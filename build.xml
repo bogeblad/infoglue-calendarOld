@@ -1,0 +1,804 @@
+<?xml version="1.0" encoding="Iso-8859-1"?>
+
+<!-- Build file for infoglue Calendar -->
+
+<project name="InfoGlueCalendar" default="war" basedir=".">
+
+    <!-- Give user a chance to override without editing this file 
+         (and without typing -D each time they invoke a target) -->    
+
+    <property file="${user.home}/build.properties" />
+    <property file="${user.home}/.build.properties" />
+    <property file="build.properties" />
+  
+    <!-- Generic project properties -->
+
+    <property name="project.fullname" value="InfoGlue Calendar"/>
+    <property name="project.warName" value="infoglueCalendar"/>
+
+    <!-- =================================================================== -->
+    <!-- Set the properties related to the source tree                       -->
+    <!-- =================================================================== -->
+
+    <!-- Source locations for the build -->    
+
+    <property name="src.dir" value="src"/>
+    <property name="webapp.dir" value="webapps"/>        
+    <property name="conf.dir" value="conf"/>        
+    
+    <!-- =================================================================== -->
+    <!-- Set the properties related to the build area                        -->
+    <!-- =================================================================== -->
+
+    <!-- Destination locations for the build (relative to the basedir as -->
+    <!-- specified in the 'basedir' attribute of the project tag)        -->
+
+	<property name="build" value="build"/>
+	<property name="build.classes" value="${build}"/>
+
+    <property name="conf.dir" value="bin"/>        
+    <property name="build.dir" value="webapps/WEB-INF"/>        
+    <property name="webapp" value="webapps"/>        
+    <property name="conf" value="conf"/>
+    <property name="lib" value="lib"/>
+    <property name="build.dest.dir" value="${build.dir}/classes"/>        
+    <property name="lib.dir" value="${build.dir}/lib"/>        
+    <property name="war.dir" value="war"/>        
+    <property name="dist.dir" value="dist"/>        
+    <property name="javadocs.destdir" value="docs/api"/>    
+
+    <!-- Miscellaneous settings -->
+
+    <property name="year" value="2004"/>
+    <property name="locale.default" value="en"/>
+    <property name="ant.home" value="build"/>
+    <property name="debug" value="on"/>
+    <property name="optimize" value="off"/>
+    <property name="deprecation" value="off"/>
+
+	<!--
+	* The master filterset, created from build.properties
+	-->
+	<filterset id="project.filters">
+		<filtersfile file="build.properties"/>
+	</filterset>
+
+    <!-- =================================================================== -->
+    <!-- Builds Classpath                                                    -->
+    <!-- =================================================================== -->
+    
+	<fileset id="build.libs" dir="${lib}">
+		<include name="**/*.jar"/>
+	</fileset>
+
+	<path id="classpath">
+		<pathelement location="${build.classes}"/>
+		<!--<pathelement location="${infoglue.classes}"/>-->
+		<fileset refid="build.libs"/>
+	</path>
+
+	<!--
+	<path id="classpath">
+        <fileset dir="${lib.dir}">
+            <include name="**/*.jar"/>
+        </fileset>        
+    </path>-->
+	
+	
+
+    <!-- =================================================================== -->
+    <!-- Builds Sourcepath                                                   -->
+    <!-- =================================================================== -->
+    <path id="sourcepath">
+        <pathelement location="${src.dir}/"/>
+    </path>
+    <!-- =================================================================== -->
+    <!-- Initializes the build.                                              -->
+    <!-- =================================================================== -->    
+    <target name="init">
+
+        <!-- So that we can use the ${TSTAMP}, ${DSTAMP}, ... time stamps
+             in targets, if need be -->
+        <tstamp/>
+
+        <echo message="---------- ${project.fullname} ${project.version} ----------"/>
+        <echo message=""/>
+
+        <echo message="java.class.path = ${java.class.path}"/>        
+        <echo message=""/>
+        <echo message="java.home = ${java.home}"/>
+        <echo message="ant.home = ${ant.home}"/>
+        <echo message="user.home = ${user.home}"/>
+        <echo message=""/>
+        <echo message="basedir = ${basedir}"/>
+        <echo message=""/>        
+        <echo message="build.compiler = ${build.compiler}"/>
+        <echo message="locale.default = ${locale.default}"/>
+                
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${build.dest.dir}"/>
+        <mkdir dir="${dist.dir}"/>
+                  
+    </target> 
+    <!-- End of init -->
+
+
+
+    <!-- ================================================================== -->
+    <!-- Displays usage information                                         -->
+    <!-- ================================================================== -->
+    <target name="usage" description="Displays usage information">
+        <echo message="Use -projecthelp to see the available targets"/>
+    </target> 
+    <!-- End of usage -->
+        
+
+    <!-- ================================================================== -->
+    <!-- creates infoglueCMS jar                                            -->
+    <!-- ================================================================== -->
+    <target name="jar" 
+     description="Create jar file for this module"
+     depends="compile" >
+        <jar destfile="${dist.dir}/${ant.project.name}${project.version}.jar"
+             basedir="${build.dest.dir}" />
+    </target> 
+    <!-- End of jar -->
+
+    <!-- ================================================================== -->
+    <!-- creates infoglueCMS jar                                            -->
+    <!-- ================================================================== -->
+    <target name="prepareWarDir" description="Adds all files in a good structure which can then be war:ed">
+        
+    	<echo message="Copying files to war-dir"/>
+        <echo message="Deploying to ${war.dir}"/>
+
+		<copy todir="${war.dir}/WEB-INF/lib">
+			<fileset dir="${lib}">
+				<include name="**/*"/>
+                <exclude name="servlet.jar"/>
+				<exclude name="pluto-1.0.1-rc1.jar"/>
+				<exclude name="pluto-1.0.1-rc2.jar"/>
+				<exclude name="pluto-1.0.1-rc4.jar"/>
+				<exclude name="portlet-api-1.0.jar"/>
+			</fileset>
+		</copy>
+
+		<echo message="Copying infoglueCalendar/WEB-INF/classes"/>
+		<copy todir="${war.dir}/WEB-INF/classes" overwrite="true">
+			<fileset dir="${webapp}/WEB-INF/classes">
+				<include name="**/*.*"/>
+			</fileset>
+		</copy>
+
+		<echo message="Copying JSP-files ${webapp}"/>
+		<copy todir="${war.dir}/jsp/portlet" overwrite="true">
+			<fileset dir="${webapp}/jsp/portlet">
+				<include name="**/*.jsp"/>
+			</fileset>
+		</copy>
+
+		<echo message="Copying Template-files ${webapp}"/>
+        <copy todir="${war.dir}/templates" overwrite="true">
+                <fileset dir="${webapp}/templates">
+                        <include name="**/*"/>
+                </fileset>
+        </copy>
+
+		<echo message="Copying Other-files"/>
+		<copy todir="${war.dir}"  overwrite="true">
+			<fileset dir="${webapp}">
+				<include name="applications/**/*.*"/>
+				<include name="digitalAssets/**/*.*"/>
+				<include name="calendars/**/*.*"/>
+				<include name="css/**/*.*"/>
+				<include name="images/**/*.*"/>
+				<include name="logs/**/*.*"/>
+				<include name="script/**/*.*"/>
+				<include name="scripts/**/*.*"/>
+				<include name="templates/**/*.*"/>
+				<include name="index.html"/>
+			</fileset>
+		</copy>
+
+		<echo message="Copying CSS-files"/>
+		<copy todir="${war.dir}/css" overwrite="true">
+			<fileset dir="${webapp}/css">
+				<include name="**/*.css"/>
+			</fileset>
+		</copy>
+
+		<echo message="Copying CSS-files"/>
+		<copy todir="${war.dir}/images" overwrite="true">
+			<fileset dir="${webapp}/images">
+				<include name="**/*"/>
+			</fileset>
+		</copy>
+
+		<echo message="Copying Resourse bundle-files"/>
+		<copy todir="${war.dir}/WEB-INF/classes" overwrite="true">
+			<fileset dir="${build.classes}">
+				<include name="infoglueCalendar_en.properties"/>
+				<include name="infoglueCalendar_sv.properties"/>
+			</fileset>
+		</copy>
+
+		<echo message="Copying TagLib files"/>
+		<copy todir="${war.dir}/WEB-INF/tld" overwrite="true">
+			<fileset dir="${conf}/tld">
+				<include name="**/*"/>
+			</fileset>
+		</copy>
+
+		<echo message="Copying TagLib files"/>
+		<copy todir="${war.dir}/WEB-INF/classes" overwrite="true">
+			<fileset dir="${conf}">
+				<include name="*"/>
+				<include name="**/*-validation.xml"/>
+				<exclude name="portlet.xml"/>
+				<exclude name="context.xml"/>
+				<exclude name="*.properties"/>
+				<exclude name="web.xml"/>
+			</fileset>
+		</copy>
+
+		<echo message="Copying web.xml and portlet.xml from ${webapp}/WEB-INF to ${webapp}/WEB-INF"/>
+		<copy todir="${war.dir}/WEB-INF" overwrite="true" encoding="iso-8859-1">
+			<fileset dir="${conf}">
+				<include name="web.xml"/>
+				<include name="portlet.xml"/>
+			</fileset>
+		</copy>
+
+		<copy todir="${war.dir}/META-INF" overwrite="true" encoding="iso-8859-1">
+			<fileset dir="${conf}">
+				<include name="context.xml"/>
+			</fileset>
+		</copy>
+
+		<echo message="Copying confs to cms ${conf}"/>
+		<copy todir="${war.dir}/WEB-INF/classes" overwrite="true" encoding="iso-8859-1">
+			<fileset dir="${conf}">
+				<include name="*.properties"/>
+				<include name="*.xml"/>
+			</fileset>
+			<filterset refid="project.filters"/>
+			<filterset>
+				<filter token="context.root.deliver" value="${context.root.working}"/>
+				<filter token="operatingMode.deliver" value="${operatingMode.working}"/>
+			</filterset>
+		</copy>
+
+		<echo message="Copying context.xml from ${webapp}/META-INF to ${webapp}/META-INF"/>
+		<copy todir="${war.dir}/META-INF" overwrite="true" encoding="iso-8859-1">
+			<fileset dir="${conf}">
+				<include name="context.xml"/>
+			</fileset>
+		</copy>
+
+    </target> 
+    
+	
+    <!-- =================================================================== -->
+    <!-- Compiles java sources of this project                               -->
+    <!-- =================================================================== -->
+    <target
+        name="compile"
+        description="Compiles java sources of this module"
+        depends="clean,init" >
+  
+        <echo message="classpath = ${classpath}"/>        
+
+        <javac 
+            classpathref="classpath"
+            destdir="${build.dest.dir}" 
+            debug="${debug}"
+            deprecation="${deprecation}"
+            optimize="${optimize}"
+            encoding="iso-8859-1"
+        >            
+            <src refid="sourcepath"/>
+        </javac>
+
+	<echo message="build.classes"/>
+	<echo message="${build.classes}"/>
+        <echo message="${build.dest.dir}"/>
+
+        <!-- Copies non java files that need to be in the classes directory -->
+        <copy todir="${build.dest.dir}">            
+            <fileset dir="${src.dir}">
+                <include name="*.HTML"/>
+            </fileset>
+        </copy>
+
+        <copy todir="${build.dest.dir}">            
+            <fileset dir="${src.dir}">
+                <include name="**/*.vm"/>
+            </fileset>
+        </copy>
+
+        <copy todir="${build.dest.dir}">            
+            <fileset dir="${src.dir}/">
+                <include name="**/*.properties"/>
+            </fileset>
+        </copy>
+
+        <copy todir="${build.dest.dir}">            
+            <fileset dir="${src.dir}/">
+                <include name="**/*.xml"/>
+            </fileset>
+        </copy>
+        <copy todir="${build.dest.dir}">            
+            <fileset dir="${src.dir}/">
+                <include name="**/*.dtd"/>
+            </fileset>
+        </copy>
+        
+    </target>
+    <!-- End of compile -->
+    
+    <!-- =================================================================== -->
+    <!-- Creates the war file                                                -->
+    <!-- =================================================================== -->
+    <target name="war" depends="clean,init,compile,jar,prepareWarDir" description="Creates the war file for this module">        
+                
+        <!-- Create the war file -->
+        <!--<war basedir="${war.dir}" warfile="${dist.dir}/${ant.project.name}.war" webxml="${war.dir}/WEB-INF/web.xml">-->
+        <war warfile="${dist.dir}/${project.warName}.war" webxml="${conf}/web.xml">
+         	
+        	<zipfileset dir="${war.dir}/applications" prefix="applications"/>
+        	<zipfileset dir="${war.dir}/calendars" prefix="calendars"/>
+        	<zipfileset dir="${war.dir}/css" prefix="css"/>
+        	<zipfileset dir="${war.dir}/digitalAssets" prefix="digitalAssets"/>
+        	<zipfileset dir="${war.dir}/images" prefix="images"/>
+        	<zipfileset dir="${war.dir}/jsp" prefix="jsp"/>
+        	<zipfileset dir="${war.dir}/logs" prefix="logs"/>
+        	<zipfileset dir="${war.dir}/script" prefix="script"/>
+        	<zipfileset dir="${war.dir}/templates" prefix="templates"/>
+        	
+        	<zipfileset dir="${war.dir}/WEB-INF" prefix="WEB-INF">
+				<exclude name="web.xml"/>
+				<exclude name="context.xml"/>
+        		<include name="portlet.xml"/>
+           	</zipfileset>
+        	
+        	<zipfileset dir="${war.dir}/META-INF" prefix="META-INF">
+				<include name="context.xml"/>
+           	</zipfileset>
+			
+        	<zipfileset dir="${war.dir}/WEB-INF/classes" prefix="WEB-INF/classes">
+				<exclude name="web.xml"/>
+        		<exclude name="portlet.xml"/>
+        		<exclude name="tld"/>
+        		<exclude name="**/*.class"/>
+        	</zipfileset>
+
+        	<zipfileset dir="${war.dir}/WEB-INF/tld" prefix="WEB-INF/tld"/>
+			
+        	<lib dir="lib">
+        	    <exclude name="pluto*.jar"/>
+        	    <exclude name="portlet*.jar"/>
+        	</lib>
+        	
+       		<lib dir="dist"></lib>
+        	
+        </war>       
+        
+    </target>    
+    <!-- End of war -->
+
+    <!-- =================================================================== -->
+    <!-- Cleans up the distribution                                          -->
+    <!-- =================================================================== -->
+    <target name="clean">
+        <delete quiet="true">
+        <fileset dir="${build.dir}">
+            <!-- Everything in the build lib dir -->
+            <exclude name="CVS"/>
+        </fileset>
+        <fileset dir="${dist.dir}">
+            <!-- Everything in the distribution dir -->
+            <exclude name="CVS"/>
+        </fileset>
+        </delete>
+    </target>
+	
+    <!-- End of clean -->
+    <!-- =================================================================== -->    
+    <!--Fetches the latest code from cvs                                     -->    
+    <!-- =================================================================== -->    
+    <target
+      name="fetchInfoGlueCalendar"
+      description="Get updates from cvs for this module"
+    >
+        <cvs command="update -P -d"
+             cvsRoot=":pserver:anonymous@www.infoglue.org:2401/home/cvs/infoglue2" quiet="true"/>
+    </target>
+    <!-- =================================================================== -->    
+    <!-- Generates the project's API documentation                           -->    
+    <!-- =================================================================== -->    
+    <target
+        name="javadocs"
+        description="Generates the API documentation for this module"
+        depends="init"
+    >
+                                                                                
+        <javadoc
+            sourcepathref="sourcepath"
+            destdir="${javadocs.destdir}"
+            packagenames="org.*"
+            author="true"
+            private="false"
+            version="true"
+            use="true"
+            windowtitle="${project.fullname} API - ${project.version}"
+            doctitle="${project.fullname} - ${project.version}"
+            bottom="Copyright &#169; ${year} InfoGlue.org All Rights Reserved."
+        >
+            <classpath refid="classpath"/>
+        </javadoc>
+
+        <zip destfile="${javadocs.destdir}/${ant.project.name}${project.version}API.zip" >
+             <zipfileset dir="${javadocs.destdir}"
+                     excludes="*.zip"
+                     prefix="${ant.project.name}API"/>
+        </zip>
+
+                                                                          
+    </target>
+    <!-- =================================================================== -->    
+    <!--Execute All major targets                                            -->    
+    <!-- =================================================================== -->    
+    <target
+      name="all"
+      description="Execute All major targets"
+      depends="clean,init,fetchInfoGlueCalendar,war,javadocs"
+    >
+    </target>
+
+	
+    <!-- =================================================================== -->    
+    <!-- Execute XDoclet target  	                  	                     -->    
+    <!-- =================================================================== -->    
+	<target name="generate" 
+	        description="Generates Hibernate class descriptor files.">
+
+		<path id="xdoclet.classpath">
+		    <fileset dir="${lib.dir}/xdoclet">
+		        <include name="*.jar"/>
+		    </fileset>
+		</path>
+
+		<taskdef name="hibernatedoclet"
+		    classname="xdoclet.modules.hibernate.HibernateDocletTask">
+		    <classpath refid="xdoclet.classpath"/>
+		</taskdef>
+		
+		<taskdef name="hibernatedoclet"
+		    classname="xdoclet.modules.hibernate.HibernateDocletTask">
+		    <classpath>
+		        <fileset dir="${lib.dir}/xdoclet">
+		            <include name="*.jar"/>
+		        </fileset>
+		    </classpath>
+		</taskdef>
+		
+		<hibernatedoclet
+		    destdir="${conf.dir}"
+		    excludedtags="@version,@author,@todo"
+		    force="${generated.forced}"
+		    mergedir="${conf.dir}"
+		    verbose="true">
+
+		    <fileset dir="${src.dir}">
+		        <include name="**/entities/*.java"/>
+		    </fileset>
+
+		    <hibernate version="2.0"/>
+
+		</hibernatedoclet>
+		
+		 <move todir="${src.dir}" flatten="true" overwrite="true">
+		    <fileset dir="${conf.dir}">
+		      <include name="**/*.xml"/>
+		    </fileset>
+		 </move>
+
+		 <copy todir="${src.dir}/org/infoglue/calendar/entities" overwrite="true">
+		    <fileset dir="${src.dir}">
+		      <include name="*hbm.xml"/>
+		    </fileset>
+		 </copy>
+
+	</target>
+	
+	
+	<!--
+	* Deploys the deliver live app, replacing deliver.properties with one that
+	* has context.root.deliver and operatingMode.deliver set appropriately.
+	* Replaces the mapping.xml from the war with the deliver version.
+	-->
+	<target name="fast-build" depends="" description="Compiles the classes if class and moves configs to the right spot">
+		
+		<echo message="Copying JAR-files"/>
+		<copy todir="${deploy.dir.working}/WEB-INF/lib">
+			<fileset dir="${lib}">
+				<include name="**/*"/>
+				<exclude name="pluto-1.0.1-rc1.jar"/>
+				<exclude name="pluto-1.0.1-rc2.jar"/>
+				<exclude name="pluto-1.0.1-rc4.jar"/>
+				<exclude name="portlet-api-1.0.jar"/>
+			</fileset>
+		</copy>
+
+		<echo message="Copying infoglueCalendar/WEB-INF/classes"/>
+		<copy todir="${deploy.dir.working}/WEB-INF/classes">
+			<fileset dir="${build.classes}">
+				<include name="**/*.*"/>
+			</fileset>
+		</copy>
+		
+		<!--
+		<echo message="Copying JSP-files"/>
+		<copy todir="${deploy.dir.working}/jsp/portlet" overwrite="true">
+			<fileset dir="${webapp}/jsp/portlet">
+				<include name="**/*.jsp"/>
+			</fileset>
+		</copy>
+
+		<echo message="Copying Template-files"/>
+		<copy todir="${deploy.dir.working}/templates">
+			<fileset dir="${webapp}/templates">
+				<include name="**/*.*"/>
+			</fileset>
+		</copy>
+
+		<echo message="Copying CSS-files"/>
+		<copy todir="${deploy.dir.working}/css">
+			<fileset dir="${webapp}/css">
+				<include name="**/*.css"/>
+			</fileset>
+		</copy>
+
+		<echo message="Copying Script-files"/>
+		<copy todir="${deploy.dir.working}/script">
+			<fileset dir="${webapp}/script">
+				<include name="**/*.js"/>
+			</fileset>
+		</copy>
+
+		<echo message="Copying Images-files"/>
+		<copy todir="${deploy.dir.working}/images">
+			<fileset dir="${webapp}/images">
+				<include name="**/*"/>
+			</fileset>
+		</copy>
+		-->
+		
+		<echo message="Copying Resourse bundle-files"/>
+		<copy todir="${deploy.dir.working}/WEB-INF/classes">
+			<fileset dir="${build.classes}">
+				<include name="infoglueCalendar_en.properties"/>
+				<include name="infoglueCalendar_sv.properties"/>
+			</fileset>
+		</copy>
+		
+		<!--
+		<echo message="Copying web and portlet files"/>
+		<copy todir="${deploy.dir.working}/WEB-INF">
+			<fileset dir="${conf}">
+				<include name="web.xml"/>
+			</fileset>
+		</copy>
+		-->
+		
+		<echo message="Copying TagLib files"/>
+		<copy todir="${deploy.dir.working}/WEB-INF/tld">
+			<fileset dir="${conf}/tld">
+				<include name="**/*"/>
+			</fileset>
+		</copy>
+
+		<echo message="Copying TagLib files"/>
+		<copy todir="${deploy.dir.working}/WEB-INF/classes">
+			<fileset dir="${conf}">
+				<include name="*"/>
+				<include name="**/*-validation.xml"/>
+				<exclude name="portlet.xml"/>
+				<exclude name="context.xml"/>
+				<exclude name="*.properties"/>
+				<exclude name="web.xml"/>
+			</fileset>
+		</copy>
+
+		<echo message="Copying confs to cms"/>
+		<copy todir="${deploy.dir.working}/WEB-INF/classes" overwrite="true">
+			<fileset dir="${conf}">
+				<include name="*.properties"/>
+				<include name="*.xml"/>
+				<exclude name="portlet.xml"/>
+				<exclude name="context.xml"/>
+				<exclude name="web.xml"/>
+			</fileset>
+			<filterset refid="project.filters"/>
+			<filterset>
+				<filter token="context.root.deliver" value="${context.root.working}"/>
+				<filter token="operatingMode.deliver" value="${operatingMode.working}"/>
+			</filterset>
+		</copy>
+	</target>
+	
+	<!--
+	* Deploys the deliver live app, replacing deliver.properties with one that
+	* has context.root.deliver and operatingMode.deliver set appropriately.
+	* Replaces the mapping.xml from the war with the deliver version.
+	-->
+	<target name="fast-build-webapp" depends="" description="Moves all webb app resources to webapp">
+				
+		<echo message="Copying JSP-files"/>
+		<copy todir="${deploy.dir.working}/jsp/portlet">
+			<fileset dir="${webapp}/jsp/portlet">
+				<include name="**/*.jsp"/>
+			</fileset>
+		</copy>
+
+		<echo message="Copying Template-files"/>
+		<copy todir="${deploy.dir.working}/templates">
+			<fileset dir="${webapp}/templates">
+				<include name="**/*.*"/>
+			</fileset>
+		</copy>
+
+		<echo message="Copying CSS-files"/>
+		<copy todir="${deploy.dir.working}/css">
+			<fileset dir="${webapp}/css">
+				<include name="**/*.css"/>
+			</fileset>
+		</copy>
+
+		<echo message="Copying Script-files"/>
+		<copy todir="${deploy.dir.working}/script">
+			<fileset dir="${webapp}/script">
+				<include name="**/*.js"/>
+			</fileset>
+		</copy>
+
+		<echo message="Copying Images-files"/>
+		<copy todir="${deploy.dir.working}/images">
+			<fileset dir="${webapp}/images">
+				<include name="**/*"/>
+			</fileset>
+		</copy>
+
+	</target>
+
+	
+	<!--****************************************************-->
+	<!-- This target deploys the files to the infoglue apps -->
+	<!--****************************************************-->
+	<target name="deploy" depends="compile">
+		<echo message="Copying JAR-files"/>
+                <echo message="Deploying to ${deploy.dir.working}"/>
+                <echo message="Classes fromld.classes}"/>
+
+		<copy todir="${deploy.dir.working}/WEB-INF/lib">
+			<fileset dir="${lib}">
+				<include name="**/*"/>
+                <exclude name="servlet.jar"/>
+				<exclude name="pluto-1.0.1-rc1.jar"/>
+				<exclude name="pluto-1.0.1-rc2.jar"/>
+				<exclude name="pluto-1.0.1-rc4.jar"/>
+				<exclude name="portlet-api-1.0.jar"/>
+			</fileset>
+		</copy>
+
+		<echo message="Copying infoglueCalendar/WEB-INF/classes"/>
+		<copy todir="${deploy.dir.working}/WEB-INF/classes">
+			<fileset dir="${webapp}/WEB-INF/classes">
+				<include name="**/*.*"/>
+			</fileset>
+		</copy>
+
+		<echo message="Copying JSP-files ${webapp}"/>
+		<copy todir="${deploy.dir.working}/jsp/portlet">
+			<fileset dir="${webapp}/jsp/portlet">
+				<include name="**/*.jsp"/>
+			</fileset>
+		</copy>
+
+		<echo message="Copying Template-files ${webapp}"/>
+        <copy todir="${deploy.dir.working}/templates">
+                <fileset dir="${webapp}/templates">
+                        <include name="**/*"/>
+                </fileset>
+        </copy>
+
+		<echo message="Copying Other-files"/>
+		<copy todir="${deploy.dir.working}">
+			<fileset dir="${webapp}">
+				<include name="applications/**/*.*"/>
+				<include name="digitalAssets/**/*.*"/>
+				<include name="calendars/**/*.*"/>
+				<include name="css/**/*.*"/>
+				<include name="images/**/*.*"/>
+				<include name="logs/**/*.*"/>
+				<include name="script/**/*.*"/>
+				<include name="scripts/**/*.*"/>
+				<include name="templates/**/*.*"/>
+				<include name="index.html"/>
+			</fileset>
+		</copy>
+
+		<echo message="Copying CSS-files"/>
+		<copy todir="${deploy.dir.working}/css">
+			<fileset dir="${webapp}/css">
+				<include name="**/*.css"/>
+			</fileset>
+		</copy>
+
+		<echo message="Copying CSS-files"/>
+		<copy todir="${deploy.dir.working}/images">
+			<fileset dir="${webapp}/images">
+				<include name="**/*"/>
+			</fileset>
+		</copy>
+
+		<echo message="Copying Resourse bundle-files"/>
+		<copy todir="${deploy.dir.working}/WEB-INF/classes">
+			<fileset dir="${build.classes}">
+				<include name="infoglueCalendar_en.properties"/>
+				<include name="infoglueCalendar_sv.properties"/>
+			</fileset>
+		</copy>
+
+		<echo message="Copying TagLib files"/>
+		<copy todir="${deploy.dir.working}/WEB-INF/tld">
+			<fileset dir="${conf}/tld">
+				<include name="**/*"/>
+			</fileset>
+		</copy>
+
+		<echo message="Copying TagLib files"/>
+		<copy todir="${deploy.dir.working}/WEB-INF/classes">
+			<fileset dir="${conf}">
+				<include name="*"/>
+				<include name="**/*-validation.xml"/>
+				<exclude name="portlet.xml"/>
+				<exclude name="context.xml"/>
+				<exclude name="*.properties"/>
+				<exclude name="web.xml"/>
+			</fileset>
+		</copy>
+
+		<echo message="Copying web.xml and portlet.xml from ${webapp}/WEB-INF to ${webapp}/WEB-INF"/>
+		<copy todir="${deploy.dir.working}/WEB-INF" overwrite="true" encoding="iso-8859-1">
+			<fileset dir="${conf}">
+				<include name="web.xml"/>
+				<include name="portlet.xml"/>
+			</fileset>
+		</copy>
+
+		<copy todir="${deploy.dir.working}/META-INF" overwrite="true" encoding="iso-8859-1">
+			<fileset dir="${conf}">
+				<include name="context.xml"/>
+			</fileset>
+		</copy>
+
+		<echo message="Copying confs to cms ${conf}"/>
+		<copy todir="${deploy.dir.working}/WEB-INF/classes" overwrite="true" encoding="iso-8859-1">
+			<fileset dir="${conf}">
+				<include name="*.properties"/>
+				<include name="*.xml"/>
+				<exclude name="portlet.xml"/>
+				<exclude name="context.xml"/>
+				<exclude name="web.xml"/>
+			</fileset>
+			<filterset refid="project.filters"/>
+			<filterset>
+				<filter token="context.root.deliver" value="${context.root.working}"/>
+				<filter token="operatingMode.deliver" value="${operatingMode.working}"/>
+			</filterset>
+		</copy>
+
+	</target>
+
+</project>

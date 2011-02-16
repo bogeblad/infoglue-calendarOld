@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<!-- org.infoglue.calendar.entities.EventVersion root -->
+	<class
+        name="org.infoglue.calendar.entities.EventVersion"
+        table="Event_Version"
+        dynamic-update="false"
+        dynamic-insert="false"
+        select-before-update="false"
+        optimistic-lock="version"
+    >
+		<id name="id" column="id" type="long" unsaved-value="null">
+            <generator class="native"></generator>
+        </id>
+
+		<property name="name" column="name" type="string"/>
+		<property name="title" column="title" type="string"/>
+		<property name="lecturer" column="lecturer" type="string"/>
+		<property name="longDescription" column="longDescription" type="string"/>
+		<!--
+		<property name="contactEmail" column="contactEmail" type="string"/>
+		<property name="contactName" column="contactName" type="string"/>
+        <property name="contactPhone" column="contactPhone" type="string"/>
+		<property name="price" column="price" type="string"/>
+		-->
+		<property name="shortDescription" column="shortDescription" type="string"/>
+		<property name="organizerName" column="organizerName" type="string"/>
+		<property name="description" column="description" type="string"/>
+		<property name="customLocation" column="customLocation" type="string"/>
+		<property name="alternativeLocation" column="alternativeLocation" type="string"/>
+		<property name="eventUrl" column="eventUrl" type="string"/>
+		<property name="attributes" type="text" column="attributes" not-null="false" unique="false"/>
+
+        <many-to-one name="event" class="org.infoglue.calendar.entities.Event" cascade="none" outer-join="auto" update="true" insert="true" access="property" column="event_id"/>
+        <many-to-one name="language" class="org.infoglue.calendar.entities.Language" cascade="none" outer-join="auto" update="true" insert="true" access="property" column="language_id"/>
+
+	</class>
+</hibernate-mapping>

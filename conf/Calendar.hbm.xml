@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="org.infoglue.calendar.entities.Calendar" table="Calendar" dynamic-update="false" dynamic-insert="false" select-before-update="false" optimistic-lock="version">
+
+        <id name="id" column="id" type="long" unsaved-value="null">
+            <generator class="native">
+              <!--  
+                  To add non XDoclet generator parameters, create a file named 
+                  hibernate-generator-params-Calendar.xml 
+                  containing the additional parameters and place it in your merge dir. 
+              --> 
+            </generator>
+        </id>
+
+        <property name="name" type="string" update="true" insert="true" access="property" column="name" not-null="false" unique="true"/>
+        <property name="description" type="string" update="true" insert="true" access="property" column="description" not-null="false" unique="false"/>
+		<!--
+		<property name="owner" type="string" update="true" insert="true" access="property" column="owner" not-null="false" unique="false"/>
+		-->
+        
+        <many-to-one name="eventType" class="org.infoglue.calendar.entities.EventType" cascade="none" outer-join="false" update="true" insert="true" access="property" column="eventtype_id"/>
+        
+        <set name="events" lazy="true" inverse="false" cascade="delete" sort="unsorted">
+			<key column="calendar_id"></key>
+			<one-to-many class="org.infoglue.calendar.entities.Event"/>
+        </set>
+
+        <set name="publishedEvents" where="stateId=3" lazy="true" inverse="false" cascade="none" order-by="startDateTime" sort="unsorted">
+			<key column="calendar_id"></key>
+			<one-to-many class="org.infoglue.calendar.entities.Event"/>
+        </set>
+
+        <set name="waitingEvents" where="stateId=2" lazy="true" inverse="false" cascade="none" order-by="startDateTime" sort="unsorted">
+			<key column="calendar_id"></key>
+			<one-to-many class="org.infoglue.calendar.entities.Event"/>
+        </set>
+
+        <set name="workingEvents" where="stateId=0" lazy="true" inverse="false" cascade="none" order-by="startDateTime" sort="unsorted">
+			<key column="calendar_id"></key>
+			<one-to-many class="org.infoglue.calendar.entities.Event"/>
+        </set>
+
+        <set name="owningRoles" lazy="true" inverse="false" cascade="delete" sort="unsorted">
+			<key column="calendar_id"></key>
+			<one-to-many class="org.infoglue.calendar.entities.Role"/>
+        </set>
+        <set name="owningGroups" lazy="true" inverse="false" cascade="delete" sort="unsorted">
+			<key column="calendar_id"></key>
+			<one-to-many class="org.infoglue.calendar.entities.Group"/>
+        </set>
+        
+        <set name="subscriptions" lazy="true" inverse="false" cascade="delete" sort="unsorted">
+			<key column="calendar_id"></key>
+			<one-to-many class="org.infoglue.calendar.entities.Subscriber"/>
+        </set>
+
+        <set name="languages" table="Calendar_Language" lazy="false" inverse="false" cascade="none" sort="unsorted">
+	    	<key column="calendar_id"></key>
+        	<many-to-many class="org.infoglue.calendar.entities.Language" column="language_id" outer-join="auto" />
+        </set>
+        
+    </class>
+    
+</hibernate-mapping>

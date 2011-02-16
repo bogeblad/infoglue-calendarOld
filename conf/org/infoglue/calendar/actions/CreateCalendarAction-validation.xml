@@ -1,0 +1,31 @@
+<!DOCTYPE validators PUBLIC "-//OpenSymphony Group//XWork Validator 1.0//EN" "http://www.opensymphony.com/xwork/xwork-validator-1.0.dtd">
+<validators>
+    <field name="name">
+        <field-validator type="igrequiredstring">
+            <message>You must enter a name.</message>
+        </field-validator>
+    </field>
+    <!--
+    <field name="description">
+        <field-validator type="igrequiredstring">
+            <message>You must enter a description.</message>
+        </field-validator>
+    </field>
+    <field name="owner">
+        <field-validator type="igrequiredstring">
+            <message>You must enter a owner for this calendar.</message>
+        </field-validator>
+    </field>
+    -->
+    <field name="roles">
+        <field-validator type="igrequiredstring">
+            <message>You must enter one or more roles as owners for this calendar.</message>
+        </field-validator>
+    </field>
+    <field name="groups">
+        <field-validator type="igrequiredstring">
+            <message>You must enter one or more groups as owners for this calendar.</message>
+        </field-validator>
+    </field>
+
+</validators>

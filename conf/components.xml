@@ -1,0 +1,15 @@
+<components>
+
+    <component>
+        <scope>request</scope>
+        <class>org.infoglue.common.component.HibernateSession</class>
+        <enabler>org.infoglue.common.component.HibernateSessionAware</enabler>
+    </component>
+
+    <component>
+        <scope>application</scope>
+        <class>org.infoglue.common.component.HibernateSessionFactory</class>
+        <enabler>org.infoglue.common.component.HibernateSessionFactoryAware</enabler>
+    </component>
+
+</components>

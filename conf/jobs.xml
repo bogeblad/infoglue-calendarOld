@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='utf-8'?>
+<quartz xmlns="http://www.opensymphony.com/quartz/JobSchedulingData"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.opensymphony.com/quartz/JobSchedulingData
+  http://www.opensymphony.com/quartz/xml/job_scheduling_data_1_5.xsd"
+  version="1.5">
+  
+  <calendar class-name="org.quartz.impl.calendar.HolidayCalendar" replace="true">
+    <name>holidayCalendar</name>
+    <description>HolidayCalendar</description>
+    <base-calendar class-name="org.quartz.impl.calendar.WeeklyCalendar">
+      <name>weeklyCalendar</name>
+      <description>WeeklyCalendar</description>
+      <base-calendar class-name="org.quartz.impl.calendar.AnnualCalendar">
+        <name>annualCalendar</name>
+        <description>AnnualCalendar</description>
+      </base-calendar>
+    </base-calendar>
+  </calendar>
+  
+  <job>
+    <job-detail>
+      <name>RemoteCacheUpdateJob</name>
+      <group>InfoGlueCalendar</group>
+      <description>Expires caches in remote apps</description>
+      <job-class>org.infoglue.calendar.jobs.RemoteCacheUpdateJob</job-class>
+      <volatility>false</volatility>
+      <durability>false</durability>
+      <recover>false</recover>
+      <job-data-map allows-transient-data="true"/>
+    </job-detail>
+
+    <trigger>
+      <cron>
+        <name>testTrigger1</name>
+        <group>testJobs</group>
+        <description>Test Trigger Number 1</description>
+        <job-name>testJob1</job-name>
+        <job-group>testJobs</job-group>
+        <cron-expression>0/30 * * ? * *</cron-expression>
+        <!-- every 30 seconds... -->
+      </cron>
+    </trigger>
+  </job>
+
+</quartz>

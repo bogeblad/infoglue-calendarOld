@@ -1,0 +1,20 @@
+<div><h2>New entry created</h2></div>
+<div>
+	InfoGlue Calendar Notification: A new entry to "$eventVersion.name" was made.<br/>
+	<hr/>
+	Name: $entry.firstName $entry.lastName<br/>
+	Email: <a href="mailto:$entry.email">$entry.email</a><br/>
+	Organisation: $entry.organisation<br/>
+	Address: $entry.address<br/>
+	ZipCode: $entry.zipcode<br/>
+	City: $entry.city<br/>
+	Phone: $entry.phone<br/>
+	Fax: $entry.fax<br/>
+	Message: $entry.message<br/>
+	#foreach($attribute in $attributes)
+		$attribute.name: $this.getAttributeValue($entry.attributes, $attribute.name, true)<br/>
+	#end	
+	<hr/>
+	This email was automatically generated and the sender is the Calendar-system.<br/>
+	Do not reply to this email. <br/>
+</div>

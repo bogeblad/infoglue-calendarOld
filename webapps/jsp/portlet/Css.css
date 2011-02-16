@@ -1,0 +1,1151 @@
+#set($cl = $templateLogic.componentLogic)
+#set($browser = $templateLogic.browserBean)
+
+#set($saveAdjust = $templateLogic.getRequestParameter("saveAdjust"))
+
+#if($saveAdjust == "true")
+
+	#set($textFontSize = $templateLogic.getRequestParameter("textFontSize"))
+	#set($fontFamily = $templateLogic.getRequestParameter("fontFamily"))
+	#set($textLineHeight = $templateLogic.getRequestParameter("textLineHeight"))
+	#set($contrast = $templateLogic.getRequestParameter("contrast"))
+	#set($wordspace = $templateLogic.getRequestParameter("wordspace"))
+	#set($letterSpace = $templateLogic.getRequestParameter("letterSpace"))
+
+#else
+
+	#set($textFontSize = "$!templateLogic.getCookie('textFontSize')")
+	#set($fontFamily = "$!templateLogic.getCookie('fontFamily')")
+	#set($textLineHeight = "$!templateLogic.getCookie('textLineHeight')")
+	#set($contrast = "$!templateLogic.getCookie('contrast')")
+	#set($wordspace = "$!templateLogic.getCookie('wordspace')")
+	#set($letterSpace = "$!templateLogic.getCookie('letterSpace')")
+
+#end
+
+
+
+.instructions {
+	background-color:#fffccc;
+	border:1px dotted #DFEAF6;
+	Padding:0.5em 0.5em 0.5em 0.5em;
+	margin:1em 0 0 0;
+	}
+	
+.instructions h1 {
+	font-size: 65%;
+	margin:0;
+	padding:0;
+	}
+
+table { border-top:0; border-right:1px solid #9BBDDE; border-bottom:1px solid #9BBDDE; background-color: #999999; margin:5px; padding:0; font-size:65%; text-align: left}
+th { background-color: #DFEAF6; margin:0; padding:2px 4px; border-top:1px solid #9BBDDE; border-bottom:1px solid #9BBDDE; border-left:1px solid #9BBDDE;}
+td { background-color: #fff; margin:0; padding:2px 4px; border-top:1px solid #9BBDDE; border-left:1px solid #9BBDDE; }
+
+fieldset ul {margin:0; padding:0 0 1em 1.75em;}
+
+/* ------------------------------------------------------------- */
+/* --------------------------- FORMS --------------------------- */
+/* ------------------------------------------------------------- */
+
+label {
+	clear:right;
+	}
+
+fieldset h3 {font-size:65%; margin:0; padding:1.5em 0 0 0;}
+
+/* ------------------------------------------------------------- */
+/* ------------------------ RECRUITAPP ------------------------- */
+/* ------------------------------------------------------------- */
+
+.icon {
+	background-image: url("$cl.getAssetUrl($cl.infoGlueComponent.contentId, "file_icon")");
+	margin:0.25em 0 0 0; 
+	padding:0 0 0 21px;
+	background-repeat: no-repeat; 
+	background-position:left center;
+	display:block;
+	/*clear:both;*/
+	}
+
+.recruitApp table td h2 {font-size:110%}
+
+.attachment {
+	border:1px solid;
+	margin:1em 0;
+	}
+
+.attachment .header {
+	padding:2px 0.5em;
+	border-bottom:1px solid;
+	}
+
+.attachment .footer {
+	padding:2px 0.5em;
+	border-top:1px solid;
+	}
+
+.attachment .footer p {
+margin:0; padding:0;
+}
+
+.attachment .header h2 {
+	margin:0;
+}
+
+.files {
+padding:0.5em
+}
+
+.recruitApp .maincolumn {
+	width:69%; 
+	float:left;
+	}
+
+.recruitApp .rightcolumn {
+	width:27%;
+	float:right;
+	border-left:1px solid;
+	border-bottom:1px solid;
+	}
+
+.recruitApp .workflowarea {	
+	width:auto;
+	padding:0.5em;
+	}
+
+.recruitApp .margin {
+	margin:0.5em 0.5em;
+	}
+
+.rightcolumnhead {
+	margin-top:0.25em;
+	padding: 0.25em 0.75em;
+	border-top:1px solid;
+	border-bottom:1px solid;
+	font-weight:bold; }
+
+
+.workflowarea p {
+	margin:0.125em 0;
+	}
+
+
+/*fieldset p {
+	margin:0; 
+	padding:1em;
+	}
+*/
+.subject {
+	padding: 1em 0.75em 0.5em 0.75em;
+	font-weight:bold;
+	font-style:italic;
+	border-top:1px solid;
+	/*border-left:1px solid;
+	border-right:1px solid;
+	*/border-bottom:1px solid;
+	}
+
+
+.attachment {
+	border-color:#9BBDDE
+	}
+
+.attachment .header h2 {
+	font-size:65%;
+	}
+
+.attachment .footer,
+.attachment .header {
+	background-color:#f9f9f9;
+	color:#396692;
+	border-color:#9BBDDE;
+	}
+
+.recruitApp .rightcolumn {
+	border-color:#DFEAF6;
+	background-color:#f9f9f9;
+	}
+
+.rightcolumnhead {
+	background-color:#DFEAF6;
+	font-size:65%;
+	color:#396692;border-color:#9BBDDE; }
+
+
+.subject {
+	background-color:#fff;
+	font-size:65%;
+	border-color:#fff #f9f9f9 #f9f9f9 #dfeaf6
+	}
+
+
+
+
+/*
+label {
+	line-height:1.75em;
+	}
+*/
+
+
+
+
+/* Administrativa CSS:en */
+
+body { font-family: Verdana, Arial, Helvetica, sans-serif; line-height:100% }
+	
+/**/
+.portlet th, select {		font-size:65%; text-align:left }
+
+
+.myNotesApp .portlet h2 {margin:0; padding:0 0 0 10px; font-size:65%;}
+.myNotesApp .portlet p {margin:0; padding:0 0 0 10px}
+.myNotesApp .portlet .smalldate {margin:0; padding:0 0 0 10px}
+
+.myBookmarks .portal_dotlink { margin:5px 0 0 10px; text-decoration:none}
+.myBookmarks .portlet h2 {margin:0; padding:0 0 0 0; font-size:65%; float:left}
+
+
+
+
+
+
+body {
+	text-align: left; 
+	font-size:100%;
+	/*background-color:#fff;*/
+	margin:0 /*15px 10px 15px 10px*/;
+	}
+
+p {
+	margin-top: 0; 
+	margin-bottom: 0.875em;
+	}
+
+.redstar,
+.bold {
+	font-weight:bold;
+	}
+
+.clear {
+	clear:both;
+	}
+
+.left {
+	float:left;
+	}
+
+.right {
+	float:right;
+	}
+
+.center {
+	text-align:center;
+	}
+
+.RegionHeaderColor {				}
+
+.PortletHeaderText a,
+.PortletHeaderText {
+	font-weight:bold;
+	padding:0.0625em 0 0.125em 0;
+	margin:1.25em 0 0 0
+	}
+	
+.PortletHeaderColor {
+	margin:0 0 0 0 }
+
+.PortletSubHeaderText,
+font.PortletHeading2,
+.portletHeadline {
+	font-weight:bold;
+	}
+
+.portletDate {
+	font-style:italic;
+	}
+
+font.PortletText2,
+.PortletText1 {
+	margin:0 1em 0 1em; 
+	padding:0;
+	}
+
+form .PortletText1 {
+	margin:0;
+	}
+
+.inplacedisplayid1siteid0 {
+	margin-left:1em;
+	} /* Portal ordinarie classer */
+
+.titleorimageid1siteid0,
+.PortletHeading1 {
+	font-weight:bold;
+	margin-left:1em;
+	} /* Portal ordinarie classer */
+
+.wwsbr_publishdate_id1siteid0,
+.PortletText3 {
+	font-style:italic;
+	margin:0.75em 1em 0 1em;
+	} /* Portal ordinarie classer */
+
+
+/* ------------------------------------------------------------- */
+/* --------------------------- LINKS --------------------------- */
+/* ------------------------------------------------------------- */
+	
+.portlet p a {text-decoration:underline}
+
+.portlet p a.dotlink {text-decoration:none}
+
+.portlet p a.dotlink:hover {text-decoration:underline}
+
+.PortletText3 a,
+.functionsarea a,
+.filterarea a {
+	text-decoration: none;
+	}
+
+.PortletHeaderText a {
+	text-decoration:none;
+	}
+
+
+/* ------------------------------------------------------------- */
+/* ----------------- MENU/CRUMBTRAIL ADDITION ------------------ */
+/* ------------------------------------------------------------- */
+
+#navcontainer {
+	border-right:1px solid #9BBDDE;
+	}
+
+.menucloser {
+	width:100%;
+	margin-bottom:3em;
+	padding:0.75em 0 0 0;
+	border-top:1px solid #ffffff;
+	background-image: url("$cl.getAssetUrl($cl.infoGlueComponent.contentId, "menucloser_corner")");
+	background-repeat: no-repeat;
+	background-position: right bottom;
+	background-color: #9BBDDE;
+	}
+
+#crumbtrail_area {
+	border-top:1px solid #ffffff;
+	}
+
+
+/* ------------------------------------------------------------- */
+/* ---------------------- IMAGES/ICONS ------------------------- */
+/* ------------------------------------------------------------- */
+
+.delete,
+.edit,
+.moveup,
+.movedown,
+.transparent,
+.expand,
+.collapse {
+	height:10px;
+	width:10px;
+	margin:0.125em 10px 0 0;
+	padding:0 0 0 0;
+	background-repeat: no-repeat;
+	float:left;
+	}
+
+.checkboxIcon,
+.radiobuttonIcon,
+.selectIcon,
+.textfieldIcon,
+.textareaIcon,
+.hiddenIcon {
+	height:20px;
+	width:20px;
+	margin:0.125em 10px 0 0;
+	padding:0 0 0 0;
+	background-repeat: no-repeat;
+	float:left;
+	}
+
+
+ /* || BROWSER SPECIFIC CODE || */
+
+#if($browser.isWindows() && $browser.isIE())
+
+	.transparent {margin:2px 5px 0 0 }
+
+#end
+
+/* || BROWSER SPECIFIC CODE END || */
+
+
+.LeftCurve {
+	background-repeat: no-repeat;
+	background-position: top left;
+	}
+
+.PortletHeaderColor img	{
+	margin-right: 0.1875em;
+	}
+
+
+/* ------------------------------------------------------------- */
+/* ------------------------- PORTLETS -------------------------- */
+/* ------------------------------------------------------------- */
+
+div.portlet {
+	border:1px Solid;
+	border-top:1px Solid;
+	}
+
+.RegionBorder {
+	border:0px solid #ffffff;
+	}
+
+.portlet .head {
+	border-bottom:1px solid;
+	}
+
+.portlet_margin {
+	margin:10px;
+	}
+/*
+.portlet_margin {
+	margin:0.5em 0.625em 0.25em 0.625em;
+	}
+*/
+.portlet .head { 
+	border-bottom:1px solid;
+	font-weight:bold;
+	text-align:left;
+	padding:0.5em 10px;
+	}
+
+.portlet .functionsarea,			
+.portlet .functionarea {
+	border-bottom:1px Solid;
+	padding:0.125em 10px;
+	}
+
+.portlet .subfunctionsarea,
+.portlet .subfunctionarea {
+	border-bottom:1px Solid;
+	padding:0.125em 10px;
+	}
+	
+.portlet .filterarea {
+	border-bottom:1px solid;
+	text-align:left;
+	padding:0.125em 10px;
+	}
+/*
+.Pageheader {
+	margin:0 1em 0 0.75em;
+	font-weight:bold;
+	}
+*/
+
+
+
+
+/* ------------------------------------------------------------- */
+/* ---------------------- PORTLET FORMS------------------------- */
+/* ------------------------------------------------------------- */
+
+.portlet form {
+	margin:0 0 0.25em 0; 
+	padding:0em;
+	text-align:left;
+	}
+								
+.portlet legend {
+	font-weight:bold;
+	margin:1em 0;
+	padding:3px;
+	}
+				
+.portlet fieldset {
+	margin:0;
+	padding:0.5em;
+	border:3px double #9BBDDE;
+	}
+
+.portlet label {
+	font-weight:normal;
+	}
+
+.button {
+	border-top:3px double #9BBDDE;
+	margin-top:2em;
+	padding:0.5em 0 0.025em 0;
+	}
+
+.redstar {
+	font-weight:bold; 
+	}
+
+.portlet .largetextarea  {
+	width: 35em; 
+	height: 20em; 
+	}
+
+.portlet .smalltextarea  {
+	width:35em;
+	height:10em;
+	}
+
+.portlet .longtextfield	{
+	width:28em;
+	}
+
+.portlet .shorttextfield { 
+	width:12em;
+	}
+
+.portlet .xtrashorttextfield {
+	width:9em;
+	}
+
+.portlet .datefield	{
+	width: 7em; 
+	}
+
+.portlet .hourfield		{
+	width: 4em; 
+	}
+
+.portlet .datetimefield	{
+	width: 10em; 
+	}
+
+.portlet .listBox {
+	width: 25em;
+	max-height:10em;
+	}
+
+.inputLabelArea {
+	width:9em;
+	float:left; 
+	}
+
+.inputFieldArea {
+	width:auto;
+	}
+
+.fieldrow {
+	margin-top:0.375em; 
+	clear:both
+	}
+
+
+
+/* customize */
+
+.portlet legend {
+	color:#396692;
+	font-size:70%;
+	}
+	
+.redstar {	color:#cc0000;}
+
+
+.portlet .longtextfield,
+.portlet .shorttextfield,
+.portlet .xtrashorttextfield,
+.portlet .datefield,
+.portlet .hourfield,
+.portlet .datetimefield,
+.portlet .listBox,
+.portlet .largetextarea,
+.portlet textarea {
+	background-color:#f3f3f3;
+	}
+	
+
+
+/* ------------------------------------------------------------- */
+
+/*
+table { border:1px solid # BEC8CC; background-color: #999999; margin:5px; padding:0; font-size:65%; text-align: left}
+th { background-color: #BEC8CC; margin:0; padding:2px 4px; border-bottom:1px solid #999999; border-left:1px solid #999999;}
+td { background-color: #fff; margin:0; padding:2px 4px; border-top:1px solid #BEC8CC; border-left:1px solid #999999; }
+
+.colStart { border-left:0px solid #red;  }
+.colEnd { border-right:0px solid #red; }
+*/
+
+/*
+fieldset table {
+	border:0px;
+	}
+
+fieldset th {
+	border-top:0px;
+	}
+							
+fieldset td {
+	border-bottom:0px;
+	}
+*/
+
+/* ------------------------------------------------------------- */
+/* -------------------------- WORKFLOW ------------------------- */
+/* ------------------------------------------------------------- */
+
+dl {
+	margin:0 0 0.5em 0; 
+	padding:0;
+	}
+	
+dt { }
+
+dd {
+	font-style:italic;
+	margin-left:10px;
+	}
+
+.current {
+	font-weight:bold;
+	}
+
+
+/* customize */
+
+
+fieldset table {
+	background-color:#fff;}
+
+dl {
+	font-size:65%;
+	}
+				
+.dimmed {
+	color:#858585 
+	}
+
+
+/* ------------------------------------------------------------- */
+/* ---------------------- MY BOOKMARKS APP --------------------- */
+/* ------------------------------------------------------------- */
+
+.group {
+	border-bottom:1px Solid #DFEAF6;
+	}
+
+.grouphead {
+	border-top:1px Solid #fff;
+	border-bottom:1px Solid #DFEAF6;
+	padding:0.0625em 0 0 10px;
+	background-color:#f9f9f9;
+	}
+
+.groupheadtext {
+	font-size:65%; 
+	font-weight:bold; 
+	color:#396692;
+	}
+
+.grouprecord2 {
+	clear:left;
+	}
+
+/*
+.portal_dotlink {
+	margin: 0 0 0 1em; 
+	padding: 0.3125em 0 0.125em 0;
+	text-decoration: none;
+	display:block;
+	font-size: 65%;
+	}
+	
+.portal_dotlink2_off {
+	margin: 0 0 0 0; 
+	padding: 0 0 0.5em 1.75em;
+	background-image: url("$cl.getAssetUrl($cl.infoGlueComponent.contentId, "listlink_a")");  
+	background-repeat: no-repeat; 
+	text-decoration: none;
+	display:block;
+	font-size:65%;
+	}
+
+.portal_dotlink2 {
+	margin:0 0 0 17px; 
+	padding: 0 0 0 17px;
+	display: block;
+	background-repeat: no-repeat; 
+	text-decoration: none;
+	background-image: url("$cl.getAssetUrl($cl.infoGlueComponent.contentId, "listlink_a")");
+	background-position: left 0.3125em;
+	}
+*/
+
+
+/* ------------------------------------------------------------- */
+/* ------------------------ MY NOTES APP ----------------------- */
+/* ------------------------------------------------------------- */
+
+.record_prio,
+.record_pending,
+.record_expired,
+.record_published,
+.record {
+	border-bottom:1px dotted #9BBDDE;
+	padding-top:0.5em;
+	padding-bottom:0.25em;
+	}
+
+.record_prio h2 {
+	background-image: url("$cl.getAssetUrl($cl.infoGlueComponent.contentId, "prio")"); 
+	background-repeat: no-repeat;
+	background-position: left center;
+	}
+
+.record_expired  {
+	border-left: 3px solid #d70000; 
+	/*background-image: url("$cl.getAssetUrl($cl.infoGlueComponent.contentId, "expired")"); 
+	background-repeat: no-repeat;*/ 
+	}
+								
+.record_published  {
+	border-left: 3px solid #61A32F /*00d719*/; 
+	/*background-image: url("$cl.getAssetUrl($cl.infoGlueComponent.contentId, "published")"); 
+	background-repeat: no-repeat;*/
+	}
+								
+.record_pending  {
+	border-left: 3px solid #ffa500;
+	/*background-image: url("$cl.getAssetUrl($cl.infoGlueComponent.contentId, "pending")");
+	background-repeat: no-repeat;*/
+	}
+
+.pending {
+	border-bottom:2px solid #ffa500; 
+	}
+								
+.expired {
+	border-bottom:2px solid #d70000;
+	}
+
+.published {
+	border-bottom:2px solid #61A32F;
+	}
+
+
+/* ------------------------------------------------------------- */
+/* -------------------------- CALAPP --------------------------- */
+/* ------------------------------------------------------------- */
+
+
+.calApp .portletHeadline a {
+	display:block
+	}
+
+.label {
+	font-weight:bold;
+	}
+
+.calApp .portlet {
+	padding-bottom:1em
+	}
+
+.columnlabelarea {
+	padding:0.125em 0.75em 0.125em 0.75em;
+	border: 1px solid red;
+	font-weight:bold;
+	border-top:1px solid;
+	border-bottom:1px solid;
+	}
+
+.oddrow,
+.evenrow,
+.actionrow {
+	padding:0.25em 0.75em 0.25em 0.75em
+	}
+
+.oddrow p,
+.evenrow p,
+.actionrow p {
+	margin:0;
+	padding:0 
+	}
+
+.calApp .edit {
+	margin: 1px 0 0 0;
+	}
+
+.calApp form {
+	margin:0;
+	}
+
+.columnShort {
+	width:7em;
+	float:left;
+	}
+
+.columnMedium {
+	width:30%;
+	float:left; 
+	}
+
+.columnLong {
+	width:50%;
+	float:left;
+	}
+
+.columnFull {
+	width:90%;
+	float:left;
+	}
+
+.columnDate {
+	width:4em;
+	float:left;
+	}
+
+.columnEnd {
+	width:auto;
+	float:right;
+	}
+
+.columnlabelarea p{
+	margin:0;
+	padding:0
+	}
+
+
+
+/* customize */
+
+.label {
+	color:#396692;
+	}
+
+.columnlabelarea {
+	color:#396692;
+	}
+
+.oddrow {
+	background-color:#fff;
+	}
+	
+.oddrow:hover {
+	background-color:#DFEAF6;
+	}
+							
+.evenrow {
+	background-color:#f6f6f6;
+	}
+	
+.evenrow:hover {
+	background-color:#DFEAF6;
+	}
+	
+.columnlabelarea {
+	background:#ECF3FA;
+	border-color:#9BBDDE;
+	}
+
+
+
+/*
+input {							border-right:1px solid #939393;
+								border-bottom:1px solid #939393;
+								border-top:1px solid #939393;
+								border-left:1px solid #939393; }
+							
+.oddrow input .shorttextfield,
+.oddrow input .longtextfield {		background:#fff}
+*/
+
+
+
+
+/* ------------------------------------------------------------- */
+/* ------------------------- NEWSAPP --------------------------- */
+/* ------------------------------------------------------------- */
+
+
+.newsApp .category {
+	margin-top:0.75em
+	}
+
+
+
+
+
+
+/* ------------------------------------------------------------- */
+/* ------------------------------------------------------------- */
+/* -------------------- CHANGEBLE VALUES ----------------------- */
+/* ------------------------------------------------------------- */
+/* ------------------------------------------------------------- */
+
+#if($contrast =="high") 
+
+body, 
+table tr,
+table td tr { 				background-color:#000033;  }
+
+#elseif($contrast =="low") 
+
+body, 
+table tr,
+table td tr { 				background-color:#fff9cd; }
+
+#else
+	
+body, 
+table tr,
+table td tr { 				background-color:#ffffff; }
+	
+#end
+
+
+
+
+
+
+
+
+
+
+
+a .PortletHeading1:hover { color:#6690BA; }
+
+a  {
+	color:#396692;
+	text-decoration:none;
+	}
+
+a:hover {
+	text-decoration:underline;
+	color:#6690BA;
+	}
+
+a .portletHeadline:hover {
+	color:#6690BA;
+	}
+
+
+
+H1 {  						font-size:75%; }
+
+H2,
+.portlet .head {  			font-size:70%; }
+
+.Pageheader,
+.portlet h2 {				font-size:75% }
+
+.PortletHeaderText {		font-size: 75%;}
+
+p,
+ol,
+ul,
+input,
+label,
+.Error,
+/*.redstar,*/
+.portal_dotlink,
+.portletHeadline {			font-size:65%; }
+
+.portletDate { 				font-size:58%; }
+
+.portlet .subfunctionsarea,
+.portlet .subfunctionarea,
+.portlet .functionsarea,
+.portlet .functionarea,
+.portlet .filterarea {		font-size:65%; }
+
+font.PortletText2,
+.PortletSubHeaderText,
+font.PortletHeading2,
+.PortletText1,
+.portletText,
+.titleorimageid1siteid0,
+.PortletHeading1,
+.inplacedisplayid1siteid0 {	font-size:65%; } /* Portal ordinarie classer */
+
+.wwsbr_publishdate_id1siteid0,
+.PortletText3 {				font-size:58%; } /* Portal ordinarie classer */
+
+
+
+
+
+.titleorimageid1siteid0,
+.PortletHeading1 { 			color:#396692; } /* Portal ordinarie classer */
+
+body { 						color: #000000; }
+
+.Error,
+.redstar {					color:#cc0000; }
+
+.instruction { 				color:#d60000 }
+
+.errorMessage { 			color: #ff0000; }
+
+H1,
+H2,
+H3,
+.Pageheader,
+.portlet .head,
+.PortletHeaderText a,
+.PortletHeaderText,
+.PortletSubHeaderText,
+font.PortletHeading2,
+.portletHeadline {			color:#396692; }
+
+.portlet .subfunctionsarea,
+.portlet .subfunctionarea,
+.portlet .functionsarea,
+.portlet .functionarea,
+.portlet .filterarea {		color:#22486E; }
+
+
+.collapse {					background-image: url("$cl.getAssetUrl($cl.infoGlueComponent.contentId, "collaps")"); }
+
+.expand { 					background-image: url("$cl.getAssetUrl($cl.infoGlueComponent.contentId, "expand")"); }
+
+.transparent {				background-image: url("$cl.getAssetUrl($cl.infoGlueComponent.contentId, "transparent_dot")"); }
+
+.delete { 					background-image: url("$cl.getAssetUrl($cl.infoGlueComponent.contentId, "trashcan")"); }
+
+.edit { 					background-image: url("$cl.getAssetUrl($cl.infoGlueComponent.contentId, "edit")"); }
+
+.moveup { 					background-image: url("$cl.getAssetUrl($cl.infoGlueComponent.contentId, "moveup")"); }
+.movedown { 					background-image: url("$cl.getAssetUrl($cl.infoGlueComponent.contentId, "movedown")"); }
+.checkboxIcon { 					background-image: url("$cl.getAssetUrl($cl.infoGlueComponent.contentId, "checkboxIcon")"); }
+.radiobuttonIcon { 					background-image: url("$cl.getAssetUrl($cl.infoGlueComponent.contentId, "radiobuttonIcon")"); }
+.selectIcon { 					background-image: url("$cl.getAssetUrl($cl.infoGlueComponent.contentId, "selectIcon")"); }
+.textfieldIcon { 					background-image: url("$cl.getAssetUrl($cl.infoGlueComponent.contentId, "textfieldIcon")"); }
+.textareaIcon { 					background-image: url("$cl.getAssetUrl($cl.infoGlueComponent.contentId, "textareaIcon")"); }
+.hiddenIcon { 					background-image: url("$cl.getAssetUrl($cl.infoGlueComponent.contentId, "hiddenIcon")"); }
+
+.LeftCurve {				background-image: url("$cl.getAssetUrl($cl.infoGlueComponent.contentId, "related_corner")"); }
+
+
+.portlet {					border:#DFEAF6;
+							border-top:#9BBDDE;
+							/*background-color:#fff;*/ }
+
+
+.portlet select:focus,
+.portlet textarea:focus,
+.portlet input:focus {		background-color: #feffb5; }
+
+.PortletSubHeaderColor {	background-color:#f6f6f6; }
+
+
+
+.PortletHeaderColor,
+.portlet .head { 			background-color:#DFEAF6; }
+
+.portlet .functionsarea,
+.portlet .functionarea {	background-color:#ECF3FA; }
+
+.portlet .filterarea,
+.portlet .subfunctionsarea,
+.portlet .subfunctionarea {	background-color:#f9f9f9; }
+
+
+
+
+.portlet .filterarea,
+.portlet .functionsarea,			
+.portlet .functionarea,
+.portlet .subfunctionsarea,
+.portlet .subfunctionarea {	border-color:#DFEAF6; }
+							
+.portlet .head { 			border-color:#9BBDDE; }
+
+
+div.portlet {
+	border-color:#9BBDDE #DFEAF6 #DFEAF6 #DFEAF6;
+	}
+
+
+/*Content type definition editor */
+
+#contentTypeEditorContainer {
+	width: 100%;
+	margin: 0px 0px 0px 0px;
+	padding: 10px 10px 10px 10px;
+	border: 1px solid green;
+}
+#attributes {
+	aborder: 1px solid red;	
+}
+
+.propertiesDiv {
+	position:absolute;
+	width:700px;
+    background-color:#F4F4F4;
+	border:1px solid #333333;
+	z-index:201;
+	left:10px;
+	top:100px;
+	height:650px;
+	}
+
+.propertiesDivHandle {
+	padding:2px;
+        margin: 2px;
+        margin-bottom: 8px;
+        width:690px;
+	color:white;
+	background-color:navy;
+	font-family:verdana, sans-serif;
+	font-size:10px;
+	}
+
+.propertiesDivLeftHandle {
+	width: 150px; 
+	float: left;
+	color:white;
+	text-align: left;
+	line-height:10px;
+	}
+
+.propertiesDivRightHandle {
+	color:white;
+	text-align: right;
+	line-height:10px;	
+	}
+
+.propertiesDivBody {
+        padding: 4px;
+	}
+
+#propertyBody label {
+        display: block;
+		float: left;
+		margin-bottom: 10px;
+        padding-right: 5px;
+        atext-align: right;
+		width: 200px;
+}
+
+br {
+	clear: left;
+}
+
+a.white {
+        text-decoration:none;
+        color: white;
+		font-size:10px;
+    }
+a.white:hover {
+	text-decoration:underline;
+	}
+a.white:active {
+	font-weight: bold;
+	}
+
+.validationRow {
+  	width: 25%;
+  	padding:0.125em 0.75em 0.125em 0.75em;  
+}

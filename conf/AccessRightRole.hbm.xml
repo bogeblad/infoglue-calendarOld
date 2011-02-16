@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="org.infoglue.calendar.entities.AccessRightRole" table="AccessRightRole" dynamic-update="false" dynamic-insert="false" select-before-update="false" optimistic-lock="version">
+
+        <id name="id" column="id" type="long" unsaved-value="null">
+            <generator class="native">
+              <!--  
+                  To add non XDoclet generator parameters, create a file named 
+                  hibernate-generator-params-Calendar.xml 
+                  containing the additional parameters and place it in your merge dir. 
+              --> 
+            </generator>
+        </id>
+
+        <property name="name" type="string" update="true" insert="true" access="property" column="name" not-null="false" unique="true"/>
+        
+        <many-to-one name="accessRight" class="org.infoglue.calendar.entities.AccessRight" cascade="none" outer-join="false" update="true" insert="true" access="property" column="access_right_id"/>
+         
+    </class>
+    
+</hibernate-mapping>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+                         "http://java.sun.com/dtd/web-app_2_3.dtd">
+<web-app>
+    <display-name>Pluto Testsuite</display-name>
+    <context-param>
+        <param-name>test-parameter-name</param-name>
+        <param-value>test-parameter-val</param-value>
+    </context-param>
+    <context-param>
+        <param-name>parameter-name</param-name>
+        <param-value>parameter-value</param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>com.opensymphony.webwork.lifecycle.ApplicationLifecycleListener</listener-class>
+    </listener>
+
+    <listener>
+        <listener-class>com.opensymphony.webwork.lifecycle.SessionLifecycleListener</listener-class>
+    </listener>
+
+    <listener>
+		<listener-class>org.infoglue.calendar.util.CalendarContextListener</listener-class>
+    </listener>
+
+	<filter>
+        <filter-name>DigitalAssetValidatorFilter</filter-name>
+        <filter-class>org.infoglue.calendar.util.DigitalAssetValidatorFilter</filter-class>
+    </filter>
+
+	<filter-mapping>
+		<filter-name>DigitalAssetValidatorFilter</filter-name>
+		<url-pattern>/digitalAssets/*</url-pattern>
+	</filter-mapping>
+	
+    <servlet>
+        <servlet-name>WebworkDispatcherPortlet</servlet-name>
+        <display-name>WebworkDispatcherPortlet Wrapper</display-name>
+        <description>Automated generated Portlet Wrapper</description>
+        <servlet-class>org.apache.pluto.core.PortletServlet</servlet-class>
+        <init-param>
+            <param-name>portlet-guid</param-name>
+            <param-value>infoglueCalendar.WebworkDispatcherPortlet</param-value>
+        </init-param>
+        <init-param>
+            <param-name>portlet-class</param-name>
+            <param-value>com.opensymphony.webwork.portlet.dispatcher.PortletDispatcher</param-value>
+        </init-param>
+    </servlet>
+    
+   	<!-- ****************************************** -->
+	<!-- This part is for Apache Axis			    -->
+	<!-- ****************************************** -->
+	<servlet>
+		<servlet-name>AxisServlet</servlet-name>
+	    <display-name>Apache-Axis Servlet</display-name>
+	    <servlet-class>org.apache.axis.transport.http.AxisServlet</servlet-class>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>CalendarRESTServlet</servlet-name>
+        <display-name>Calendar rest services servlet</display-name>
+        <description>To get internal information over REST</description>
+        <servlet-class>org.infoglue.calendar.servlets.CalendarServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CategoryRESTServlet</servlet-name>
+        <display-name>Category rest services servlet</display-name>
+        <description>To get internal information over REST</description>
+        <servlet-class>org.infoglue.calendar.servlets.CategoryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EventsRESTServlet</servlet-name>
+        <display-name>Event rest services servlet</display-name>
+        <description>To get internal information over REST</description>
+        <servlet-class>org.infoglue.calendar.servlets.EventsServlet</servlet-class>
+    </servlet>
+
+    <!-- ****************************************** -->
+	<!-- This part is for Apache Axis			    -->
+	<!-- ****************************************** -->
+	<servlet-mapping>
+	    <servlet-name>AxisServlet</servlet-name>
+    	<url-pattern>/servlet/AxisServlet</url-pattern>
+  	</servlet-mapping>
+	<servlet-mapping>
+    	<servlet-name>AxisServlet</servlet-name>
+    	<url-pattern>*.jws</url-pattern>
+  	</servlet-mapping>
+	<servlet-mapping>
+    	<servlet-name>AxisServlet</servlet-name>
+    	<url-pattern>/services/*</url-pattern>
+  	</servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>CalendarRESTServlet</servlet-name>
+        <url-pattern>/CalendarRESTServlet/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>CategoryRESTServlet</servlet-name>
+        <url-pattern>/CategoryRESTServlet/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>EventsRESTServlet</servlet-name>
+        <url-pattern>/EventsRESTServlet/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>WebworkDispatcherPortlet</servlet-name>
+        <url-pattern>/WebworkDispatcherPortlet/*</url-pattern>
+    </servlet-mapping>
+ 
+	<taglib>
+		<taglib-uri>calendar</taglib-uri>
+		<taglib-location>/WEB-INF/tld/calendar.tld</taglib-location>
+	</taglib>
+	<taglib>
+		<taglib-uri>infoglue-common</taglib-uri>
+		<taglib-location>/WEB-INF/tld/infoglue-common.tld</taglib-location>
+	</taglib>
+</web-app>

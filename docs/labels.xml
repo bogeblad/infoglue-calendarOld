@@ -1,0 +1,577 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<languages>
+  <language languageCode="en">
+    <labels>
+      <errors.afterStartDateTime><![CDATA[End date/time must be after start date/time]]></errors.afterStartDateTime>
+      <NP307><![CDATA[Wrong format]]></NP307>
+      <NP300><![CDATA[The field must have a value]]></NP300>
+      <labels.internal.applicationFooter><![CDATA[PPPPPPPPPP]]><![CDATA[PPPPPPPPPP]]><![CDATA[? The InfoGlue Community 2005]]></labels.internal.applicationFooter>
+      <labels.internal.applicationTitle><![CDATA[MSU:s Calender]]><![CDATA[GU:s Calendar]]></labels.internal.applicationTitle>
+      <labels.internal.calendar.weekTab><![CDATA[Week]]></labels.internal.calendar.weekTab>
+      <labels.internal.application.chooseCalendarIntro><![CDATA[Choose the calendar in which you wish to create the event in.]]></labels.internal.application.chooseCalendarIntro>
+      <labels.internal.eventType.createNewEventType><![CDATA[Create new eventType]]></labels.internal.eventType.createNewEventType>
+      <labels.public.event.until><![CDATA[until]]></labels.public.event.until>
+      <labels.internal.eventTypeCategoryAttribute.updateButton><![CDATA[Update eventTypeCategoryAttribute]]></labels.internal.eventTypeCategoryAttribute.updateButton>
+      <errors.reqiredDateTimeField><![CDATA[Both date and time must be entered]]></errors.reqiredDateTimeField>
+      <labels.internal.eventTypeCategoryAttribute.createNewEventTypeCategoryAttribute><![CDATA[Create new eventTypeCategoryAttribute]]></labels.internal.eventTypeCategoryAttribute.createNewEventTypeCategoryAttribute>
+      <labels.internal.eventTypeCategoryAttribute.description><![CDATA[Description]]></labels.internal.eventTypeCategoryAttribute.description>
+      <labels.internal.applicationDelete><![CDATA[Delete]]></labels.internal.applicationDelete>
+      <labels.internal.category.updateButton><![CDATA[Update category]]></labels.internal.category.updateButton>
+      <labels.internal.event.lastRegistrationTime><![CDATA[Last reg hour:]]></labels.internal.event.lastRegistrationTime>
+      <labels.internal.soba.noHits><![CDATA[No entries found]]></labels.internal.soba.noHits>
+      <labels.internal.soba.firstName><![CDATA[First name]]></labels.internal.soba.firstName>
+      <labels.internal.soba.hitListStart><![CDATA[At the moment there are]]></labels.internal.soba.hitListStart>
+      <labels.internal.application.chooseCalendar><![CDATA[Choose calendar]]></labels.internal.application.chooseCalendar>
+      <labels.public.event.name><![CDATA[Name:]]></labels.public.event.name>
+      <labels.internal.application.chooseCalendarForCopyIntro><![CDATA[Choose the calendar in which you wish to copy this event to.]]></labels.internal.application.chooseCalendarForCopyIntro>
+      <labels.public.event.contactEmail><![CDATA[Contact email:]]></labels.public.event.contactEmail>
+      <errors.maximumParticipantsDemandsLastRegistrationDateTime><![CDATA[You must state a last registration date/time when you have set maximum numbers of participants]]></errors.maximumParticipantsDemandsLastRegistrationDateTime>
+      <labels.internal.event.shortDescription><![CDATA[Short description:]]></labels.internal.event.shortDescription>
+      <labels.public.event.dateTime><![CDATA[Date/time:]]></labels.public.event.dateTime>
+      <labels.internal.entry.createNewEntry><![CDATA[Create entry]]></labels.internal.entry.createNewEntry>
+      <labels.internal.soba.searchButton><![CDATA[Search]]></labels.internal.soba.searchButton>
+      <labels.public.event.description><![CDATA[Description:]]></labels.public.event.description>
+      <labels.internal.applicationSearchEntries><![CDATA[Search entries]]></labels.internal.applicationSearchEntries>
+      <labels.internal.event.createButton><![CDATA[Preview]]></labels.internal.event.createButton>
+      <labels.internal.soba.message><![CDATA[Message]]></labels.internal.soba.message>
+      <labels.public.event.shortDescription><![CDATA[Short description:]]></labels.public.event.shortDescription>
+      <labels.internal.entry.firstName><![CDATA[First name:]]></labels.internal.entry.firstName>
+      <labels.internal.soba.searchEntries><![CDATA[Search entries]]></labels.internal.soba.searchEntries>
+      <labels.internal.event.createEventCopyMessage><![CDATA[Copy of old event]]></labels.internal.event.createEventCopyMessage>
+      <labels.internal.soba.searchANDOR><![CDATA[AND search (OR default)]]></labels.internal.soba.searchANDOR>
+      <labels.internal.applicationCancel><![CDATA[Cancel]]></labels.internal.applicationCancel>
+      <labels.internal.soba.subject><![CDATA[Subject]]></labels.internal.soba.subject>
+      <labels.internal.location.createNewLocation><![CDATA[Create new location]]></labels.internal.location.createNewLocation>
+      <labels.public.entry.lastName><![CDATA[Last name:]]></labels.public.entry.lastName>
+      <labels.public.calendar.headline><![CDATA[Calendar name:]]></labels.public.calendar.headline>
+      <labels.internal.eventTypeCategoryAttribute.name><![CDATA[Name]]></labels.internal.eventTypeCategoryAttribute.name>
+      <labels.internal.calendar.updateButton><![CDATA[Update calendar]]></labels.internal.calendar.updateButton>
+      <labels.internal.maximumEntriesReached.header><![CDATA[Error message]]></labels.internal.maximumEntriesReached.header>
+      <labels.internal.entry.city><![CDATA[City:]]></labels.internal.entry.city>
+      <labels.internal.category.createCategory.title><![CDATA[Create category]]></labels.internal.category.createCategory.title>
+      <labels.internal.applicationConfirm><![CDATA[Confirm]]></labels.internal.applicationConfirm>
+      <labels.internal.eventType.updateEventType><![CDATA[Update event type]]></labels.internal.eventType.updateEventType>
+      <labels.internal.category.updateCategory><![CDATA[Update category]]></labels.internal.category.updateCategory>
+      <labels.public.event.organizerName><![CDATA[Organizer name]]></labels.public.event.organizerName>
+      <labels.internal.event.eventUrl><![CDATA[Event URL:]]></labels.internal.event.eventUrl>
+      <labels.internal.eventType.simple><![CDATA[Simple]]></labels.internal.eventType.simple>
+      <labels.public.event.location><![CDATA[Locations:]]></labels.public.event.location>
+      <labels.internal.event.assetKey><![CDATA[Asset name]]></labels.internal.event.assetKey>
+      <labels.internal.application.chooseCalendarForSubscriptionIntro><![CDATA[Choose which calendar you wish to subscribe to - all events created in it will be sent to you]]></labels.internal.application.chooseCalendarForSubscriptionIntro>
+      <labels.internal.event.fileToAttach><![CDATA[File to attach:]]></labels.internal.event.fileToAttach>
+      <labels.internal.waitingEvents.subHeader><![CDATA[Waiting events ]]></labels.internal.waitingEvents.subHeader>
+      <errors.atLeastOneItem><![CDATA[You must choose at least one item]]></errors.atLeastOneItem>
+      <labels.internal.applicationPublishedEvents><![CDATA[Published events]]></labels.internal.applicationPublishedEvents>
+      <labels.internal.entry.newEntryHeader><![CDATA[Create new entry]]></labels.internal.entry.newEntryHeader>
+      <labels.internal.event.startDate><![CDATA[Start date:]]></labels.internal.event.startDate>
+      <labels.internal.event.noLastRegistrationDateTime><![CDATA[None given]]></labels.internal.event.noLastRegistrationDateTime>
+      <labels.internal.eventType.addAvailableCategory><![CDATA[Add available category]]></labels.internal.eventType.addAvailableCategory>
+      <labels.internal.eventTypeCategoryAttribute.internalName><![CDATA[Internal name]]></labels.internal.eventTypeCategoryAttribute.internalName>
+      <labels.internal.location.updateLocation><![CDATA[Update location]]></labels.internal.location.updateLocation>
+      <labels.internal.calendar.groups><![CDATA[Owning groups (user must be part of one of these if set)]]></labels.internal.calendar.groups>
+      <labels.internal.entry.phone><![CDATA[Phone:]]></labels.internal.entry.phone>
+      <labels.internal.maximumEntriesReached.title><![CDATA[Maximum number of entries reached]]></labels.internal.maximumEntriesReached.title>
+      <labels.internal.event.price><![CDATA[Price:]]></labels.internal.event.price>
+      <labels.internal.entry.zipcode><![CDATA[Zipcode:]]></labels.internal.entry.zipcode>
+      <labels.public.calendar.dayTab><![CDATA[Day]]></labels.public.calendar.dayTab>
+      <labels.internal.applicationEventSubscriptions><![CDATA[Subscriptions]]></labels.internal.applicationEventSubscriptions>
+      <labels.public.event.isOrganizedByGU><![CDATA[Organized by GU:]]></labels.public.event.isOrganizedByGU>
+      <labels.internal.location.description><![CDATA[Description]]></labels.internal.location.description>
+      <labels.public.calendar.weekTab><![CDATA[Week]]></labels.public.calendar.weekTab>
+      <labels.public.event.contactPhone><![CDATA[Contact phone:]]></labels.public.event.contactPhone>
+      <labels.public.calendar.waitingEventsTab><![CDATA[Waiting events]]></labels.public.calendar.waitingEventsTab>
+      <labels.internal.event.location><![CDATA[Locations:]]></labels.internal.event.location>
+      <labels.public.event.startDate><![CDATA[Start date:]]></labels.public.event.startDate>
+      <labels.internal.eventType.CategoryAttribute><![CDATA[Attribute name]]></labels.internal.eventType.CategoryAttribute>
+      <labels.internal.calendar.viewGUICalendarButton><![CDATA[Graphical calendar]]></labels.internal.calendar.viewGUICalendarButton>
+      <labels.internal.event.addEvent><![CDATA[Add event]]></labels.internal.event.addEvent>
+      <labels.internal.entry.updateEntry><![CDATA[Update entry]]></labels.internal.entry.updateEntry>
+      <labels.internal.eventType.name><![CDATA[Name]]></labels.internal.eventType.name>
+      <labels.internal.calendar.comingEvents><![CDATA[Coming events]]></labels.internal.calendar.comingEvents>
+      <labels.internal.location.subHeader><![CDATA[Locations]]></labels.internal.location.subHeader>
+      <labels.internal.entry.fax><![CDATA[Fax:]]></labels.internal.entry.fax>
+      <labels.internal.event.name><![CDATA[Name:]]></labels.internal.event.name>
+      <labels.internal.category.createButton><![CDATA[Create category]]></labels.internal.category.createButton>
+      <labels.internal.event.lastRegistrationDate><![CDATA[Last registration date:]]></labels.internal.event.lastRegistrationDate>
+      <labels.public.event.startTime><![CDATA[Start time:]]></labels.public.event.startTime>
+      <labels.state.published><![CDATA[Published]]></labels.state.published>
+      <labels.internal.category.subHeader><![CDATA[Categories]]></labels.internal.category.subHeader>
+      <labels.internal.entry.createNewEntryThankYou><![CDATA[Thank you - registration complete]]></labels.internal.entry.createNewEntryThankYou>
+      <labels.internal.eventType.subHeader><![CDATA[Event type]]></labels.internal.eventType.subHeader>
+      <labels.internal.event.signUp><![CDATA[Sign up for this event]]></labels.internal.event.signUp>
+      <labels.public.event.registrationExpired><![CDATA[Registration is closed for this event]]></labels.public.event.registrationExpired>
+      <labels.internal.applicationAdministerLabels><![CDATA[Application labels]]></labels.internal.applicationAdministerLabels>
+      <labels.internal.event.eventPublishedText><![CDATA[The event was published]]></labels.internal.event.eventPublishedText>
+      <labels.internal.soba.lastName><![CDATA[Last name]]></labels.internal.soba.lastName>
+      <labels.internal.event.contactPhone><![CDATA[Contact phone:]]></labels.internal.event.contactPhone>
+      <labels.internal.event.isInternal.false><![CDATA[Open for the public]]></labels.internal.event.isInternal.false>
+      <labels.internal.calendar.week><![CDATA[Week]]></labels.internal.calendar.week>
+      <labels.internal.soba.searchIntro><![CDATA[Select to search on one or more fields below]]></labels.internal.soba.searchIntro>
+      <labels.internal.event.updateEvent><![CDATA[Update event]]></labels.internal.event.updateEvent>
+      <labels.public.event.endTime><![CDATA[End time:]]></labels.public.event.endTime>
+      <labels.internal.subscribedCalendarNames><![CDATA[Subscribed calendars]]></labels.internal.subscribedCalendarNames>
+      <labels.internal.soba.idColumnHeader><![CDATA[ID]]></labels.internal.soba.idColumnHeader>
+      <labels.internal.event.isOrganizedByGU><![CDATA[Organized by GU:]]></labels.internal.event.isOrganizedByGU>
+      <labels.internal.calendar.name><![CDATA[Name]]></labels.internal.calendar.name>
+      <labels.internal.application.chooseCalendarForLinkIntro><![CDATA[Choose the calendar in which you wish this event to be visible in.]]></labels.internal.application.chooseCalendarForLinkIntro>
+      <labels.internal.event.lecturer><![CDATA[Lecturer:]]></labels.internal.event.lecturer>
+      <labels.internal.event.contactEmail><![CDATA[Contact email:]]></labels.internal.event.contactEmail>
+      <labels.internal.maximumEntriesReached.text><![CDATA[The maximum number of registrated persons has allready been reached ]]></labels.internal.maximumEntriesReached.text>
+      <labels.internal.location.addLocation><![CDATA[Add location]]></labels.internal.location.addLocation>
+      <labels.public.calendar.comingEvents><![CDATA[Coming events]]></labels.public.calendar.comingEvents>
+      <labels.internal.calendar.updateCalendar><![CDATA[Update calendar]]></labels.internal.calendar.updateCalendar>
+      <false><![CDATA[No]]></false>
+      <labels.internal.calendar.createCalendar.title><![CDATA[Create Calendar]]></labels.internal.calendar.createCalendar.title>
+      <labels.internal.event.customLocation><![CDATA[Custom location:]]></labels.internal.event.customLocation>
+      <labels.internal.soba.emailPersons><![CDATA[Email persons]]></labels.internal.soba.emailPersons>
+      <labels.internal.myWorkingEvents.subHeader><![CDATA[My events (unpublished)]]></labels.internal.myWorkingEvents.subHeader>
+      <labels.internal.event.category><![CDATA[Categories:]]></labels.internal.event.category>
+      <labels.internal.event.deleteButton><![CDATA[Delete]]></labels.internal.event.deleteButton>
+      <labels.internal.calendar.description><![CDATA[Description]]></labels.internal.calendar.description>
+      <labels.internal.applicationMyWorkingEvents><![CDATA[My working events]]></labels.internal.applicationMyWorkingEvents>
+      <labels.state.publish><![CDATA[Up for review]]></labels.state.publish>
+      <labels.internal.soba.nameColumnHeader><![CDATA[Name]]></labels.internal.soba.nameColumnHeader>
+      <labels.internal.event.files><![CDATA[Attached files:]]></labels.internal.event.files>
+      <labels.internal.event.isInternal.true><![CDATA[Only internal]]></labels.internal.event.isInternal.true>
+      <labels.public.event.alternativeLocation><![CDATA[Alternative location:]]></labels.public.event.alternativeLocation>
+      <labels.public.event.signUp><![CDATA[Sign up for this event]]></labels.public.event.signUp>
+      <labels.internal.applicationAdministerSettings><![CDATA[Settings]]></labels.internal.applicationAdministerSettings>
+      <labels.internal.eventType.updateButton><![CDATA[Update eventType]]></labels.internal.eventType.updateButton>
+      <labels.public.event.isInternal><![CDATA[Internal event:]]></labels.public.event.isInternal>
+      <labels.internal.eventType.type><![CDATA[Type]]></labels.internal.eventType.type>
+      <labels.internal.soba.emailIntro><![CDATA[Here you can email the persons you found]]></labels.internal.soba.emailIntro>
+      <labels.internal.entry.createButton><![CDATA[Create entry]]></labels.internal.entry.createButton>
+      <labels.internal.event.linkEvent><![CDATA[Link event]]></labels.internal.event.linkEvent>
+      <labels.internal.event.attachedFiles><![CDATA[Attached files]]></labels.internal.event.attachedFiles>
+      <labels.public.calendar.monthTab><![CDATA[Month]]></labels.public.calendar.monthTab>
+      <labels.internal.soba.hitListEnd><![CDATA[entries found ]]></labels.internal.soba.hitListEnd>
+      <labels.internal.applicationEdit><![CDATA[Edit]]></labels.internal.applicationEdit>
+      <labels.internal.application.chooseCalendarForLinkDeleteIntro><![CDATA[Choose which calendar you wish the event to not appear in any more.]]></labels.internal.application.chooseCalendarForLinkDeleteIntro>
+      <labels.internal.application.backToMainMenu><![CDATA[Back to main menu]]></labels.internal.application.backToMainMenu>
+      <labels.internal.event.entryForm><![CDATA[Entry form]]></labels.internal.event.entryForm>
+      <labels.public.event.lastRegistrationDate><![CDATA[Last registration date:]]></labels.public.event.lastRegistrationDate>
+      <labels.public.calendar.week><![CDATA[Week]]></labels.public.calendar.week>
+      <labels.internal.eventTypeCategoryAttribute.BaseCategory><![CDATA[Base category]]></labels.internal.eventTypeCategoryAttribute.BaseCategory>
+      <labels.internal.calendar.nameMyCalendars><![CDATA[Name (My calendars)]]></labels.internal.calendar.nameMyCalendars>
+      <labels.internal.calendar.headline><![CDATA[Calendar name:]]></labels.internal.calendar.headline>
+      <labels.internal.calendar.monthTab><![CDATA[Month]]></labels.internal.calendar.monthTab>
+      <labels.internal.event.isInternal><![CDATA[Internal event:]]></labels.internal.event.isInternal>
+      <labels.internal.calendar.addCalendar><![CDATA[Add calendar]]></labels.internal.calendar.addCalendar>
+      <labels.internal.soba.andSearchTrue><![CDATA[Yes]]></labels.internal.soba.andSearchTrue>
+      <labels.internal.eventType.AvailableCategories><![CDATA[Category areas]]></labels.internal.eventType.AvailableCategories>
+      <labels.internal.category.addCategory><![CDATA[Add category]]></labels.internal.category.addCategory>
+      <labels.internal.applicationNoItemsFound><![CDATA[No items found]]></labels.internal.applicationNoItemsFound>
+      <errors.beforeStartDateTime><![CDATA[Date/time must be before start date/time]]></errors.beforeStartDateTime>
+      <labels.internal.category.childCategories><![CDATA[Child categories]]></labels.internal.category.childCategories>
+      <labels.internal.calendar.roles><![CDATA[Owning roles (user must be part of one of these if set)]]></labels.internal.calendar.roles>
+      <labels.internal.event.submitForPublishEvent><![CDATA[Submit for publishing]]></labels.internal.event.submitForPublishEvent>
+      <labels.internal.event.maximumParticipants><![CDATA[Maximum number of viewers:]]></labels.internal.event.maximumParticipants>
+      <labels.internal.applicationPublishedComingEvents><![CDATA[Published coming events]]></labels.internal.applicationPublishedComingEvents>
+      <labels.internal.event.description><![CDATA[Description:]]></labels.internal.event.description>
+      <labels.internal.eventType.createButton><![CDATA[Create eventType]]></labels.internal.eventType.createButton>
+      <labels.internal.entry.organisation><![CDATA[Organisation:]]></labels.internal.entry.organisation>
+      <labels.internal.eventTypeCategoryAttribute.AvailableCategories><![CDATA[Category areas]]></labels.internal.eventTypeCategoryAttribute.AvailableCategories>
+      <labels.internal.event.startTime><![CDATA[Start time:]]></labels.internal.event.startTime>
+      <labels.internal.location.createLocation.title><![CDATA[Create location]]></labels.internal.location.createLocation.title>
+      <labels.internal.calendar.viewSubscriptions><![CDATA[Prenumeranter]]></labels.internal.calendar.viewSubscriptions>
+      <labels.internal.soba.delete><![CDATA[Delete]]></labels.internal.soba.delete>
+      <labels.internal.applicationIntroduction><![CDATA[<p>This is the administrative application. It will let you manage all aspects of the calendar/event system.</p><p>The top menu contains links to management of the different parts of the system.</p>]]></labels.internal.applicationIntroduction>
+      <labels.public.event.customLocation><![CDATA[Custom location:]]></labels.public.event.customLocation>
+      <labels.internal.soba.actionColumnHeader><![CDATA[Actions]]></labels.internal.soba.actionColumnHeader>
+      <labels.internal.calendar.eventsTab><![CDATA[Published events]]></labels.internal.calendar.eventsTab>
+      <labels.internal.eventTypeCategoryAttribute.CategoryAttribute><![CDATA[Attribute name]]></labels.internal.eventTypeCategoryAttribute.CategoryAttribute>
+      <labels.internal.event.contactName><![CDATA[Contact name:]]></labels.internal.event.contactName>
+      <labels.internal.event.searchEvents><![CDATA[Search events]]></labels.internal.event.searchEvents>
+      <labels.public.event.participants><![CDATA[Participants:]]></labels.public.event.participants>
+      <labels.internal.eventType.attributes><![CDATA[Attributes]]></labels.internal.eventType.attributes>
+      <labels.public.event.eventUrl><![CDATA[Event URL:]]></labels.public.event.eventUrl>
+      <labels.internal.eventType.BaseCategory><![CDATA[Base categori]]></labels.internal.eventType.BaseCategory>
+      <labels.public.calendar.eventsTab><![CDATA[Published events]]></labels.public.calendar.eventsTab>
+      <labels.internal.category.createNewCategory><![CDATA[Create new category]]></labels.internal.category.createNewCategory>
+      <labels.internal.soba.email><![CDATA[Email]]></labels.internal.soba.email>
+      <labels.internal.eventType.addEventType><![CDATA[Add event type]]></labels.internal.eventType.addEventType>
+      <labels.internal.calendar.createNewCalendar><![CDATA[Create new calendar]]></labels.internal.calendar.createNewCalendar>
+      <labels.public.entry.submit><![CDATA[Send]]></labels.public.entry.submit>
+      <labels.internal.applicationWaitingEvents><![CDATA[Waiting events]]></labels.internal.applicationWaitingEvents>
+      <labels.internal.event.participants><![CDATA[Participants:]]></labels.internal.event.participants>
+      <labels.internal.event.editButton><![CDATA[Edit]]></labels.internal.event.editButton>
+      <labels.internal.event.organizerName><![CDATA[Organizer name]]></labels.internal.event.organizerName>
+      <labels.public.event.longDescription><![CDATA[Full description:]]></labels.public.event.longDescription>
+      <labels.internal.soba.newSearch><![CDATA[New search]]></labels.internal.soba.newSearch>
+      <labels.internal.event.entriesButton><![CDATA[View entries]]></labels.internal.event.entriesButton>
+      <labels.internal.event.searchIntro><![CDATA[Select to search on one or more fields below]]></labels.internal.event.searchIntro>
+      <labels.internal.entry.lastName><![CDATA[Last name:]]></labels.internal.entry.lastName>
+      <labels.internal.entry.address><![CDATA[Address]]></labels.internal.entry.address>
+      <labels.internal.event.state><![CDATA[State]]></labels.internal.event.state>
+      <labels.internal.applicationHeader><![CDATA[Calendar application administration]]></labels.internal.applicationHeader>
+      <labels.internal.soba.events><![CDATA[Event:]]></labels.internal.soba.events>
+      <labels.internal.calendar.dayTab><![CDATA[Day]]></labels.internal.calendar.dayTab>
+      <labels.internal.subscribers><![CDATA[Subscribers]]></labels.internal.subscribers>
+      <labels.internal.event.eventSubmittedHome><![CDATA[Home]]></labels.internal.event.eventSubmittedHome>
+      <labels.internal.category.description><![CDATA[Description]]></labels.internal.category.description>
+      <labels.internal.location.updateButton><![CDATA[Update location]]></labels.internal.location.updateButton>
+      <labels.state.working><![CDATA[Working]]></labels.state.working>
+      <labels.public.maximumEntriesReached.text><![CDATA[The maximum number of registrated persons has allready been reached ]]></labels.public.maximumEntriesReached.text>
+      <labels.internal.applicationSearchEvents><![CDATA[Search events]]></labels.internal.applicationSearchEvents>
+      <labels.internal.soba.edit><![CDATA[Edit]]></labels.internal.soba.edit>
+      <labels.public.maximumEntriesReached.header><![CDATA[Error message]]></labels.public.maximumEntriesReached.header>
+      <labels.internal.soba.eventColumnHeader><![CDATA[Event]]></labels.internal.soba.eventColumnHeader>
+      <labels.internal.event.alternativeLocation><![CDATA[Alternative location:]]></labels.internal.event.alternativeLocation>
+      <labels.internal.entry.updateButton><![CDATA[Update entry]]></labels.internal.entry.updateButton>
+      <labels.internal.calendar.subHeader><![CDATA[Calendars]]></labels.internal.calendar.subHeader>
+      <labels.internal.soba.categories><![CDATA[Categories]]></labels.internal.soba.categories>
+      <labels.internal.event.updateButton><![CDATA[Update event]]></labels.internal.event.updateButton>
+      <labels.internal.category.name><![CDATA[Name]]></labels.internal.category.name>
+      <labels.public.event.lastRegistrationTime><![CDATA[Last reg hour:]]></labels.public.event.lastRegistrationTime>
+      <labels.internal.event.eventSubmittedText><![CDATA[The event was submitted to the publisher. He or she will be notified and will look at the event as soon as possible.]]></labels.internal.event.eventSubmittedText>
+      <labels.internal.event.noAttachments><![CDATA[No attachments found]]></labels.internal.event.noAttachments>
+      <labels.internal.event.signUpForThisOverbookedEvent><![CDATA[The event is full but you can sign up anyway and we will contact you if a seat opens up.]]></labels.internal.event.signUpForThisOverbookedEvent>
+      <labels.internal.eventTypeCategoryAttribute.updateEventTypeCategoryAttribute><![CDATA[Update eventTypeCategoryAttribute]]></labels.internal.eventTypeCategoryAttribute.updateEventTypeCategoryAttribute>
+      <labels.internal.location.name><![CDATA[Name]]></labels.internal.location.name>
+      <labels.public.event.price><![CDATA[Price:]]></labels.public.event.price>
+      <labels.internal.eventType.description><![CDATA[Description]]></labels.internal.eventType.description>
+      <labels.public.event.maximumParticipants><![CDATA[Maximum number of viewers:]]></labels.public.event.maximumParticipants>
+      <labels.internal.applicationSubHeader><![CDATA[Welcome to InfoGlue Calendar]]></labels.internal.applicationSubHeader>
+      <labels.internal.calendar.createButton><![CDATA[Create calendar]]></labels.internal.calendar.createButton>
+      <labels.internal.entry.submit><![CDATA[Send]]></labels.internal.entry.submit>
+      <labels.internal.event.dateTime><![CDATA[Date/time:]]></labels.internal.event.dateTime>
+      <labels.internal.event.endDate><![CDATA[End date:]]></labels.internal.event.endDate>
+      <labels.internal.event.endTime><![CDATA[End time:]]></labels.internal.event.endTime>
+      <labels.internal.entry.createNewEntryThankYouText><![CDATA[Your registration is complete. Welcome!]]></labels.internal.entry.createNewEntryThankYouText>
+      <labels.internal.event.signUpForThisEvent><![CDATA[Sign up for this event]]></labels.internal.event.signUpForThisEvent>
+      <labels.internal.entry.email><![CDATA[E-mail:]]></labels.internal.entry.email>
+      <labels.internal.eventType.createEventType.title><![CDATA[Create eventType]]></labels.internal.eventType.createEventType.title>
+      <labels.internal.calendar.owner><![CDATA[Calendar Owner]]></labels.internal.calendar.owner>
+      <labels.public.calendar.waitingEvents><![CDATA[Waiting events (not published)]]></labels.public.calendar.waitingEvents>
+      <labels.public.event.category><![CDATA[Categories:]]></labels.public.event.category>
+      <labels.public.entry.email><![CDATA[E-mail:]]></labels.public.entry.email>
+      <labels.internal.subscription.addSubscription><![CDATA[Add subscription]]></labels.internal.subscription.addSubscription>
+      <labels.internal.applicationHome><![CDATA[Events]]></labels.internal.applicationHome>
+      <labels.internal.calendar.eventType><![CDATA[Event type]]></labels.internal.calendar.eventType>
+      <errors.reqiredField><![CDATA[The field must have a value]]></errors.reqiredField>
+      <true><![CDATA[Yes]]></true>
+      <labels.internal.applicationOK><![CDATA[OK]]></labels.internal.applicationOK>
+      <labels.internal.soba.locations><![CDATA[Locations]]></labels.internal.soba.locations>
+      <labels.internal.category.internalName><![CDATA[Internal Name]]></labels.internal.category.internalName>
+      <labels.internal.applicationLinkedPublishedEvents><![CDATA[Linked events]]></labels.internal.applicationLinkedPublishedEvents>
+      <labels.internal.applicationAdministerEventTypes><![CDATA[Event types]]></labels.internal.applicationAdministerEventTypes>
+      <labels.internal.applicationAdministerCalendars><![CDATA[Calendars]]></labels.internal.applicationAdministerCalendars>
+      <labels.public.event.endDate><![CDATA[End date:]]></labels.public.event.endDate>
+      <labels.internal.applicationAdministerLocations><![CDATA[Locations]]></labels.internal.applicationAdministerLocations>
+      <labels.internal.location.createButton><![CDATA[Create location]]></labels.internal.location.createButton>
+      <labels.internal.applicationAdministerCategories><![CDATA[Categories]]></labels.internal.applicationAdministerCategories>
+      <labels.public.entry.firstName><![CDATA[First name:]]></labels.public.entry.firstName>
+      <labels.public.event.files><![CDATA[Attached files:]]></labels.public.event.files>
+      <labels.internal.soba.anyEvent><![CDATA[Any]]></labels.internal.soba.anyEvent>
+      <labels.internal.applicationAdministrate><![CDATA[Administrate:]]></labels.internal.applicationAdministrate>
+      <labels.internal.eventTypeCategoryAttribute.createEventTypeCategoryAttribute.title><![CDATA[Create eventTypeCategoryAttribute]]></labels.internal.eventTypeCategoryAttribute.createEventTypeCategoryAttribute.title>
+      <labels.internal.soba.sendMessage><![CDATA[Send message]]></labels.internal.soba.sendMessage>
+      <labels.internal.eventTypeCategoryAttribute.createButton><![CDATA[Create eventTypeCategoryAttribute]]></labels.internal.eventTypeCategoryAttribute.createButton>
+      <labels.internal.soba.addresses><![CDATA[Addresses:]]></labels.internal.soba.addresses>
+      <labels.internal.event.until><![CDATA[until]]></labels.internal.event.until>
+      <labels.internal.event.eventSubmitted><![CDATA[Event submitted to publisher]]></labels.internal.event.eventSubmitted>
+      <labels.internal.publishedEvents.subHeader><![CDATA[Published events]]></labels.internal.publishedEvents.subHeader>
+      <labels.internal.event.publishEvent><![CDATA[Publish event]]></labels.internal.event.publishEvent>
+      <labels.internal.event.createNewEvent><![CDATA[Create copy]]></labels.internal.event.createNewEvent>
+      <labels.internal.entry.message><![CDATA[Message:]]></labels.internal.entry.message>
+      <labels.internal.publishedComingEvents.subHeader><![CDATA[Published coming events]]></labels.internal.publishedComingEvents.subHeader>
+      <labels.internal.calendar.waitingEventsTab><![CDATA[Waiting events]]></labels.internal.calendar.waitingEventsTab>
+      <labels.public.event.contactName><![CDATA[Contact name:]]></labels.public.event.contactName>
+      <labels.internal.event.searchResult><![CDATA[Search result]]></labels.internal.event.searchResult>
+      <labels.public.maximumEntriesReached.title><![CDATA[Maximum number of entries reached]]></labels.public.maximumEntriesReached.title>
+      <labels.internal.application.editCalendar><![CDATA[Edit Calendar]]></labels.internal.application.editCalendar>
+      <labels.internal.event.longDescription><![CDATA[Full description:]]></labels.internal.event.longDescription>
+      <labels.internal.event.owningCalendar><![CDATA[Owning Calendar]]></labels.internal.event.owningCalendar>
+      <labels.public.entry.newEntryHeader><![CDATA[Create new entry]]></labels.public.entry.newEntryHeader>
+      <labels.public.event.lecturer><![CDATA[Lecturer:]]></labels.public.event.lecturer>
+      <labels.internal.event.attachFile><![CDATA[Attach file]]></labels.internal.event.attachFile>
+    </labels>
+  </language>
+  <language languageCode="sv">
+    <labels>
+      <errors.afterStartDateTime><![CDATA[wefewfwef]]><![CDATA[wefewfwef]]><![CDATA[Slutdatum och tid måste infalla efter startdatum och tid]]></errors.afterStartDateTime>
+      <NP307><![CDATA[Felaktigt format]]></NP307>
+      <NP300><![CDATA[Fältet måste vara ifyllt]]></NP300>
+      <labels.internal.applicationTitle><![CDATA[MSU:s kalender]]><![CDATA[GU:s kalendarium]]></labels.internal.applicationTitle>
+      <labels.internal.calendar.weekTab><![CDATA[Vecka]]></labels.internal.calendar.weekTab>
+      <labels.internal.application.chooseCalendarIntro><![CDATA[Välj den kalender nedan som du vill skapa evenemanget i.]]></labels.internal.application.chooseCalendarIntro>
+      <labels.internal.eventType.createNewEventType><![CDATA[Skapa ny evenemangtyp]]></labels.internal.eventType.createNewEventType>
+      <labels.public.event.until><![CDATA[till]]></labels.public.event.until>
+      <labels.internal.eventTypeCategoryAttribute.updateButton><![CDATA[Spara]]></labels.internal.eventTypeCategoryAttribute.updateButton>
+      <errors.reqiredDateTimeField><![CDATA[Både datum och tid måste vara ifyllt]]></errors.reqiredDateTimeField>
+      <labels.internal.eventTypeCategoryAttribute.createNewEventTypeCategoryAttribute><![CDATA[Skapa ny tillgängligt attribut]]></labels.internal.eventTypeCategoryAttribute.createNewEventTypeCategoryAttribute>
+      <labels.internal.eventTypeCategoryAttribute.description><![CDATA[Beskrivning]]></labels.internal.eventTypeCategoryAttribute.description>
+      <labels.internal.applicationDelete><![CDATA[Radera]]></labels.internal.applicationDelete>
+      <labels.internal.category.updateButton><![CDATA[Spara]]></labels.internal.category.updateButton>
+      <labels.internal.event.lastRegistrationTime><![CDATA[Sista anmälningstiden:]]></labels.internal.event.lastRegistrationTime>
+      <labels.internal.soba.noHits><![CDATA[Det finns för tillfället inga personer anmälda till]]></labels.internal.soba.noHits>
+      <labels.internal.soba.firstName><![CDATA[Förnamn]]></labels.internal.soba.firstName>
+      <labels.internal.soba.hitListStart><![CDATA[Det finns för tillfället ]]></labels.internal.soba.hitListStart>
+      <labels.internal.application.chooseCalendar><![CDATA[Välj kalendar]]></labels.internal.application.chooseCalendar>
+      <labels.public.event.name><![CDATA[Evenemangets namn:]]></labels.public.event.name>
+      <labels.internal.application.chooseCalendarForCopyIntro><![CDATA[Välj den kalender nedan som du vill kopiera evenemanget till.]]></labels.internal.application.chooseCalendarForCopyIntro>
+      <labels.public.event.contactEmail><![CDATA[Kontaktpersonens e-postadress:]]></labels.public.event.contactEmail>
+      <errors.maximumParticipantsDemandsLastRegistrationDateTime><![CDATA[Du måste ange sista anmälningsdatum när max antal deltagare är satt]]></errors.maximumParticipantsDemandsLastRegistrationDateTime>
+      <labels.internal.event.shortDescription><![CDATA[Kort beskrivning:]]></labels.internal.event.shortDescription>
+      <labels.public.event.dateTime><![CDATA[Datum/tid:]]></labels.public.event.dateTime>
+      <labels.internal.entry.createNewEntry><![CDATA[Skapa anmälan]]></labels.internal.entry.createNewEntry>
+      <labels.internal.soba.searchButton><![CDATA[Sök]]></labels.internal.soba.searchButton>
+      <labels.public.event.description><![CDATA[Beskrivning:]]></labels.public.event.description>
+      <labels.internal.applicationSearchEntries><![CDATA[Sök anmälda]]></labels.internal.applicationSearchEntries>
+      <labels.internal.event.createButton><![CDATA[Förhandsgranska]]></labels.internal.event.createButton>
+      <labels.internal.soba.message><![CDATA[Meddelande]]></labels.internal.soba.message>
+      <labels.public.event.shortDescription><![CDATA[Kort beskrivning:]]></labels.public.event.shortDescription>
+      <labels.internal.entry.firstName><![CDATA[Förnamn]]></labels.internal.entry.firstName>
+      <labels.internal.soba.searchEntries><![CDATA[Sök anmälningar]]></labels.internal.soba.searchEntries>
+      <labels.internal.event.createEventCopyMessage><![CDATA[Kopia av annat evenemang]]></labels.internal.event.createEventCopyMessage>
+      <labels.internal.soba.searchANDOR><![CDATA[AND sökning (OR default)]]></labels.internal.soba.searchANDOR>
+      <labels.internal.applicationCancel><![CDATA[Avbryt]]></labels.internal.applicationCancel>
+      <labels.internal.soba.subject><![CDATA[Ämne]]></labels.internal.soba.subject>
+      <labels.internal.location.createNewLocation><![CDATA[Skapa ny plats]]></labels.internal.location.createNewLocation>
+      <labels.public.entry.lastName><![CDATA[Efternamn:]]></labels.public.entry.lastName>
+      <labels.public.calendar.headline><![CDATA[Kalenderns namn:]]></labels.public.calendar.headline>
+      <labels.internal.eventTypeCategoryAttribute.name><![CDATA[Namn]]></labels.internal.eventTypeCategoryAttribute.name>
+      <labels.internal.calendar.updateButton><![CDATA[Spara]]></labels.internal.calendar.updateButton>
+      <labels.internal.maximumEntriesReached.header><![CDATA[Felmeddelande]]></labels.internal.maximumEntriesReached.header>
+      <labels.internal.entry.city><![CDATA[Ort]]></labels.internal.entry.city>
+      <labels.internal.category.createCategory.title><![CDATA[Skapa kategori]]></labels.internal.category.createCategory.title>
+      <labels.internal.applicationConfirm><![CDATA[Verifiera]]></labels.internal.applicationConfirm>
+      <labels.internal.eventType.updateEventType><![CDATA[Uppdatera evenemangtyp]]></labels.internal.eventType.updateEventType>
+      <labels.internal.category.updateCategory><![CDATA[Uppdatera kategori]]></labels.internal.category.updateCategory>
+      <labels.public.event.organizerName><![CDATA[Arrangör]]></labels.public.event.organizerName>
+      <labels.internal.event.eventUrl><![CDATA[Länk till ev webbplats:]]></labels.internal.event.eventUrl>
+      <labels.internal.eventType.simple><![CDATA[Enkel]]></labels.internal.eventType.simple>
+      <labels.public.event.location><![CDATA[Plats:]]></labels.public.event.location>
+      <labels.internal.event.assetKey><![CDATA[Asset name]]></labels.internal.event.assetKey>
+      <labels.internal.application.chooseCalendarForSubscriptionIntro><![CDATA[Välj vilken kalender du vill prenumerera på - alla evenemang som skapas i den kalendern kommer skickas till dig]]></labels.internal.application.chooseCalendarForSubscriptionIntro>
+      <labels.internal.event.fileToAttach><![CDATA[Peka ut fil:]]></labels.internal.event.fileToAttach>
+      <labels.internal.waitingEvents.subHeader><![CDATA[Opublicerade evenemang ]]></labels.internal.waitingEvents.subHeader>
+      <errors.atLeastOneItem><![CDATA[Du måste ange minst en]]></errors.atLeastOneItem>
+      <labels.internal.applicationPublishedEvents><![CDATA[Publicerade]]></labels.internal.applicationPublishedEvents>
+      <labels.internal.entry.newEntryHeader><![CDATA[Skapa ny anmälan]]></labels.internal.entry.newEntryHeader>
+      <labels.internal.event.startDate><![CDATA[Startdatum och tid:]]></labels.internal.event.startDate>
+      <labels.internal.event.noLastRegistrationDateTime><![CDATA[Ingen angiven]]></labels.internal.event.noLastRegistrationDateTime>
+      <labels.internal.eventType.addAvailableCategory><![CDATA[Lägg till tillgänglig kategori]]></labels.internal.eventType.addAvailableCategory>
+      <labels.internal.eventTypeCategoryAttribute.internalName><![CDATA[Internt namn]]></labels.internal.eventTypeCategoryAttribute.internalName>
+      <labels.internal.location.updateLocation><![CDATA[Uppdatera plats]]></labels.internal.location.updateLocation>
+      <labels.internal.calendar.groups><![CDATA[Ägande grupper (ägande roll/roller måste tillhöra åtminstone en av dessa grupper)]]></labels.internal.calendar.groups>
+      <labels.internal.entry.phone><![CDATA[Telefon]]></labels.internal.entry.phone>
+      <labels.internal.maximumEntriesReached.title><![CDATA[Maximalt deltagarantal uppnått]]></labels.internal.maximumEntriesReached.title>
+      <labels.internal.event.price><![CDATA[Avgift:]]></labels.internal.event.price>
+      <labels.internal.entry.zipcode><![CDATA[Postnummer]]></labels.internal.entry.zipcode>
+      <labels.public.calendar.dayTab><![CDATA[Dag]]></labels.public.calendar.dayTab>
+      <labels.internal.applicationEventSubscriptions><![CDATA[Prenumerationer]]></labels.internal.applicationEventSubscriptions>
+      <labels.public.event.isOrganizedByGU><![CDATA[Organiserad av GU:]]></labels.public.event.isOrganizedByGU>
+      <labels.internal.location.description><![CDATA[Beskrivning]]></labels.internal.location.description>
+      <labels.public.calendar.weekTab><![CDATA[Vecka]]></labels.public.calendar.weekTab>
+      <labels.public.event.contactPhone><![CDATA[Kontaktpersonens telefonnummer:]]></labels.public.event.contactPhone>
+      <labels.public.calendar.waitingEventsTab><![CDATA[Begärda evenemang]]></labels.public.calendar.waitingEventsTab>
+      <labels.internal.event.location><![CDATA[Plats:]]></labels.internal.event.location>
+      <labels.public.event.startDate><![CDATA[Startdatum och tid:]]></labels.public.event.startDate>
+      <labels.internal.eventType.CategoryAttribute><![CDATA[Attributnamn]]></labels.internal.eventType.CategoryAttribute>
+      <labels.internal.calendar.viewGUICalendarButton><![CDATA[Grafisk kalender]]></labels.internal.calendar.viewGUICalendarButton>
+      <labels.internal.event.addEvent><![CDATA[Nytt evenemang]]></labels.internal.event.addEvent>
+      <labels.internal.entry.updateEntry><![CDATA[Uppdatera anmälan]]></labels.internal.entry.updateEntry>
+      <labels.internal.eventType.name><![CDATA[Namn]]></labels.internal.eventType.name>
+      <labels.internal.calendar.comingEvents><![CDATA[Kommande evenemang]]></labels.internal.calendar.comingEvents>
+      <labels.internal.location.subHeader><![CDATA[Platser]]></labels.internal.location.subHeader>
+      <labels.internal.entry.fax><![CDATA[Fax]]></labels.internal.entry.fax>
+      <labels.internal.event.name><![CDATA[Evenemangets namn:]]></labels.internal.event.name>
+      <labels.internal.category.createButton><![CDATA[Skapa kategori]]></labels.internal.category.createButton>
+      <labels.internal.event.lastRegistrationDate><![CDATA[Sista anmälningsdag och tid:]]></labels.internal.event.lastRegistrationDate>
+      <labels.public.event.startTime><![CDATA[Starttid:]]></labels.public.event.startTime>
+      <labels.state.published><![CDATA[Publicerad]]></labels.state.published>
+      <labels.internal.category.subHeader><![CDATA[Kategorier]]></labels.internal.category.subHeader>
+      <labels.internal.entry.createNewEntryThankYou><![CDATA[Tack - du är nu registrerad!]]></labels.internal.entry.createNewEntryThankYou>
+      <labels.internal.eventType.subHeader><![CDATA[Evenemangtyper]]></labels.internal.eventType.subHeader>
+      <labels.internal.event.signUp><![CDATA[Boka plats/anmäl dig]]></labels.internal.event.signUp>
+      <labels.public.event.registrationExpired><![CDATA[Registreringstiden för detta evenemang har gått ut]]></labels.public.event.registrationExpired>
+      <labels.internal.applicationAdministerLabels><![CDATA[Applikationens ledtexter]]></labels.internal.applicationAdministerLabels>
+      <labels.internal.event.eventPublishedText><![CDATA[Evenemanget är nu publicerat.]]></labels.internal.event.eventPublishedText>
+      <labels.internal.soba.lastName><![CDATA[Efternamn]]></labels.internal.soba.lastName>
+      <labels.internal.event.contactPhone><![CDATA[Kontaktpersonens telefonnummer:]]></labels.internal.event.contactPhone>
+      <labels.internal.event.isInternal.false><![CDATA[Öppet för allmänheten]]></labels.internal.event.isInternal.false>
+      <labels.internal.calendar.week><![CDATA[Vecka]]></labels.internal.calendar.week>
+      <labels.internal.soba.searchIntro><![CDATA[Sök i ett eller flera fält]]></labels.internal.soba.searchIntro>
+      <labels.internal.applicationFooter><![CDATA[&copy; InfoGlue Communitien 2005]]></labels.internal.applicationFooter>
+      <labels.internal.event.updateEvent><![CDATA[Uppdatera evenemang]]></labels.internal.event.updateEvent>
+      <labels.public.event.endTime><![CDATA[Sluttid:]]></labels.public.event.endTime>
+      <labels.internal.subscribedCalendarNames><![CDATA[Kalendrar du prenumererar på]]></labels.internal.subscribedCalendarNames>
+      <labels.internal.soba.idColumnHeader><![CDATA[ID]]></labels.internal.soba.idColumnHeader>
+      <labels.internal.event.isOrganizedByGU><![CDATA[Organiserad av GU:]]></labels.internal.event.isOrganizedByGU>
+      <labels.internal.calendar.name><![CDATA[Namn]]></labels.internal.calendar.name>
+      <labels.internal.application.chooseCalendarForLinkIntro><![CDATA[Välj den kalender nedan som du vill länka in evenemanget i.]]></labels.internal.application.chooseCalendarForLinkIntro>
+      <labels.internal.event.lecturer><![CDATA[Föreläsare:]]></labels.internal.event.lecturer>
+      <labels.internal.event.contactEmail><![CDATA[Kontaktpersonens e-postadress:]]></labels.internal.event.contactEmail>
+      <labels.internal.maximumEntriesReached.text><![CDATA[Platserna till detta evenemang är tyvärr redan slut ]]></labels.internal.maximumEntriesReached.text>
+      <labels.internal.location.addLocation><![CDATA[Lägg till plats]]></labels.internal.location.addLocation>
+      <labels.public.calendar.comingEvents><![CDATA[Kommande evenemang]]></labels.public.calendar.comingEvents>
+      <labels.internal.calendar.updateCalendar><![CDATA[Uppdatera kalender]]></labels.internal.calendar.updateCalendar>
+      <false><![CDATA[Nej]]></false>
+      <labels.internal.calendar.createCalendar.title><![CDATA[Skapa kalender]]></labels.internal.calendar.createCalendar.title>
+      <labels.internal.event.customLocation><![CDATA[Ange lokal (ev adress):]]></labels.internal.event.customLocation>
+      <labels.internal.soba.emailPersons><![CDATA[Skicka epost]]></labels.internal.soba.emailPersons>
+      <labels.internal.myWorkingEvents.subHeader><![CDATA[För godkännande]]></labels.internal.myWorkingEvents.subHeader>
+      <labels.internal.event.category><![CDATA[Kategorier:]]></labels.internal.event.category>
+      <labels.internal.event.deleteButton><![CDATA[Radera evenemang]]></labels.internal.event.deleteButton>
+      <labels.internal.calendar.description><![CDATA[Beskrivning]]></labels.internal.calendar.description>
+      <labels.internal.applicationMyWorkingEvents><![CDATA[Pågående arbetsdokument]]></labels.internal.applicationMyWorkingEvents>
+      <labels.state.publish><![CDATA[För granskning]]></labels.state.publish>
+      <labels.internal.soba.nameColumnHeader><![CDATA[Namn]]></labels.internal.soba.nameColumnHeader>
+      <labels.internal.event.files><![CDATA[Bifogade filer:]]></labels.internal.event.files>
+      <labels.internal.event.isInternal.true><![CDATA[Endast GU]]></labels.internal.event.isInternal.true>
+      <labels.public.event.alternativeLocation><![CDATA[Annan plats:]]></labels.public.event.alternativeLocation>
+      <labels.public.event.signUp><![CDATA[Boka plats/anmäl dig]]></labels.public.event.signUp>
+      <labels.internal.applicationAdministerSettings><![CDATA[Inställningar]]></labels.internal.applicationAdministerSettings>
+      <labels.internal.eventType.updateButton><![CDATA[Spara]]></labels.internal.eventType.updateButton>
+      <labels.public.event.isInternal><![CDATA[Vem som får delta:]]></labels.public.event.isInternal>
+      <labels.internal.eventType.type><![CDATA[Typ]]></labels.internal.eventType.type>
+      <labels.internal.soba.emailIntro><![CDATA[Här kan du skicka mail till personerna i din träfflista ]]></labels.internal.soba.emailIntro>
+      <labels.internal.entry.createButton><![CDATA[Skicka anmälan]]></labels.internal.entry.createButton>
+      <labels.internal.event.linkEvent><![CDATA[Länka in evenemang]]></labels.internal.event.linkEvent>
+      <labels.internal.event.attachedFiles><![CDATA[Bifogade filer]]></labels.internal.event.attachedFiles>
+      <labels.public.calendar.monthTab><![CDATA[Månad]]></labels.public.calendar.monthTab>
+      <labels.internal.soba.hitListEnd><![CDATA[personer anmälda som matchade din sökning]]></labels.internal.soba.hitListEnd>
+      <labels.internal.applicationEdit><![CDATA[Redigera]]></labels.internal.applicationEdit>
+      <labels.internal.application.chooseCalendarForLinkDeleteIntro><![CDATA[Välj den kalender nedan som du vill att evenemanget inte skall visas i längre.]]></labels.internal.application.chooseCalendarForLinkDeleteIntro>
+      <labels.internal.application.backToMainMenu><![CDATA[Tillbaka till menyn]]></labels.internal.application.backToMainMenu>
+      <labels.internal.event.entryForm><![CDATA[Anmälningsformulä]]></labels.internal.event.entryForm>
+      <labels.public.event.lastRegistrationDate><![CDATA[Sista anmälningsdag och tid:]]></labels.public.event.lastRegistrationDate>
+      <labels.public.calendar.week><![CDATA[Vecka]]></labels.public.calendar.week>
+      <labels.internal.eventTypeCategoryAttribute.BaseCategory><![CDATA[Bas categori]]></labels.internal.eventTypeCategoryAttribute.BaseCategory>
+      <labels.internal.calendar.nameMyCalendars><![CDATA[Namn (Mina kalendrar)]]></labels.internal.calendar.nameMyCalendars>
+      <labels.internal.calendar.headline><![CDATA[Kalenderns namn:]]></labels.internal.calendar.headline>
+      <labels.internal.calendar.monthTab><![CDATA[Månad]]></labels.internal.calendar.monthTab>
+      <labels.internal.event.isInternal><![CDATA[Vem som får delta:]]></labels.internal.event.isInternal>
+      <labels.internal.calendar.addCalendar><![CDATA[Lägg till kalender]]></labels.internal.calendar.addCalendar>
+      <labels.internal.soba.andSearchTrue><![CDATA[Ja]]></labels.internal.soba.andSearchTrue>
+      <labels.internal.eventType.AvailableCategories><![CDATA[Categoriområden]]></labels.internal.eventType.AvailableCategories>
+      <labels.internal.category.addCategory><![CDATA[Lägg till kategori]]></labels.internal.category.addCategory>
+      <labels.internal.applicationNoItemsFound><![CDATA[Inga poster funna]]></labels.internal.applicationNoItemsFound>
+      <errors.beforeStartDateTime><![CDATA[Datum och tid måste infalla innan startdatum och tid]]></errors.beforeStartDateTime>
+      <labels.internal.category.childCategories><![CDATA[Underkategorier]]></labels.internal.category.childCategories>
+      <labels.internal.calendar.roles><![CDATA[Ägande roller (användare måste ha en av dessa roller om satt)]]></labels.internal.calendar.roles>
+      <labels.internal.event.submitForPublishEvent><![CDATA[Spara för godkännande]]></labels.internal.event.submitForPublishEvent>
+      <labels.internal.event.maximumParticipants><![CDATA[Max antal deltagare:]]></labels.internal.event.maximumParticipants>
+      <labels.internal.applicationPublishedComingEvents><![CDATA[Aktuellt publicerade]]></labels.internal.applicationPublishedComingEvents>
+      <labels.internal.event.description><![CDATA[Beskrivning:]]></labels.internal.event.description>
+      <labels.internal.eventType.createButton><![CDATA[Skapa evenemangtyp]]></labels.internal.eventType.createButton>
+      <labels.internal.entry.organisation><![CDATA[Organisation]]></labels.internal.entry.organisation>
+      <labels.internal.eventTypeCategoryAttribute.AvailableCategories><![CDATA[Categoriområden]]></labels.internal.eventTypeCategoryAttribute.AvailableCategories>
+      <labels.internal.event.startTime><![CDATA[Start tid:]]></labels.internal.event.startTime>
+      <labels.internal.location.createLocation.title><![CDATA[Skapa plats]]></labels.internal.location.createLocation.title>
+      <labels.internal.calendar.viewSubscriptions><![CDATA[Prenumeranter]]></labels.internal.calendar.viewSubscriptions>
+      <labels.internal.soba.delete><![CDATA[Ta bort]]></labels.internal.soba.delete>
+      <labels.internal.applicationIntroduction><![CDATA[<p>Detta är den administrativa delen av systemet. Det låter dig hantera alla delar av kalender/evenemang-systemet.</p>]]></labels.internal.applicationIntroduction>
+      <labels.public.event.customLocation><![CDATA[Lokal (ev adress):]]></labels.public.event.customLocation>
+      <labels.internal.soba.actionColumnHeader><![CDATA[Actions]]></labels.internal.soba.actionColumnHeader>
+      <labels.internal.calendar.eventsTab><![CDATA[Publicerade evenemang]]></labels.internal.calendar.eventsTab>
+      <labels.internal.eventTypeCategoryAttribute.CategoryAttribute><![CDATA[Attributnamn]]></labels.internal.eventTypeCategoryAttribute.CategoryAttribute>
+      <labels.internal.event.contactName><![CDATA[Kontaktperson:]]></labels.internal.event.contactName>
+      <labels.internal.event.searchEvents><![CDATA[Sök evenemang]]></labels.internal.event.searchEvents>
+      <labels.public.event.participants><![CDATA[Deltagare:]]></labels.public.event.participants>
+      <labels.internal.eventType.attributes><![CDATA[Attribut]]></labels.internal.eventType.attributes>
+      <labels.public.event.eventUrl><![CDATA[Länk till ev. webbplats:]]></labels.public.event.eventUrl>
+      <labels.internal.eventType.BaseCategory><![CDATA[Baskategori]]></labels.internal.eventType.BaseCategory>
+      <labels.public.calendar.eventsTab><![CDATA[Publicerade evenemang]]></labels.public.calendar.eventsTab>
+      <labels.internal.category.createNewCategory><![CDATA[Skapa ny kategori]]></labels.internal.category.createNewCategory>
+      <labels.internal.soba.email><![CDATA[Epost]]></labels.internal.soba.email>
+      <labels.internal.eventType.addEventType><![CDATA[Lägg till evenemangtyp]]></labels.internal.eventType.addEventType>
+      <labels.internal.calendar.createNewCalendar><![CDATA[Skapa ny kalender]]></labels.internal.calendar.createNewCalendar>
+      <labels.public.entry.submit><![CDATA[Skicka]]></labels.public.entry.submit>
+      <labels.internal.applicationWaitingEvents><![CDATA[För godkännande]]></labels.internal.applicationWaitingEvents>
+      <labels.internal.event.participants><![CDATA[Deltagare:]]></labels.internal.event.participants>
+      <labels.internal.event.editButton><![CDATA[Redigera]]></labels.internal.event.editButton>
+      <labels.internal.event.organizerName><![CDATA[Arrangör]]></labels.internal.event.organizerName>
+      <labels.public.event.longDescription><![CDATA[Beskrivning:]]></labels.public.event.longDescription>
+      <labels.internal.soba.newSearch><![CDATA[Ny sökning]]></labels.internal.soba.newSearch>
+      <labels.internal.event.entriesButton><![CDATA[Lista anmälningar]]></labels.internal.event.entriesButton>
+      <labels.internal.event.searchIntro><![CDATA[Sök i ett eller flera fält]]></labels.internal.event.searchIntro>
+      <labels.internal.entry.lastName><![CDATA[Efternamn]]></labels.internal.entry.lastName>
+      <labels.internal.entry.address><![CDATA[Address]]></labels.internal.entry.address>
+      <labels.internal.event.state><![CDATA[Status]]></labels.internal.event.state>
+      <labels.internal.applicationHeader><![CDATA[Administrativa verktyg InfoGlue Kalender]]></labels.internal.applicationHeader>
+      <labels.internal.soba.events><![CDATA[Evenemang:]]></labels.internal.soba.events>
+      <labels.internal.calendar.dayTab><![CDATA[Dag]]></labels.internal.calendar.dayTab>
+      <labels.internal.subscribers><![CDATA[Prenumeranter]]></labels.internal.subscribers>
+      <labels.internal.event.eventSubmittedHome><![CDATA[Tillbaka till startsidan]]></labels.internal.event.eventSubmittedHome>
+      <labels.internal.category.description><![CDATA[Beskrivning]]></labels.internal.category.description>
+      <labels.internal.location.updateButton><![CDATA[Spara]]></labels.internal.location.updateButton>
+      <labels.state.working><![CDATA[Pågående arbetskopia]]></labels.state.working>
+      <labels.public.maximumEntriesReached.text><![CDATA[Platserna till detta evenemang är tyvärr redan slut ]]></labels.public.maximumEntriesReached.text>
+      <labels.internal.applicationSearchEvents><![CDATA[Sök]]></labels.internal.applicationSearchEvents>
+      <labels.internal.soba.edit><![CDATA[Editera]]></labels.internal.soba.edit>
+      <labels.public.maximumEntriesReached.header><![CDATA[Felmeddelande]]></labels.public.maximumEntriesReached.header>
+      <labels.internal.soba.eventColumnHeader><![CDATA[Evenemang]]></labels.internal.soba.eventColumnHeader>
+      <labels.internal.event.alternativeLocation><![CDATA[Annan plats:]]></labels.internal.event.alternativeLocation>
+      <labels.internal.entry.updateButton><![CDATA[Spara]]></labels.internal.entry.updateButton>
+      <labels.internal.calendar.subHeader><![CDATA[Kalendrar]]></labels.internal.calendar.subHeader>
+      <labels.internal.soba.categories><![CDATA[Kategorier]]></labels.internal.soba.categories>
+      <labels.internal.event.updateButton><![CDATA[Spara]]></labels.internal.event.updateButton>
+      <labels.internal.category.name><![CDATA[Namn]]></labels.internal.category.name>
+      <labels.public.event.lastRegistrationTime><![CDATA[Sista anmälningstiden:]]></labels.public.event.lastRegistrationTime>
+      <labels.internal.event.eventSubmittedText><![CDATA[Evenemanget är skickat för granskning till den ansvarige. Efter godkännande publiceras evenemanget.]]></labels.internal.event.eventSubmittedText>
+      <labels.internal.event.noAttachments><![CDATA[Inga bifogade filer]]></labels.internal.event.noAttachments>
+      <labels.internal.event.signUpForThisOverbookedEvent><![CDATA[Evenemanget är fullbokat, men du kan göra en intresseanmälan så hör vi av oss vid återbud.]]></labels.internal.event.signUpForThisOverbookedEvent>
+      <labels.internal.eventTypeCategoryAttribute.updateEventTypeCategoryAttribute><![CDATA[Uppdatera kategoriattribut]]></labels.internal.eventTypeCategoryAttribute.updateEventTypeCategoryAttribute>
+      <labels.internal.location.name><![CDATA[Namn]]></labels.internal.location.name>
+      <labels.public.event.price><![CDATA[Avgift:]]></labels.public.event.price>
+      <labels.internal.eventType.description><![CDATA[Beskrivning]]></labels.internal.eventType.description>
+      <labels.public.event.maximumParticipants><![CDATA[Max antal deltagare:]]></labels.public.event.maximumParticipants>
+      <labels.internal.applicationSubHeader><![CDATA[Välkommen till InfoGlue Kalender/Evenemang]]></labels.internal.applicationSubHeader>
+      <labels.internal.calendar.createButton><![CDATA[Skapa kalender]]></labels.internal.calendar.createButton>
+      <labels.internal.entry.submit><![CDATA[Skicka]]></labels.internal.entry.submit>
+      <labels.internal.event.dateTime><![CDATA[Datum/tid:]]></labels.internal.event.dateTime>
+      <labels.internal.event.endDate><![CDATA[Slutdatum och tid:]]></labels.internal.event.endDate>
+      <labels.internal.event.endTime><![CDATA[Slut tid:]]></labels.internal.event.endTime>
+      <labels.internal.entry.createNewEntryThankYouText><![CDATA[Du är nu registrerad för detta evenemang - du kommer få en bekräftelse strax på e-post.]]></labels.internal.entry.createNewEntryThankYouText>
+      <labels.internal.event.signUpForThisEvent><![CDATA[Boka plats/anmäl dig]]></labels.internal.event.signUpForThisEvent>
+      <labels.internal.entry.email><![CDATA[E-post]]></labels.internal.entry.email>
+      <labels.internal.eventType.createEventType.title><![CDATA[Skapa evenemangtyp]]></labels.internal.eventType.createEventType.title>
+      <labels.internal.calendar.owner><![CDATA[Ägare]]></labels.internal.calendar.owner>
+      <labels.public.calendar.waitingEvents><![CDATA[Väntande evenemang (ej publicerade)]]></labels.public.calendar.waitingEvents>
+      <labels.public.event.category><![CDATA[Kategorier:]]></labels.public.event.category>
+      <labels.public.entry.email><![CDATA[E-post:]]></labels.public.entry.email>
+      <labels.internal.subscription.addSubscription><![CDATA[Lägg till prenumeration]]></labels.internal.subscription.addSubscription>
+      <labels.internal.applicationHome><![CDATA[Evenemang]]></labels.internal.applicationHome>
+      <labels.internal.calendar.eventType><![CDATA[Evenemangtyp]]></labels.internal.calendar.eventType>
+      <errors.reqiredField><![CDATA[Fältet måste vara ifyllt]]></errors.reqiredField>
+      <true><![CDATA[Ja]]></true>
+      <labels.internal.applicationOK><![CDATA[OK]]></labels.internal.applicationOK>
+      <labels.internal.soba.locations><![CDATA[Platser]]></labels.internal.soba.locations>
+      <labels.internal.category.internalName><![CDATA[Internt namn]]></labels.internal.category.internalName>
+      <labels.internal.applicationLinkedPublishedEvents><![CDATA[Inlänkade evenemang]]></labels.internal.applicationLinkedPublishedEvents>
+      <labels.internal.applicationAdministerEventTypes><![CDATA[Fältmallar]]></labels.internal.applicationAdministerEventTypes>
+      <labels.internal.applicationAdministerCalendars><![CDATA[Kalendrar]]></labels.internal.applicationAdministerCalendars>
+      <labels.public.event.endDate><![CDATA[Slutdatum och tid:]]></labels.public.event.endDate>
+      <labels.internal.applicationAdministerLocations><![CDATA[Platser]]></labels.internal.applicationAdministerLocations>
+      <labels.internal.location.createButton><![CDATA[Skapa plats]]></labels.internal.location.createButton>
+      <labels.internal.applicationAdministerCategories><![CDATA[Kategorier]]></labels.internal.applicationAdministerCategories>
+      <labels.public.entry.firstName><![CDATA[Förnamn:]]></labels.public.entry.firstName>
+      <labels.public.event.files><![CDATA[Bifogade filer:]]></labels.public.event.files>
+      <labels.internal.soba.anyEvent><![CDATA[Alla]]></labels.internal.soba.anyEvent>
+      <labels.internal.applicationAdministrate><![CDATA[Administrera:]]></labels.internal.applicationAdministrate>
+      <labels.internal.eventTypeCategoryAttribute.createEventTypeCategoryAttribute.title><![CDATA[Skapa]]></labels.internal.eventTypeCategoryAttribute.createEventTypeCategoryAttribute.title>
+      <labels.internal.soba.sendMessage><![CDATA[Skicka meddelande]]></labels.internal.soba.sendMessage>
+      <labels.internal.eventTypeCategoryAttribute.createButton><![CDATA[Skapa evenemangTypeCategoryAttribute]]></labels.internal.eventTypeCategoryAttribute.createButton>
+      <labels.internal.soba.addresses><![CDATA[Adresser:]]></labels.internal.soba.addresses>
+      <labels.internal.event.until><![CDATA[till]]></labels.internal.event.until>
+      <labels.internal.event.eventSubmitted><![CDATA[Evenemang skickat för granskning]]></labels.internal.event.eventSubmitted>
+      <labels.internal.publishedEvents.subHeader><![CDATA[Publicerade evenemang]]></labels.internal.publishedEvents.subHeader>
+      <labels.internal.event.publishEvent><![CDATA[Publicera evenemang]]></labels.internal.event.publishEvent>
+      <labels.internal.event.createNewEvent><![CDATA[Skapa kopia]]></labels.internal.event.createNewEvent>
+      <labels.internal.entry.message><![CDATA[Meddelande]]></labels.internal.entry.message>
+      <labels.internal.publishedComingEvents.subHeader><![CDATA[Aktuellt publicerade]]></labels.internal.publishedComingEvents.subHeader>
+      <labels.internal.calendar.waitingEventsTab><![CDATA[labels.internal.calendar.waitingEventsTab]]></labels.internal.calendar.waitingEventsTab>
+      <labels.public.event.contactName><![CDATA[Kontaktperson:]]></labels.public.event.contactName>
+      <labels.internal.event.searchResult><![CDATA[Sökresultat]]></labels.internal.event.searchResult>
+      <labels.public.maximumEntriesReached.title><![CDATA[Maximalt deltagarantal uppnått]]></labels.public.maximumEntriesReached.title>
+      <labels.internal.application.editCalendar><![CDATA[Editera kalendern]]></labels.internal.application.editCalendar>
+      <labels.internal.event.longDescription><![CDATA[Beskrivning:]]></labels.internal.event.longDescription>
+      <labels.internal.event.owningCalendar><![CDATA[Huvudkalender]]></labels.internal.event.owningCalendar>
+      <labels.public.entry.newEntryHeader><![CDATA[Skapa ny anmälan]]></labels.public.entry.newEntryHeader>
+      <labels.public.event.lecturer><![CDATA[Föreläsare:]]></labels.public.event.lecturer>
+      <labels.internal.event.attachFile><![CDATA[Bifoga fil]]></labels.internal.event.attachFile>
+    </labels>
+  </language>
+</languages>

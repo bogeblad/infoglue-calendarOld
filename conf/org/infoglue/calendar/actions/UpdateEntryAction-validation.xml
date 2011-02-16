@@ -1,0 +1,55 @@
+<!DOCTYPE validators PUBLIC "-//OpenSymphony Group//XWork Validator 1.0//EN" "http://www.opensymphony.com/xwork/xwork-validator-1.0.dtd">
+<validators>
+    <field name="firstName">
+        <field-validator type="igrequiredstring">
+            <message>You must enter a first name.</message>
+        </field-validator>
+    </field>
+    <field name="lastName">
+        <field-validator type="igrequiredstring">
+            <message>You must enter a last name.</message>
+        </field-validator>
+    </field>
+    <field name="email">
+		<field-validator type="igemail">
+            <message>You must enter a valid email address.</message>
+        </field-validator>
+    </field>
+    <!--
+    <field name="organisation">
+        <field-validator type="igrequiredstring">
+            <message>You must enter an organisation.</message>
+        </field-validator>
+    </field>
+    <field name="address">
+        <field-validator type="igrequiredstring">
+            <message>You must enter an address.</message>
+        </field-validator>
+    </field>
+    <field name="zipcode">
+        <field-validator type="igrequiredstring">
+            <message>You must enter an zip-code.</message>
+        </field-validator>
+    </field>
+    <field name="city">
+        <field-validator type="igrequiredstring">
+            <message>You must enter an city.</message>
+        </field-validator>
+    </field>
+    <field name="phone">
+        <field-validator type="igrequiredstring">
+            <message>You must enter a phone number.</message>
+        </field-validator>
+    </field>
+    <field name="fax">
+        <field-validator type="igrequiredstring">
+            <message>You must enter a fax number.</message>
+        </field-validator>
+    </field>
+    <field name="message">
+        <field-validator type="igrequiredstring">
+            <message>You must enter a message.</message>
+        </field-validator>
+    </field>
+    -->
+</validators>

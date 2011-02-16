@@ -1,0 +1,20 @@
+InfoGlue Calendar Verification Message
+
+You are registered for the event $eventVersion.name
+	
+Name: $entry.firstName $entry.lastName<br/>
+Email: $entry.email
+Organisation: $entry.organisation
+Address: $entry.address
+ZipCode: $entry.zipcode
+City: $entry.city
+Phone: $entry.phone
+Fax: $entry.fax
+Message: $entry.message
+#foreach($attribute in $attributes)
+$attribute.name: $this.getAttributeValue($entry.attributes, $attribute.name, true)
+#end
+
+----------------------------------------------------------
+This email was sent from the InfoGlue Calendar Application.
+Do not reply to this email. 

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="org.infoglue.calendar.entities.Group" table="Calendar_Group" dynamic-update="false" dynamic-insert="false" select-before-update="false" optimistic-lock="version">
+
+        <id name="id" column="id" type="long" unsaved-value="null">
+            <generator class="native">
+            </generator>
+        </id>
+
+        <property  name="name" type="string" update="true" insert="true" access="property" column="groupName" not-null="false" unique="false"/>
+
+        <many-to-one name="calendar" class="org.infoglue.calendar.entities.Calendar" cascade="none" outer-join="auto" update="true" insert="true" access="property" column="calendar_id"/>
+
+    </class>
+
+</hibernate-mapping>

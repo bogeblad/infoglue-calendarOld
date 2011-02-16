@@ -1,0 +1,866 @@
+<!-- edited with XMLSPY v5 rel. 3 U (http://www.xmlspy.com) by pino (pino) -->
+<!DOCTYPE xwork PUBLIC "-//OpenSymphony Group//XWork 1.0//EN" "http://www.opensymphony.com/xwork/xwork-1.0.dtd">
+<xwork>
+	<!-- Include webwork defaults (from WebWork JAR). -->
+	<include file="webwork-default.xml"/>
+	
+	<!-- Configuration for the default package. -->
+	<package name="default" extends="webwork-default">
+		<default-interceptor-ref name="fileUploadStack"/>
+		<!-- HERE YOU PUT ACTIONS FOR THE NORMAL WEBAPP -->
+	</package>
+	
+	<package name="mypackage" namespace="/WebworkDispatcherPortlet" extends="webwork-default">
+		    		
+		<default-interceptor-ref name="defaultStack"/>
+
+		<action name="ViewError" class="org.infoglue.calendar.actions.ViewErrorAction">
+			<result name="success" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/error.jsp</param>
+			</result>
+		</action>
+		
+		<action name="Confirm" class="org.infoglue.calendar.actions.ConfirmAction">
+			<result name="success" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/confirm.jsp</param>
+			</result>
+			<result name="error" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/error.jsp</param>
+			</result>
+		</action>
+
+		<!-- Settings actions -->
+		<action name="ViewSettings" class="org.infoglue.calendar.settings.actions.ViewSettingsAction">
+			<result name="success" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/viewSettings.jsp</param>
+			</result>
+			<result name="error" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/error.jsp</param>
+			</result>
+		</action>
+
+		<action name="UpdateDatabaseConfiguration" class="org.infoglue.calendar.settings.actions.UpdateDatabaseConfigurationAction">
+			<result name="success" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/viewSettings.jsp</param>
+			</result>
+			<result name="error" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/error.jsp</param>
+			</result>
+		</action>
+		
+		<action name="ViewCalendarAdministration" class="org.infoglue.calendar.actions.ViewCalendarAdministrationAction">
+			<result name="success" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/viewCalendarAdministration.jsp</param>
+			</result>
+			<result name="databaseConfigurationError" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/databaseConfigurationError.jsp</param>
+			</result>
+			<result name="error" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/error.jsp</param>
+			</result>
+		</action>
+		
+		<!-- CALENDAR ACTIONS -->
+		<action name="ViewCalendarList" class="org.infoglue.calendar.actions.ViewCalendarListAction">
+			<result name="success" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/viewCalendarList.jsp</param>
+			</result>
+			<result name="successChoose" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/chooseCalendar.jsp</param>
+			</result>
+			<result name="successChooseForCopy" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/chooseCalendarForCopy.jsp</param>
+			</result>
+			<result name="successChooseForLink" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/chooseCalendarForLink.jsp</param>
+			</result>
+			<result name="successChooseForDeleteLink" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/chooseCalendarForDeleteLink.jsp</param>
+			</result>
+			<result name="error" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/error.jsp</param>
+			</result>
+		</action>
+		<action name="CreateCalendar" class="org.infoglue.calendar.actions.CreateCalendarAction">
+			<result name="input" type="portletDispatch">
+            	<param name="dispatchTo">/jsp/portlet/createCalendar.jsp</param>
+            </result>
+            <result name="error" type="eventProcessed">
+				<param name="viewAction">CreateCalendar!input.action</param>
+			</result>
+            <result name="success" type="eventProcessed">
+				<param name="viewAction">ViewCalendarList.action</param>
+			</result>
+		</action>
+		<action name="ViewCalendar" class="org.infoglue.calendar.actions.ViewCalendarAction">
+			<result name="success" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/viewCalendar.jsp</param>
+			</result>
+			<result name="successGui" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/viewCalendarGUI.jsp</param>
+			</result>
+			<result name="successPublic" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/viewCalendarPublic.jsp</param>
+			</result>
+			<result name="error" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/error.jsp</param>
+			</result>
+		</action>
+		<action name="UpdateCalendar" class="org.infoglue.calendar.actions.UpdateCalendarAction">
+			<result name="success" type="eventProcessed">
+				<param name="viewAction">ViewCalendarList.action</param>
+			</result>
+			<result name="error" type="eventProcessed">
+				<param name="viewAction">ViewCalendar.action</param>
+			</result>
+		</action>
+		<action name="DeleteCalendar" class="org.infoglue.calendar.actions.DeleteCalendarAction">
+			<result name="success" type="eventProcessed">
+				<param name="viewAction">ViewCalendarList.action</param>
+			</result>
+		</action>
+		
+		<!-- LOCATION ACTIONS -->
+		<action name="ViewLocationList" class="org.infoglue.calendar.actions.ViewLocationListAction">
+			<result name="success" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/viewLocationList.jsp</param>
+			</result>
+		</action>
+		<action name="CreateLocation" class="org.infoglue.calendar.actions.CreateLocationAction">
+			<result name="input" type="portletDispatch">
+            	<param name="dispatchTo">/jsp/portlet/createLocation.jsp</param>
+            </result>
+			<result name="success" type="eventProcessed">
+				<param name="viewAction">ViewLocationList.action</param>
+			</result>
+			<result name="error" type="eventProcessed">
+				<param name="viewAction">CreateLocation!input.action</param>
+			</result>
+		</action>
+		<action name="ViewLocation" class="org.infoglue.calendar.actions.ViewLocationAction">
+			<result name="success" type="portletDispatch">
+            	<param name="dispatchTo">/jsp/portlet/viewLocation.jsp</param>
+            </result>
+			<result name="error" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/error.jsp</param>
+			</result>
+		</action>
+		<action name="UpdateLocation" class="org.infoglue.calendar.actions.UpdateLocationAction">
+			<result name="success" type="eventProcessed">
+				<param name="viewAction">ViewLocationList.action</param>
+			</result>
+			<result name="error" type="eventProcessed">
+				<param name="viewAction">ViewLocation.action</param>
+			</result>
+		</action>
+		<action name="DeleteLocation" class="org.infoglue.calendar.actions.DeleteLocationAction">
+			<result name="success" type="eventProcessed">
+				<param name="viewAction">ViewLocationList.action</param>
+			</result>
+		</action>
+
+		<!-- LANGUAGE ACTIONS -->
+		<action name="ViewLanguageList" class="org.infoglue.calendar.actions.ViewLanguageListAction">
+			<result name="success" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/viewLanguageList.jsp</param>
+			</result>
+		</action>
+		<action name="CreateLanguage" class="org.infoglue.calendar.actions.CreateLanguageAction">
+			<result name="input" type="portletDispatch">
+            	<param name="dispatchTo">/jsp/portlet/createLanguage.jsp</param>
+            </result>
+			<result name="success" type="eventProcessed">
+				<param name="viewAction">ViewLanguageList.action</param>
+			</result>
+			<result name="error" type="eventProcessed">
+				<param name="viewAction">CreateLanguage!input.action</param>
+			</result>
+		</action>
+		<action name="ViewLanguage" class="org.infoglue.calendar.actions.ViewLanguageAction">
+			<result name="success" type="portletDispatch">
+            	<param name="dispatchTo">/jsp/portlet/viewLanguage.jsp</param>
+            </result>
+			<result name="error" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/error.jsp</param>
+			</result>
+		</action>
+		<action name="UpdateLanguage" class="org.infoglue.calendar.actions.UpdateLanguageAction">
+			<result name="success" type="eventProcessed">
+				<param name="viewAction">ViewLanguageList.action</param>
+			</result>
+			<result name="error" type="eventProcessed">
+				<param name="viewAction">ViewLanguage.action</param>
+			</result>
+		</action>
+		<action name="DeleteLanguage" class="org.infoglue.calendar.actions.DeleteLanguageAction">
+			<result name="success" type="eventProcessed">
+				<param name="viewAction">ViewLanguageList.action</param>
+			</result>
+		</action>
+		
+		<!-- CATEGORY ACTIONS -->
+		<action name="ViewCategoryList" class="org.infoglue.calendar.actions.ViewCategoryListAction">
+			<result name="success" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/viewCategoryList.jsp</param>
+			</result>
+			<result name="error" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/error.jsp</param>
+			</result>
+		</action>
+		<action name="CreateCategory" class="org.infoglue.calendar.actions.CreateCategoryAction">
+			<result name="input" type="portletDispatch">
+            	<param name="dispatchTo">/jsp/portlet/createCategory.jsp</param>
+            </result>
+			<result name="error" type="eventProcessed">
+				<param name="viewAction">CreateCategory!input.action</param>
+			</result>
+			<result name="success" type="eventProcessed">
+				<param name="viewAction">ViewCategory.action?categoryId=${categoryId}</param>
+			</result>
+			<result name="successList" type="eventProcessed">
+				<param name="viewAction">ViewCategoryList.action</param>
+			</result>
+		</action>
+		<action name="ViewCategory" class="org.infoglue.calendar.actions.ViewCategoryAction">
+			<result name="success" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/viewCategoryList.jsp</param>
+			</result>
+			<result name="successDetail" type="portletDispatch">
+            	<param name="dispatchTo">/jsp/portlet/viewCategory.jsp</param>
+            </result>
+			<result name="error" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/error.jsp</param>
+			</result>
+		</action>
+		<action name="UpdateCategory" class="org.infoglue.calendar.actions.UpdateCategoryAction">
+			<result name="success" type="eventProcessed">
+				<param name="viewAction">ViewCategory.action?categoryId=${categoryId}</param>
+			</result>
+			<result name="successRootCategory" type="eventProcessed">
+				<param name="viewAction">ViewCategoryList.action</param>
+			</result>
+			<result name="error" type="eventProcessed">
+				<param name="viewAction">ViewCategory.action?categoryId=${categoryId}</param>
+			</result>
+		</action>
+		<action name="DeleteCategory" class="org.infoglue.calendar.actions.DeleteCategoryAction">
+			<result name="success" type="eventProcessed">
+				<param name="viewAction">ViewCategory.action?categoryId=${categoryId}</param>
+			</result>
+			<result name="successRootCategory" type="eventProcessed">
+				<param name="viewAction">ViewCategoryList.action</param>
+			</result>
+			<result name="error" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/error.jsp</param>
+			</result>
+		</action>
+
+		<!-- CATEGORY ACTIONS -->
+		<action name="ViewEventTypeList" class="org.infoglue.calendar.actions.ViewEventTypeListAction">
+			<result name="success" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/viewEventTypeList.jsp</param>
+			</result>
+			<result name="error" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/error.jsp</param>
+			</result>
+		</action>
+		<action name="CreateEventType" class="org.infoglue.calendar.actions.CreateEventTypeAction">
+			<result name="input" type="portletDispatch">
+            	<param name="dispatchTo">/jsp/portlet/createEventType.jsp</param>
+            </result>
+			<result name="error" type="eventProcessed">
+				<param name="viewAction">CreateEventType!input.action</param>
+			</result>
+			<result name="success" type="eventProcessed">
+				<param name="viewAction">ViewEventTypeList.action</param>
+			</result>
+		</action>
+		<action name="ViewEventType" class="org.infoglue.calendar.actions.ViewEventTypeAction">
+			<result name="success" type="portletDispatch">
+            	<param name="dispatchTo">/jsp/portlet/viewEventType.jsp</param>
+            </result>
+            <result name="updated" type="eventProcessed">
+				<param name="viewAction">ViewEventType.action</param>
+			</result>
+            <result name="error" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/error.jsp</param>
+			</result>
+		</action>
+		<action name="UpdateEventType" class="org.infoglue.calendar.actions.UpdateEventTypeAction">
+			<result name="success" type="eventProcessed">
+				<param name="viewAction">ViewEventTypeList.action</param>
+			</result>
+			<result name="error" type="eventProcessed">
+				<param name="viewAction">ViewEventType.action</param>
+			</result>
+		</action>
+		<action name="DeleteEventType" class="org.infoglue.calendar.actions.DeleteEventTypeAction">
+			<result name="success" type="eventProcessed">
+				<param name="viewAction">ViewEventTypeList.action</param>
+			</result>
+			<result name="error" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/error.jsp</param>
+			</result>
+		</action>
+
+		<!-- EVENTTYPE_CATEGORY ACTIONS -->
+		<action name="CreateEventTypeCategoryAttribute" class="org.infoglue.calendar.actions.CreateEventTypeCategoryAttributeAction">
+			<result name="input" type="portletDispatch">
+            	<param name="dispatchTo">/jsp/portlet/createEventTypeCategoryAttribute.jsp</param>
+            </result>
+			<result name="error" type="eventProcessed">
+				<param name="viewAction">CreateEventTypeCategoryAttribute!input.action</param>
+			</result>
+			<result name="success" type="eventProcessed">
+				<param name="viewAction">ViewEventType.action?eventTypeId=${newEventTypeCategoryAttribute.eventType.id}</param>
+			</result>
+		</action>
+		<action name="ViewEventTypeCategoryAttribute" class="org.infoglue.calendar.actions.ViewEventTypeCategoryAttributeAction">
+			<result name="success" type="portletDispatch">
+            	<param name="dispatchTo">/jsp/portlet/viewEventTypeCategoryAttribute.jsp</param>
+            </result>
+			<result name="error" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/error.jsp</param>
+			</result>
+		</action>
+		<action name="UpdateEventTypeCategoryAttribute" class="org.infoglue.calendar.actions.UpdateEventTypeCategoryAttributeAction">
+			<result name="success" type="eventProcessed">
+				<param name="viewAction">ViewEventType.action?eventTypeId=${eventTypeId}</param>
+			</result>
+			<result name="error" type="eventProcessed">
+				<param name="viewAction">ViewEventTypeCategoryAttribute.action</param>
+			</result>
+		</action>
+		<action name="DeleteEventTypeCategoryAttribute" class="org.infoglue.calendar.actions.DeleteEventTypeCategoryAttributeAction">
+			<result name="success" type="eventProcessed">
+				<param name="viewAction">ViewEventType.action?eventTypeId=${eventTypeId}</param>
+			</result>
+			<result name="error" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/error.jsp</param>
+			</result>
+		</action>
+		
+		<!-- EVENT ACTIONS -->
+		<action name="CreateEvent" class="org.infoglue.calendar.actions.CreateEventAction">
+			<result name="input" type="portletDispatch">
+            	<param name="dispatchTo">/jsp/portlet/createEvent.jsp</param>
+            </result>
+			<result name="error" type="eventProcessed">
+				<param name="viewAction">CreateEvent!input.action</param>
+			</result>
+			<result name="success" type="eventProcessed">
+				<param name="viewAction">ViewEvent.action?eventId=${newEvent.id}&amp;forceRequestEventId=true</param>
+				<param name="parse">true</param>
+			</result>
+			<result name="successCopy" type="eventProcessed">
+				<param name="viewAction">ViewEvent!edit.action?eventId=${newEvent.id}&amp;forceRequestEventId=true&amp;eventCopy=true</param>
+				<param name="parse">true</param>
+			</result>
+			<result name="successLinked" type="eventProcessed">
+				<param name="viewAction">ViewLinkedPublishedEventList.action</param>
+				<param name="parse">true</param>
+			</result>
+			<!--
+			<result name="success" type="eventProcessed">
+				<param name="viewAction">ViewCalendar.action?calendarId=${calendarId}&amp;mode=${mode}&amp;startDateTime=${startDateTime}&amp;endDateTime=${endDateTime}</param>
+				<param name="parse">true</param>
+			</result>
+			-->
+		</action>
+		<action name="ViewEvent" class="org.infoglue.calendar.actions.ViewEventAction">
+			<result name="success" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/viewEvent.jsp</param>
+			</result>
+			<result name="successPublic" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/viewEventPublic.jsp</param>
+			</result>
+			<result name="successPublicGU" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/gu/viewEventPublic.jsp</param>
+			</result>
+			<result name="successPublicCustom" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/custom/viewEventPublic.jsp</param>
+			</result>
+			<result name="successEdit" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/viewEventEdit.jsp</param>
+			</result>
+			<result name="successChooseLanguageForEdit" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/chooseLanguageForEdit.jsp</param>
+			</result>
+			<result name="successRenderedTemplate" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/viewRenderedTemplate.jsp</param>
+			</result>
+			<result name="error" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/error.jsp</param>
+			</result>
+		</action>
+		<action name="UpdateEvent" class="org.infoglue.calendar.actions.UpdateEventAction">
+			<result name="uploadForm" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/viewUploadForm.jsp</param>
+			</result>
+			<result name="successUpload" type="eventProcessed">
+				<param name="viewAction">ViewEvent.action?eventId=${eventId}</param>
+				<param name="parse">true</param>
+			</result>
+			<!--
+			<result name="error" type="eventProcessed">
+				<param name="viewAction">ViewEvent!edit.action?eventId=${eventId}</param>
+				<param name="parse">true</param>
+			</result>
+			-->
+			<result name="error" type="eventProcessed">
+				<param name="viewAction">ViewError.action</param>
+				<param name="parse">true</param>
+			</result>
+			<result name="evaluateError" type="eventProcessed">
+				<param name="viewAction">ViewEvent!edit.action?eventId=${eventId}</param>
+				<param name="parse">true</param>
+			</result>
+			<result name="success" type="eventProcessed">
+				<param name="viewAction">ViewEvent.action?eventId=${eventId}</param>
+				<param name="parse">true</param>
+			</result>
+			<result name="successSubmitForPublish" type="eventProcessed">
+				<param name="viewAction">ViewMessage!submitted.action?eventId=${eventId}</param>
+				<param name="parse">true</param>
+			</result>
+			<result name="successPublish" type="eventProcessed">
+				<param name="viewAction">ViewMessage!published.action?eventId=${eventId}</param>
+				<param name="parse">true</param>
+			</result>
+		</action>
+		<action name="DeleteEvent" class="org.infoglue.calendar.actions.DeleteEventAction">
+			<result name="success" type="eventProcessed">
+				<param name="viewAction">ViewWaitingEventList.action</param>
+				<param name="parse">true</param>
+			</result>
+			<result name="successLinkedPublished" type="eventProcessed">
+				<param name="viewAction">ViewLinkedPublishedEventList.action</param>
+				<param name="parse">true</param>
+			</result>
+			<result name="successPublished" type="eventProcessed">
+				<param name="viewAction">ViewPublishedEventList.action</param>
+				<param name="parse">true</param>
+			</result>
+			<result name="successWorking" type="eventProcessed">
+				<param name="viewAction">ViewMyWorkingEventList.action</param>
+				<param name="parse">true</param>
+			</result>
+			<result name="successSearch" type="eventProcessed">
+				<param name="viewAction">ViewEventSearch.action</param>
+				<param name="parse">true</param>
+			</result>
+			<result name="error" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/error.jsp</param>
+			</result>
+		</action>
+
+		<action name="DeleteEventVersion" class="org.infoglue.calendar.actions.DeleteEventVersionAction">
+			<result name="success" type="eventProcessed">
+				<param name="viewAction">ViewEvent.action?eventId=${eventId}</param>
+				<param name="parse">true</param>
+			</result>
+			<result name="error" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/error.jsp</param>
+			</result>
+		</action>
+		
+		<action name="ViewEventList" class="org.infoglue.calendar.actions.ViewEventListAction">
+			<result name="success" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/viewEventList.jsp</param>
+			</result>
+			<result name="successShort" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/viewEventShortList.jsp</param>
+			</result>
+			<result name="successGU" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/gu/viewEventList.jsp</param>
+			</result>
+			<result name="successSlotGU" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/gu/viewEventSlottedList.jsp</param>
+			</result>
+			<result name="successShortGU" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/gu/viewEventShortList.jsp</param>
+			</result>
+			<result name="successCustom" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/custom/viewEventList.jsp</param>
+			</result>
+			<result name="successSlotCustom" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/custom/viewEventSlottedList.jsp</param>
+			</result>
+			<result name="successShortCustom" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/custom/viewEventShortList.jsp</param>
+			</result>
+			<result name="successRSS" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/custom/viewEventListAsRSS.jsp</param>
+			</result>
+			<result name="successCustomRSS" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/custom/viewEventListAsCustomRSS.jsp</param>
+			</result>
+			<result name="successAggregatedRSS" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/custom/viewEventListAsAggregatedRSS.jsp</param>
+			</result>
+			<result name="successAggregatedCustom" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/custom/viewEventListAsAggregated.jsp</param>
+			</result>
+			<result name="successFilteredGU" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/gu/viewEventFilteredList.jsp</param>
+			</result>
+			<result name="successFilteredGraphicalCalendarGU" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/gu/viewEventFilteredGraphicalCalendar.jsp</param>
+			</result>
+			<result name="successAggregatedCustom" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/custom/viewEventListAggregated.jsp</param>
+			</result>
+			<result name="successShortAggregatedCustom" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/custom/viewEventShortListAggregated.jsp</param>
+			</result>
+			<result name="successRenderedTemplate" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/viewRenderedTemplate.jsp</param>
+			</result>
+			<result name="error" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/error.jsp</param>
+			</result>
+			<result name="errorCustom" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/custom/error.jsp</param>
+			</result>
+		</action>
+		
+		<action name="ViewMyWorkingEventList" class="org.infoglue.calendar.actions.ViewMyWorkingEventListAction">
+			<result name="success" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/viewMyWorkingEventList.jsp</param>
+			</result>
+			<result name="error" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/error.jsp</param>
+			</result>
+		</action>
+		
+		<action name="ViewWaitingEventList" class="org.infoglue.calendar.actions.ViewWaitingEventListAction">
+			<result name="success" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/viewWaitingEventList.jsp</param>
+			</result>
+			<result name="error" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/error.jsp</param>
+			</result>
+		</action>
+
+		<action name="ViewPublishedEventList" class="org.infoglue.calendar.actions.ViewPublishedEventListAction">
+			<result name="success" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/viewPublishedEventList.jsp</param>
+			</result>
+			<result name="error" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/error.jsp</param>
+			</result>
+		</action>
+
+		<action name="ViewLinkedPublishedEventList" class="org.infoglue.calendar.actions.ViewLinkedPublishedEventListAction">
+			<result name="success" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/viewLinkedPublishedEventList.jsp</param>
+			</result>
+			<result name="error" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/error.jsp</param>
+			</result>
+		</action>
+
+
+
+		<action name="ViewEventSubscriptionList" class="org.infoglue.calendar.actions.ViewEventSubscriptionListAction">
+			<result name="success" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/viewEventSubscriptionList.jsp</param>
+			</result>
+			<result name="error" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/error.jsp</param>
+			</result>
+		</action>
+		<action name="CreateEventSubscription" class="org.infoglue.calendar.actions.CreateEventSubscriptionAction">
+			<result name="input" type="portletDispatch">
+            	<param name="dispatchTo">/jsp/portlet/chooseCalendarForSubscription.jsp</param>
+            </result>
+			<result name="error" type="eventProcessed">
+				<param name="viewAction">CreateEventSubscription!input.action</param>
+			</result>
+			<result name="success" type="eventProcessed">
+				<param name="viewAction">ViewEventSubscriptionList.action</param>
+				<param name="parse">true</param>
+			</result>
+		</action>
+		<action name="DeleteEventSubscription" class="org.infoglue.calendar.actions.DeleteEventSubscriptionAction">
+			<result name="success" type="eventProcessed">
+				<param name="viewAction">ViewEventSubscriptionList.action</param>
+				<param name="parse">true</param>
+			</result>
+			<result name="error" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/error.jsp</param>
+			</result>
+		</action>		
+		<action name="ViewSubscriptionList" class="org.infoglue.calendar.actions.ViewSubscriptionListAction">
+			<result name="success" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/viewSubscriptionList.jsp</param>
+			</result>
+			<result name="error" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/error.jsp</param>
+			</result>
+		</action>
+
+
+
+		<action name="ViewMessage" class="org.infoglue.calendar.actions.ViewMessageAction">
+			<result name="successSubmitForPublish" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/eventSubmitted.jsp</param>
+			</result>
+			<result name="successPublished" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/eventPublished.jsp</param>
+			</result>
+			<result name="error" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/error.jsp</param>
+			</result>
+		</action>
+		
+		<action name="ViewEventSearch" class="org.infoglue.calendar.actions.ViewEventSearchAction">
+			<result name="input" type="portletDispatch">
+            	<param name="dispatchTo">/jsp/portlet/viewEventSearchForm.jsp</param>
+            </result>
+            <result name="success" type="portletDispatch">
+            	<param name="dispatchTo">/jsp/portlet/viewEventSearch.jsp</param>
+            </result>
+			<result name="error" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/error.jsp</param>
+			</result>
+		</action>
+	
+		
+		<!-- RESOURCE ACTIONS -->
+		<action name="CreateResource" class="org.infoglue.calendar.actions.CreateResourceAction">
+
+			<result name="error" type="eventProcessed">
+				<param name="viewAction">ViewError.action</param>
+				<param name="parse">true</param>
+			</result>
+			<result name="success" type="eventProcessed">
+				<param name="viewAction">ViewEvent.action?eventId=${eventId}</param>
+				<param name="parse">true</param>
+			</result>
+		</action>
+		<action name="DeleteResource" class="org.infoglue.calendar.actions.DeleteResourceAction">
+			<result name="success" type="eventProcessed">
+				<param name="viewAction">ViewEvent.action?eventId=${eventId}</param>
+				<param name="parse">true</param>
+			</result>
+			<result name="error" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/error.jsp</param>
+			</result>
+		</action>
+		
+		
+		<!-- ENTRY ACTIONS -->
+		<action name="CreateEntry" class="org.infoglue.calendar.actions.CreateEntryAction">
+			<result name="input" type="portletDispatch">
+            	<param name="dispatchTo">/jsp/portlet/createEntry.jsp</param>
+            </result>
+			<result name="inputPublic" type="portletDispatch">
+            	<param name="dispatchTo">/jsp/portlet/createEntryPublic.jsp</param>
+            </result>
+			<result name="inputPublicGU" type="portletDispatch">
+            	<param name="dispatchTo">/jsp/portlet/gu/createEntry.jsp</param>
+            </result>
+            <result name="inputPublicCustom" type="portletDispatch">
+            	<param name="dispatchTo">/jsp/portlet/custom/createEntry.jsp</param>
+            </result>
+            <result name="success" type="eventProcessed">
+				<param name="viewAction">CreateEntry!receipt.action?eventId=${eventId}&amp;entryId=${newEntry.id}</param>
+				<param name="parse">true</param>
+			</result>
+            <result name="successPublic" type="eventProcessed">
+				<param name="viewAction">CreateEntry!receiptPublic.action?eventId=${eventId}&amp;entryId=${newEntry.id}</param>
+				<param name="parse">true</param>
+			</result>
+            <result name="successPublicGU" type="eventProcessed">
+				<param name="viewAction">CreateEntry!receiptPublicGU.action?eventId=${eventId}&amp;entryId=${newEntry.id}</param>
+				<param name="parse">true</param>
+			</result>
+			<result name="successPublicCustom" type="eventProcessed">
+				<param name="viewAction">CreateEntry!receiptPublicCustom.action?eventId=${eventId}&amp;entryId=${newEntry.id}</param>
+				<param name="parse">true</param>
+			</result>
+            <result name="maximumReached" type="portletDispatch">
+            	<param name="dispatchTo">/jsp/portlet/maximumEntriesReached.jsp</param>
+			</result>
+            <result name="maximumReachedPublic" type="portletDispatch">
+            	<param name="dispatchTo">/jsp/portlet/maximumEntriesReachedPublic.jsp</param>
+			</result>
+            <result name="maximumReachedPublicGU" type="portletDispatch">
+            	<param name="dispatchTo">/jsp/portlet/gu/maximumEntriesReachedPublic.jsp</param>
+			</result>
+			<result name="error" type="eventProcessed">
+				<param name="viewAction">CreateEntry!input.action</param>
+			</result>
+			<result name="errorPublic" type="eventProcessed">
+				<param name="viewAction">CreateEntry!inputPublic.action</param>
+			</result>
+			<result name="errorPublicGU" type="eventProcessed">
+				<param name="viewAction">CreateEntry!inputPublicGU.action</param>
+			</result>		
+			<result name="errorPublicCustom" type="eventProcessed">
+				<param name="viewAction">CreateEntry!inputPublicCustom.action</param>
+			</result>	
+            <result name="receipt" type="portletDispatch">
+            	<param name="dispatchTo">/jsp/portlet/entryReceipt.jsp</param>
+			</result>
+            <result name="receiptPublic" type="portletDispatch">
+            	<param name="dispatchTo">/jsp/portlet/entryReceiptPublic.jsp</param>
+			</result>
+            <result name="receiptPublicGU" type="portletDispatch">
+            	<param name="dispatchTo">/jsp/portlet/gu/entryReceipt.jsp</param>
+			</result>
+			 <result name="receiptPublicCustom" type="portletDispatch">
+            	<param name="dispatchTo">/jsp/portlet/custom/entryReceipt.jsp</param>
+			</result>
+			<result name="successRenderedTemplate" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/viewRenderedTemplate.jsp</param>
+			</result>			
+		</action>
+		<action name="ViewEntrySearch" class="org.infoglue.calendar.actions.ViewEntrySearchAction">
+			<result name="input" type="portletDispatch">
+            	<param name="dispatchTo">/jsp/portlet/viewEntrySearch.jsp</param>
+            </result>
+            <result name="success" type="portletDispatch">
+            	<param name="dispatchTo">/jsp/portlet/viewEntrySearch.jsp</param>
+            </result>
+			<result name="error" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/error.jsp</param>
+			</result>
+		</action>
+		<action name="ViewEntry" class="org.infoglue.calendar.actions.ViewEntryAction">
+			<result name="success" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/viewEntry.jsp</param>
+			</result>
+			<result name="successEntryReceiptGU" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/gu/viewEntryReceipt.jsp</param>
+			</result>
+			<result name="error" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/error.jsp</param>
+			</result>
+		</action>
+		<action name="UpdateEntry" class="org.infoglue.calendar.actions.UpdateEntryAction">
+			<result name="success" type="eventProcessed">
+				<param name="viewAction">ViewEntrySearch.action</param>
+				<param name="parse">true</param>
+			</result>
+			<result name="error" type="eventProcessed">
+				<param name="viewAction">ViewEntry.action</param>
+			</result>
+		</action>
+		<action name="DeleteEntry" class="org.infoglue.calendar.actions.DeleteEntryAction">
+			<result name="success" type="eventProcessed">
+				<param name="viewAction">ViewEntrySearch.action</param>
+				<param name="parse">true</param>
+			</result>
+			<result name="error" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/error.jsp</param>
+			</result>
+		</action>
+		<action name="EmailEntries" class="org.infoglue.calendar.actions.EmailEntriesAction">
+			<result name="success" type="eventProcessed">
+				<param name="viewAction">ViewEntrySearch.action</param>
+				<param name="parse">true</param>
+			</result>
+			<result name="error" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/error.jsp</param>
+			</result>
+		</action>
+		<action name="ComposeEmail" class="org.infoglue.calendar.actions.ComposeEmailAction">
+	 		<result name="success" type="portletDispatch">
+	 			<param name="dispatchTo">/jsp/portlet/createEmail.jsp</param>
+	 		</result>
+		 	<result name="finished" type="eventProcessed">
+		 		<param name="viewAction">ViewEntrySearch.action</param>
+		 		<param name="parse">true</param>
+	 		</result>
+			<result name="error" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/error.jsp</param>
+			</result>
+		</action>
+		<action name="ViewAccessRights" class="org.infoglue.calendar.actions.ViewAccessRightsAction">
+			<result name="success" type="portletDispatch">
+            	<param name="dispatchTo">/jsp/portlet/viewAccessRights.jsp</param>
+            </result>
+			<result name="error" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/error.jsp</param>
+			</result>
+		</action>
+		
+		<action name="ViewApplicationState" class="org.infoglue.calendar.actions.ViewApplicationStateAction">
+			<result name="success" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/viewApplicationState.jsp</param>
+			</result>
+			<result name="cleared" type="eventProcessed">
+				<param name="viewAction">ViewApplicationState.action</param>
+				<param name="parse">true</param>
+			</result>
+			<result name="error" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/error.jsp</param>
+			</result>
+		</action>
+		<action name="UpdateApplicationState" class="org.infoglue.calendar.actions.UpdateApplicationStateAction">
+			<result name="success" type="eventProcessed">
+				<param name="viewAction">ViewApplicationState.action</param>
+				<param name="parse">true</param>
+			</result>
+			<result name="error" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/error.jsp</param>
+			</result>
+		</action>
+
+		<!-- HERE COMES THE LABELS EDITOR -->
+		<action name="ViewLabels" class="org.infoglue.calendar.labels.actions.ViewLabelsAction">
+			<result name="success" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/viewLabels.jsp</param>
+			</result>
+			<result name="updated" type="eventProcessed">
+				<param name="viewAction">ViewLabels.action</param>
+				<param name="parse">true</param>
+			</result>
+			<!--
+			<result name="updated" type="eventProcessed">
+				<param name="viewAction">ViewEventType.action</param>
+				<param name="parse">true</param>
+			</result>
+			-->			
+			<result name="error" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/error.jsp</param>
+			</result>
+		</action>
+
+		<!-- HERE COMES THE SETTINGS EDITOR -->
+		<action name="ViewSettings" class="org.infoglue.calendar.settings.actions.ViewSettingsAction">
+			<result name="success" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/viewSettings.jsp</param>
+			</result>
+			<result name="updated" type="eventProcessed">
+				<param name="viewAction">ViewSettings.action</param>
+				<param name="parse">true</param>
+			</result>
+			<!--
+			<result name="updated" type="eventProcessed">
+				<param name="viewAction">ViewEventType.action</param>
+				<param name="parse">true</param>
+			</result>
+			-->			
+			<result name="error" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/error.jsp</param>
+			</result>
+		</action>
+
+		<!-- HERE COMES THE AUTHORIZATION SWITCH ACTION-->
+		<action name="ViewAuthorizationSwitchManagement" class="org.infoglue.calendar.actions.ViewAuthorizationSwitchManagementAction">
+			<result name="input" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/viewAuthorizationSwitchManagement.jsp</param>
+			</result>
+			<result name="success" type="eventProcessed">
+				<param name="viewAction">ViewAuthorizationSwitchManagement!input.action</param>
+			</result>
+			<result name="error" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/error.jsp</param>
+			</result>
+		</action>
+		
+	</package>
+</xwork>

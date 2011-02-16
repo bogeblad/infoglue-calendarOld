@@ -1,0 +1,15 @@
+html, body		  { font-family: Verdana, Arial, Helvetica, sans-serif; text-align: left; padding: 0 } 
+
+.tab				{ background-color: white; font-family: Verdana, Arial, Helvetica, sans-serif; color: white; border: 0px solid black; background-image: url(../images/tab.gif); width: 60px; height: 20px;} 
+.activeTab			{ background-color: white; font-family: Verdana, Arial, Helvetica, sans-serif; color: white; border: 0px solid black; background-image: url(../images/activeTab.gif); width: 60px; height: 20px;} 
+.tabText			{ font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; color: black; border: 0px solid black; middle; padding: 4px 4px 4px 4px; } 
+.activeTabText		{ font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; color: white; border: 0px solid black; middle; padding: 4px 4px 4px 4px; } 
+.dayItem			{ font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; color: black; } 
+.event				{ font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; color: black; } 
+.panel 				{ position: relative; float: left; overflow:auto; left: 0px; display: none; width: 300px; height: 250px; border: 1px black solid; background-color: #E9E8DB;}
+
+
+#contentTypeEditorContainer {
+	border: 1px solid black;
+	background-color: #E9E8DB;
+}

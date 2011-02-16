@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping
+>
+    <class
+        name="org.infoglue.calendar.entities.Entry"
+        table="Entry"
+        dynamic-update="false"
+        dynamic-insert="false"
+        select-before-update="false"
+        optimistic-lock="version"
+    >
+
+        <id name="id" column="id" type="long" unsaved-value="null">
+            <generator class="native">
+              <!--  
+                  To add non XDoclet generator parameters, create a file named 
+                  hibernate-generator-params-Entry.xml 
+                  containing the additional parameters and place it in your merge dir. 
+              --> 
+            </generator>
+        </id>
+
+        <property name="firstName" type="string" update="true" insert="true" access="property" column="firstName" not-null="false" unique="false"/>
+        <property name="lastName" type="string" update="true" insert="true" access="property" column="lastName" not-null="false" unique="false"/>
+        <property name="email" type="string" update="true" insert="true" access="property" column="email" not-null="false" unique="false"/>
+        <property name="organisation" type="string" update="true" insert="true" access="property" column="organisation" not-null="false" unique="false"/>
+        <property name="address" type="string" update="true" insert="true" access="property" column="address" not-null="false" unique="false"/>
+        <property name="zipcode" type="string" update="true" insert="true" access="property" column="zipcode" not-null="false" unique="false"/>
+        <property name="city" type="string" update="true" insert="true" access="property" column="city" not-null="false" unique="false"/>
+        <property name="phone" type="string" update="true" insert="true" access="property" column="phone" not-null="false" unique="false"/>
+        <property name="fax" type="string" update="true" insert="true" access="property" column="fax" not-null="false" unique="false"/>
+        <property name="message" type="string" update="true" insert="true" access="property" column="message" not-null="false" unique="false"/>
+        <property name="attributes" type="text" column="attributes" not-null="false" unique="false"/>
+
+        <many-to-one name="event" class="org.infoglue.calendar.entities.Event" cascade="none" outer-join="auto" update="true" insert="true" access="property" column="event_id"/>
+
+        <!--
+            To add non XDoclet property mappings, create a file named
+                hibernate-properties-Entry.xml
+            containing the additional properties and place it in your merge dir.
+        -->
+
+    </class>
+
+</hibernate-mapping>

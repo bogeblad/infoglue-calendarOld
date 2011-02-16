@@ -1,0 +1,160 @@
+#set($rowCount = $events.size()+1)
+<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+  <Author>InfoGlue Calendar</Author>
+  <LastAuthor>InfoGlue Calendar</LastAuthor>
+  <Created>2009-01-16T12:05:22Z</Created>
+  <LastSaved>2009-01-16T13:43:07Z</LastSaved>
+  <Company>Modul 1 Data AB</Company>
+  <Version>11.9999</Version>
+ </DocumentProperties>
+ <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
+  <WindowHeight>13935</WindowHeight>
+  <WindowWidth>17100</WindowWidth>
+  <WindowTopX>120</WindowTopX>
+  <WindowTopY>90</WindowTopY>
+  <ProtectStructure>False</ProtectStructure>
+  <ProtectWindows>False</ProtectWindows>
+ </ExcelWorkbook>
+ <Styles>
+  <Style ss:ID="Default" ss:Name="Normal">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font/>
+   <Interior/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="s21" ss:Name="Hyperlink">
+   <Font ss:Color="#0000FF" ss:Underline="Single"/>
+  </Style>
+  <Style ss:ID="s31">
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font x:Family="Swiss" ss:Size="8" ss:Bold="1"/>
+   <Interior ss:Color="#CCFFFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s32">
+   <Font x:Family="Swiss" ss:Size="8"/>
+  </Style>
+  <Style ss:ID="s33" ss:Parent="s21">
+   <Font x:Family="Swiss" ss:Size="8" ss:Color="#0000FF" ss:Underline="Single"/>
+  </Style>
+ </Styles>
+ <Worksheet ss:Name="Sheet1">
+  <Table ss:ExpandedColumnCount="25" ss:ExpandedRowCount="$rowCount" x:FullColumns="1"
+   x:FullRows="1">
+   <Column ss:AutoFitWidth="0" ss:Width="45.75"/>
+   <Column ss:Width="50.25"/>
+   <Column ss:Width="69.75"/>
+   <Column ss:Width="81.75"/>
+   <Column ss:Width="102.75"/>
+   <Column ss:Width="99.75"/>
+   <Column ss:Width="73.5"/>
+   <Column ss:Width="131.25"/>
+   <Column ss:Width="76.5"/>
+   <Column ss:Width="87.75"/>
+   <Column ss:Width="78.75"/>
+   <Column ss:Width="84"/>
+   <Column ss:Width="119.25"/>
+   <Column ss:Width="81" ss:Span="1"/>
+   <Column ss:Index="16" ss:Width="44.25"/>
+   <Column ss:Width="93.75"/>
+   <Column ss:Width="36"/>
+   <Column ss:Width="137.25"/>
+   <Column ss:Width="85.5"/>
+   <Column ss:Width="66.75"/>
+   <Column ss:Width="39.75"/>
+   <Row ss:Height="11.25" ss:StyleID="s31">
+    <Cell><Data ss:Type="String">ID</Data></Cell>
+    <Cell><Data ss:Type="String">Name</Data></Cell>
+    <Cell><Data ss:Type="String">Title</Data></Cell>
+    <Cell><Data ss:Type="String">Lecturer</Data></Cell>
+    <Cell><Data ss:Type="String">LongDescription</Data></Cell>
+    <Cell><Data ss:Type="String">ShortDescription</Data></Cell>
+    <Cell><Data ss:Type="String">OrganizerName</Data></Cell>
+    <Cell><Data ss:Type="String">Description</Data></Cell>
+    <Cell><Data ss:Type="String">CustomLocation</Data></Cell>
+    <Cell><Data ss:Type="String">AlternativeLocation</Data></Cell>
+    <Cell><Data ss:Type="String">EventUrl</Data></Cell>
+    <Cell><Data ss:Type="String">IsOrganizedByGU</Data></Cell>
+    <Cell><Data ss:Type="String">LastRegistrationDateTime</Data></Cell>
+    <Cell><Data ss:Type="String">EndDateTime</Data></Cell>
+    <Cell><Data ss:Type="String">StartDateTime</Data></Cell>
+    <Cell><Data ss:Type="String">IsInternal</Data></Cell>
+    <Cell><Data ss:Type="String">MaximumPartipants</Data></Cell>
+    <Cell><Data ss:Type="String">StateId</Data></Cell>
+    <Cell><Data ss:Type="String">ContactEmail</Data></Cell>
+    <Cell><Data ss:Type="String">ContactName</Data></Cell>
+    <Cell><Data ss:Type="String">ContactPhone</Data></Cell>
+    <Cell><Data ss:Type="String">Price</Data></Cell>
+    <Cell><Data ss:Type="String">OwningCalendar</Data></Cell>
+    <Cell><Data ss:Type="String">Location</Data></Cell>
+    <Cell><Data ss:Type="String">NumberOfEntries</Data></Cell>
+   </Row>
+   #foreach($event in $events)
+    #set($eventVersion = "")
+   	#foreach($currentEventVersion in $event.versions)
+   		#set($eventVersion = $currentEventVersion)
+   	#end
+   <Row ss:Height="11.25" ss:StyleID="s32">
+    <Cell><Data ss:Type="Number">$!event.id</Data></Cell>
+    <Cell><Data ss:Type="String">$!formatter.escapeHTMLforXMLService($!eventVersion.name)</Data></Cell>
+    <Cell><Data ss:Type="String">$!formatter.escapeHTMLforXMLService($!eventVersion.title)</Data></Cell>
+    <Cell><Data ss:Type="String">$!formatter.escapeHTMLforXMLService($!eventVersion.lecturer)</Data></Cell>
+    <Cell><Data ss:Type="String">$!formatter.escapeHTMLforXMLService($!eventVersion.longDescription)</Data></Cell>
+    <Cell><Data ss:Type="String">$!formatter.escapeHTMLforXMLService($!eventVersion.shortDescription)</Data></Cell>
+    <Cell><Data ss:Type="String">$!formatter.escapeHTMLforXMLService($!eventVersion.organizerName)</Data></Cell>
+    <Cell><Data ss:Type="String">$!formatter.escapeHTMLforXMLService($!eventVersion.description)</Data></Cell>
+    <Cell><Data ss:Type="String">$!formatter.escapeHTMLforXMLService($!eventVersion.customLocation)</Data></Cell>
+    <Cell><Data ss:Type="String">$!formatter.escapeHTMLforXMLService($!eventVersion.alternativeLocation)</Data></Cell>
+    <Cell><Data ss:Type="String">$!formatter.escapeHTMLforXMLService($!eventVersion.eventUrl)</Data></Cell>
+    <Cell><Data ss:Type="String">$!event.isOrganizedByGU</Data></Cell>
+    <Cell><Data ss:Type="String">$!formatter.formatDate($!event.lastRegistrationDateTime.time,"yyyy-MM-dd HH:mm:ss")</Data></Cell>
+    <Cell><Data ss:Type="String">$!formatter.formatDate($!event.endDateTime.time,"yyyy-MM-dd HH:mm:ss")</Data></Cell>
+    <Cell><Data ss:Type="String">$!formatter.formatDate($!event.startDateTime.time,"yyyy-MM-dd HH:mm:ss")</Data></Cell>
+    <Cell><Data ss:Type="String">$!event.isInternal</Data></Cell>
+    <Cell><Data ss:Type="Number">$!event.maximumPartipants</Data></Cell>
+    <Cell><Data ss:Type="Number">$!event.stateId</Data></Cell>
+    <Cell><Data ss:Type="String">$!formatter.escapeHTMLforXMLService($!event.contactEmail)</Data></Cell>
+    <Cell><Data ss:Type="String">$!formatter.escapeHTMLforXMLService($!event.contactName)</Data></Cell>
+    <Cell><Data ss:Type="String">$!formatter.escapeHTMLforXMLService($!event.contactPhone)</Data></Cell>
+    <Cell><Data ss:Type="String">$!formatter.escapeHTMLforXMLService($!event.price)</Data></Cell>
+    <Cell><Data ss:Type="String">$!event.owningCalendar.name</Data></Cell>
+    <Cell><Data ss:Type="String">#foreach($location in $event.locations)$!location.getLocalizedName("en", "sv"), #end</Data></Cell>
+    <Cell><Data ss:Type="String">$!event.entries.size()</Data></Cell>
+   </Row>
+   #end
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <Selected/>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+     <ActiveRow>3</ActiveRow>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+ <Worksheet ss:Name="Sheet2">
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+ <Worksheet ss:Name="Sheet3">
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+</Workbook>

@@ -1,0 +1,1 @@
+ALTER TABLE Event_Version ADD title varchar2(255) default NULL;

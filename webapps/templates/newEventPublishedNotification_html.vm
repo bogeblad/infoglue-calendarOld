@@ -1,0 +1,12 @@
+<div><h2>New event published</h2></div>
+<div>
+	InfoGlue Calendar Notification: A new event called "$eventVersion.getName()" was published. <br/>
+	<br/>
+	You can go to the application and look at it by clicking <a href="$publishedEventUrl">here</a><br/>
+	<br/>
+	The event was published by <a href="mailto:$principal.email">$principal.firstName $principal.lastName ($principal.email)</a>
+	<br/>
+	<hr/>
+	This email was automatically generated and the sender is the Calendar-system.<br/>
+	Do not reply to this email. <br/>
+</div>

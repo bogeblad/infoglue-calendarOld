@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping
+>
+    <class
+        name="org.infoglue.calendar.entities.Category"
+        table="Category"
+        dynamic-update="false"
+        dynamic-insert="false"
+        select-before-update="false"
+        optimistic-lock="version"
+    >
+
+        <id name="id" column="id" type="long" unsaved-value="null">
+            <generator class="native"></generator>
+        </id>
+
+        <property name="internalName" type="string" update="true" insert="true" access="property" column="internalName" not-null="false" unique="true" />
+        <property name="name" type="string" update="true" insert="true" access="property" column="name" not-null="false" unique="true" />
+        <property name="description" type="string" update="true" insert="true" access="property" column="description" not-null="false" unique="false" />
+		<property name="active" column="active" type="boolean" update="true" insert="true" access="property"/>
+
+   		<many-to-one name="parent" class="org.infoglue.calendar.entities.Category" column="parent_id" not-null="false"/>
+   
+   		<set name="children" table="Category" lazy="true" inverse="false" cascade="none" order-by="name asc">
+            <key column="parent_id"/>
+            <one-to-many class="org.infoglue.calendar.entities.Category"/>
+        </set>
+
+   		<set name="activeChildren" table="Category" lazy="true" inverse="false" cascade="none" order-by="name asc" where="active=1">
+            <key column="parent_id"/>
+            <one-to-many class="org.infoglue.calendar.entities.Category"/>
+        </set>
+        
+    </class>
+
+</hibernate-mapping>

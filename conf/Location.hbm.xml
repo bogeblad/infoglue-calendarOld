@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping
+>
+    <class name="org.infoglue.calendar.entities.Location" table="Location" dynamic-update="false" dynamic-insert="false" select-before-update="false" optimistic-lock="version">
+
+        <id name="id" column="id" type="long" unsaved-value="null">
+            <generator class="native">
+            </generator>
+        </id>
+
+        <property name="name" type="string" update="true" insert="true" access="property" column="name" not-null="false" unique="true" />
+        <property name="description" type="string" update="true" insert="true" access="property" column="description" not-null="false" unique="false" />
+
+        <set name="events" table="Event_Location" lazy="false" inverse="false" cascade="none" sort="unsorted">
+	    	<key column="location_id"></key>
+        	<many-to-many class="org.infoglue.calendar.entities.Event" column="event_id" outer-join="auto" />
+        </set>
+
+    </class>
+
+</hibernate-mapping>

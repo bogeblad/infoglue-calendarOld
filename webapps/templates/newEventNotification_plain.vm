@@ -1,0 +1,11 @@
+New event created
+
+InfoGlue Calendar Notification: A new event called "$eventVersion.getName()" was created but yet not published. 
+
+You can go to the application and publish it now by using this url: $publishEventUrl 
+
+The event was written by $principal.firstName $principal.lastName ($principal.email)
+
+----------------------------------------------------------
+This email was automatically generated and the sender is the calendar-system.
+Do not reply to this email. 

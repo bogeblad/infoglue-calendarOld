@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="org.infoglue.calendar.entities.AccessRight" table="AccessRight" dynamic-update="false" dynamic-insert="false" select-before-update="false" optimistic-lock="version">
+
+        <id name="id" column="id" type="long" unsaved-value="null">
+            <generator class="native">
+              <!--  
+                  To add non XDoclet generator parameters, create a file named 
+                  hibernate-generator-params-Calendar.xml 
+                  containing the additional parameters and place it in your merge dir. 
+              --> 
+            </generator>
+        </id>
+
+        <property name="parameters" type="string" update="true" insert="true" access="property" column="parameters" not-null="false" unique="false"/>
+        
+        <many-to-one name="interceptionPoint" class="org.infoglue.calendar.entities.InterceptionPoint" cascade="none" outer-join="false" update="true" insert="true" access="property" column="interception_point_id"/>
+        
+        <set name="roles" lazy="true" inverse="false" cascade="delete" sort="unsorted">
+			<key column="access_right_id"></key>
+			<one-to-many class="org.infoglue.calendar.entities.AccessRightRole"/>
+        </set>
+
+        <set name="groups" lazy="true" inverse="false" cascade="delete" sort="unsorted">
+			<key column="access_right_id"></key>
+			<one-to-many class="org.infoglue.calendar.entities.AccessRightGroup"/>
+        </set>
+
+        <set name="users" lazy="true" inverse="false" cascade="delete" sort="unsorted">
+			<key column="access_right_id"></key>
+			<one-to-many class="org.infoglue.calendar.entities.AccessRightUser"/>
+        </set>
+        
+    </class>
+    
+</hibernate-mapping>

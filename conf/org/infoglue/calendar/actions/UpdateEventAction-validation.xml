@@ -1,0 +1,129 @@
+<!DOCTYPE validators PUBLIC "-//OpenSymphony Group//XWork Validator 1.0//EN" "http://www.opensymphony.com/xwork/xwork-validator-1.0.dtd">
+<validators>
+    <field name="name">
+        <field-validator type="igrequiredstring">
+            <message>errors.reqiredField</message>
+        </field-validator>
+    </field>
+    <field name="name">
+        <field-validator type="igrequiredstring">
+            <message>errors.reqiredField</message>
+        </field-validator>
+    </field>
+    <field name="isInternal">
+    	<field-validator type="fieldexpression">
+            <param name="expression">isInternal != null</param>
+            <message>You must state if it's an internal event or not.</message>
+        </field-validator>
+    </field>
+    <field name="startDateTime">
+		<field-validator type="fieldexpression">
+            <param name="expression">startCalendar != null and startCalendar.before(endCalendar)</param>
+            <message>errors.afterStartDateTime</message>
+        </field-validator>
+    </field>
+    <field name="lastRegistrationDateTime">
+       	<field-validator type="fieldexpression">
+            <param name="expression">lastRegistrationCalendar == null or lastRegistrationCalendar.before(startCalendar)</param>
+            <message>errors.beforeStartDateTime</message>
+        </field-validator>
+    </field>
+    <field name="lastRegistrationDateTime">
+       	<field-validator type="fieldexpression">
+            <param name="expression">maximumParticipants == null or lastRegistrationCalendar != null</param>
+            <message>errors.maximumParticipantsDemandsLastRegistrationDateTime</message>
+        </field-validator>
+    </field>
+    <field name="lecturer">
+        <field-validator type="igmaxlength">
+        	<param name="maxLength">1024</param>
+            <message>To long - the limit is 1024 characters.</message>
+        </field-validator>
+    </field>
+    
+    <!--
+    <field name="shortDescription">
+        <field-validator type="igrequiredstring">
+            <message>errors.reqiredField</message>
+        </field-validator>
+    </field>
+    <field name="longDescription">
+        <field-validator type="igrequiredstring">
+            <message>errors.reqiredField</message>
+        </field-validator>
+    </field>
+    <field name="description">
+        <field-validator type="igrequiredstring">
+            <message>errors.reqiredField</message>
+        </field-validator>
+    </field>
+	-->
+    <!--
+    <field name="isOrganizedByGU">
+        <field-validator type="igrequiredstring">
+            <message>You must enter if it's organized by you.</message>
+        </field-validator>
+    </field>
+    <field name="organizerName">
+        <field-validator type="igrequiredstring">
+            <message>You must enter the organizer's name.</message>
+        </field-validator>
+    </field>
+    <field name="lecturer">
+        <field-validator type="igrequiredstring">
+            <message>You must enter the lecturer.</message>
+        </field-validator>
+    </field>
+    <field name="customLocation">
+        <field-validator type="igrequiredstring">
+            <message>You must enter a custom location.</message>
+        </field-validator>
+    </field>
+    <field name="eventUrl">
+        <field-validator type="igrequiredstring">
+            <message>You must enter an event url.</message>
+        </field-validator>
+    </field>
+    <field name="contactName">
+        <field-validator type="igrequiredstring">
+            <message>You must enter a contact name.</message>
+        </field-validator>
+    </field>
+    <field name="contactEmail">
+        <field-validator type="igrequiredstring">
+            <message>You must enter a contact email.</message>
+        </field-validator>
+    </field>
+    <field name="contactPhone">
+        <field-validator type="igrequiredstring">
+            <message>You must enter a contact phone.</message>
+        </field-validator>
+    </field>
+    <field name="price">
+        <field-validator type="igrequiredstring">
+            <message>You must enter a price.</message>
+        </field-validator>
+    </field>
+    <field name="maximumParticipants">
+        <field-validator type="fieldexpression">
+	        <param name="expression">maximumParticipants != null</param>
+            <message>You must enter a maximum number of participants.</message>
+        </field-validator>
+    </field>
+    <field name="lastRegistrationDateTime">
+        <field-validator type="igrequiredstring">
+            <message>You must enter a last registration date.</message>
+        </field-validator>
+    </field>
+    <field name="locationId">
+        <field-validator type="igrequiredoption">
+            <message>You must choose at least one location.</message>
+        </field-validator>
+    </field>
+    <field name="categoryId">
+        <field-validator type="igrequiredoption">
+            <message>You must choose at least one category.</message>
+        </field-validator>
+    </field>
+    -->
+</validators>

@@ -1,0 +1,20 @@
+<div><h2>Message</h2></div>
+<div>    
+	You are registered as reserved for the event $eventVersion.name
+	<hr/>
+	Name: $entry.firstName $entry.lastName<br/>
+	Email: <a href="mailto:$entry.email">$entry.email</a><br/>
+	Organisation: $entry.organisation<br/>
+	Address: $entry.address<br/>
+	ZipCode: $entry.zipcode<br/>
+	City: $entry.city<br/>
+	Phone: $entry.phone<br/>
+	Fax: $entry.fax<br/>
+	Message: $entry.message<br/>
+	#foreach($attribute in $attributes)
+		$attribute.name: $this.getAttributeValue($entry.attributes, $attribute.name, true)
+	#end
+	<hr/>
+	This email was sent from the InfoGlue Calendar Application.<br/>
+	Do not reply to this email. <br/>
+</div>

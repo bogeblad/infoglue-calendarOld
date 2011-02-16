@@ -1,0 +1,7 @@
+<div><h2>Message</h2></div>
+<div>
+	$message
+	<hr/>
+	This email was sent from the InfoGlue Calendar Application.<br/>
+	Do not reply to this email. <br/>
+</div>
