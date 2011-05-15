@@ -214,6 +214,13 @@ public class ViewEventListAction extends CalendarAbstractAction
         
         return Action.SUCCESS + "CustomRSS";
     }
+	
+	public String listFullRSS() throws Exception
+    {
+        execute(getNumberOfItems());
+        
+        return Action.SUCCESS + "FullRSS";
+    }
 
     public String listAggregatedCustom() throws Exception
     {
