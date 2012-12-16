@@ -77,52 +77,87 @@ public class EntrySearchResultfilesConstructor
 				String resultType = st.nextToken().trim();
 				if (resultType.equals("TXT"))
 				{
-					EntrySearchResultfilesConstructor_TXT txtConstructor = new EntrySearchResultfilesConstructor_TXT(entries, fileFolderLocation, httpFolderLocation, resultValues, action);
-					if (txtConstructor.createFile())
+					try
 					{
-						searchResultFiles.put("Text", txtConstructor.getFileLocation());
-						//searchResultFilePaths.put("Text", txtConstructor.get)
+						EntrySearchResultfilesConstructor_TXT txtConstructor = new EntrySearchResultfilesConstructor_TXT(entries, fileFolderLocation, httpFolderLocation, resultValues, action);
+						if (txtConstructor.createFile())
+						{
+							searchResultFiles.put("Text", txtConstructor.getFileLocation());
+							//searchResultFilePaths.put("Text", txtConstructor.get)
+						}
+					}
+					catch (Exception e) 
+					{
+						log.error("Error creating TXT-file:" + e.getMessage());
 					}
 				}
 				if (resultType.indexOf("CSV") > -1)
 				{
-					log.debug("fileFolderLocation:" + fileFolderLocation);
-					String fileName = fileFolderLocation + File.separator + "entries_" + System.currentTimeMillis() + ".csv";
-					String fileURL = httpFolderLocation + "entries_" + System.currentTimeMillis() + ".csv";
-					searchResultFiles.put("CSV", fileURL);
-					searchResultFilePaths.put("CSV", fileName);
-					
-					new JFreeReportHelper().getEntriesReport(parameters, entries, fileName, "csv", entryTypeId);
+					try
+					{
+						log.debug("fileFolderLocation:" + fileFolderLocation);
+						String fileName = fileFolderLocation + File.separator + "entries_" + System.currentTimeMillis() + ".csv";
+						String fileURL = httpFolderLocation + "entries_" + System.currentTimeMillis() + ".csv";
+						searchResultFiles.put("CSV", fileURL);
+						searchResultFilePaths.put("CSV", fileName);
+						
+						new JFreeReportHelper().getEntriesReport(parameters, entries, fileName, "csv", entryTypeId);
+					}
+					catch (Exception e) 
+					{
+						log.error("Error creating CSV-file:" + e.getMessage());
+					}
 				}
 				if (resultType.indexOf("XLS") > -1)
 				{
-					log.debug("fileFolderLocation:" + fileFolderLocation);
-					String fileName = fileFolderLocation + File.separator + "entries_" + System.currentTimeMillis() + ".xls";
-					String fileURL = httpFolderLocation + "entries_" + System.currentTimeMillis() + ".xls";
-					searchResultFiles.put("Excel", fileURL);
-					searchResultFilePaths.put("Excel", fileName);
-
-					new JFreeReportHelper().getEntriesReport(parameters, entries, fileName, "xls", entryTypeId);
+					try
+					{
+						log.debug("fileFolderLocation:" + fileFolderLocation);
+						String fileName = fileFolderLocation + File.separator + "entries_" + System.currentTimeMillis() + ".xls";
+						String fileURL = httpFolderLocation + "entries_" + System.currentTimeMillis() + ".xls";
+						searchResultFiles.put("Excel", fileURL);
+						searchResultFilePaths.put("Excel", fileName);
+	
+						new JFreeReportHelper().getEntriesReport(parameters, entries, fileName, "xls", entryTypeId);
+					}
+					catch (Exception e) 
+					{
+						log.error("Error creating XLS-file:" + e.getMessage());
+					}
 				}
 				if (resultType.indexOf("PDF") > -1)
 				{
-					log.debug("fileFolderLocation:" + fileFolderLocation);
-					String fileName = fileFolderLocation + File.separator + "entries_" + System.currentTimeMillis() + ".pdf";
-					String fileURL = httpFolderLocation + "entries_" + System.currentTimeMillis() + ".pdf";
-					searchResultFiles.put("PDF", fileURL);
-					searchResultFilePaths.put("PDF", fileName);
-
-					new JFreeReportHelper().getEntriesReport(parameters, entries, fileName, "pdf", entryTypeId);
+					try
+					{
+						log.debug("fileFolderLocation:" + fileFolderLocation);
+						String fileName = fileFolderLocation + File.separator + "entries_" + System.currentTimeMillis() + ".pdf";
+						String fileURL = httpFolderLocation + "entries_" + System.currentTimeMillis() + ".pdf";
+						searchResultFiles.put("PDF", fileURL);
+						searchResultFilePaths.put("PDF", fileName);
+	
+						new JFreeReportHelper().getEntriesReport(parameters, entries, fileName, "pdf", entryTypeId);
+					}
+					catch (Exception e) 
+					{
+						log.error("Error creating PFD-file:" + e.getMessage());
+					}
 				}
 				if (resultType.indexOf("HTML") > -1)
 				{ 
-					log.debug("fileFolderLocation:" + fileFolderLocation);
-					String fileName = fileFolderLocation + File.separator + "entries_" + System.currentTimeMillis() + ".html";
-					String fileURL = httpFolderLocation + "entries_" + System.currentTimeMillis() + ".html";
-					searchResultFiles.put("HTML", fileURL);
-					searchResultFilePaths.put("HTML", fileName);
-
-					new JFreeReportHelper().getEntriesReport(parameters, entries, fileName, "html", entryTypeId);
+					try
+					{
+						log.debug("fileFolderLocation:" + fileFolderLocation);
+						String fileName = fileFolderLocation + File.separator + "entries_" + System.currentTimeMillis() + ".html";
+						String fileURL = httpFolderLocation + "entries_" + System.currentTimeMillis() + ".html";
+						searchResultFiles.put("HTML", fileURL);
+						searchResultFilePaths.put("HTML", fileName);
+	
+						new JFreeReportHelper().getEntriesReport(parameters, entries, fileName, "html", entryTypeId);
+					}
+					catch (Exception e) 
+					{
+						log.error("Error creating HTML-file:" + e.getMessage());
+					}
 				}
 			}
 		}

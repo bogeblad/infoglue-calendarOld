@@ -241,18 +241,21 @@ public class PortletDispatcher extends GenericPortlet implements WebWorkStatics
         catch (ConfigurationException e)
         {
             log.error("Could not find action:" + e.getMessage());
+            log.warn("Could not find action:" + e.getMessage(), e);
             //sendError(request, response, HttpServletResponse.SC_NOT_FOUND, e);
             disposeSession(request);
         } 
         catch (Exception e)
         {
-            log.error("Could not execute action", e);
+            log.error("Could not execute action:" + e.getMessage());
+            log.warn("Could not execute action:" + e.getMessage(), e);
             //sendError(request, response, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e);
             disposeSession(request);
         }
         catch (Throwable e)
         {
-            log.error("Could not execute action", e);
+            log.error("Could not execute action:" + e.getMessage());
+            log.warn("Could not execute action:" + e.getMessage(), e);
             //sendError(request, response, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e);
             disposeSession(request);
         }

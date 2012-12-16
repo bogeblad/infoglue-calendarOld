@@ -116,8 +116,10 @@
 	   	</div>
 
 	   	<div class="columnEnd">
+	   		<ww:if test="this.getInfoGluePrincipal().name != 'eventPublisher'">
 	   		<a href="<c:out value="${deleteUrl}"/>" title="Radera '<ww:property value="#eventVersion.name"/>'" class="delete"></a>
 	   	   	<!--<a href="<c:out value="${eventUrl}"/>" title="Redigera '<ww:property value="#eventVersion.name"/>'" class="edit"></a>-->
+			</ww:if>
 	   	</div>
 	   	<div class="clear"></div>
 	</div>

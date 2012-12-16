@@ -1,4 +1,4 @@
-//$Id: HibernateInterceptor.java,v 1.5 2005/11/29 15:49:49 mattias Exp $
+//$Id: HibernateInterceptor.java,v 1.6 2011/12/05 21:40:41 mattias Exp $
 package org.infoglue.common.interceptor;
 
 import org.hibernate.HibernateException;
@@ -41,12 +41,14 @@ public class HibernateInterceptor implements Interceptor {
 		    calendarAction.setRollBackOnly(true);
 			if (e instanceof HibernateException) 
 			{
-				LOG.error("HibernateException in execute()", e);
+				LOG.error("Error in transaction: " + e.getMessage());
+				LOG.warn("Error in transaction: " + e.getMessage(), e);
 				return Action.ERROR;
 			}
 			else 
 			{
-			    LOG.error("Exception in execute()", e);
+			    LOG.error("Exception in execute:" + e.getMessage());
+				LOG.warn("Exception in execute:" + e.getMessage(), e);
 				throw e;
 			}
 		}

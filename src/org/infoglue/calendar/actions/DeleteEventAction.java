@@ -55,16 +55,24 @@ public class DeleteEventAction extends CalendarAbstractAction
     
     public String execute() throws Exception 
     {
-        EventController.getController().deleteEvent(eventId, getSession());
-        
-        return Action.SUCCESS;
+    	if(this.getInfoGluePrincipal().getName().equals("eventPublisher"))
+    		return Action.ERROR;  
+    	else
+    	{
+			EventController.getController().deleteEvent(eventId, getSession());
+	        return Action.SUCCESS;
+    	}
     } 
 
     public String linkedPublished() throws Exception 
     {
-        EventController.getController().deleteLinkedEvent(eventId, calendarId, getSession());
-        
-        return "successPublished";
+    	if(this.getInfoGluePrincipal().getName().equals("eventPublisher"))
+    		return Action.ERROR;  
+    	else
+    	{
+    		EventController.getController().deleteLinkedEvent(eventId, calendarId, getSession());
+            return "successPublished";
+    	}
     } 
 
     public String published() throws Exception 

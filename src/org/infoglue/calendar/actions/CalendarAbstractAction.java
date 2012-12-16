@@ -51,9 +51,11 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.FlushMode;
+import org.infoglue.calendar.entities.Resource;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.TransactionException;
 import org.infoglue.calendar.controllers.AccessRightController;
 import org.infoglue.calendar.controllers.CalendarController;
 import org.infoglue.calendar.controllers.CalendarLabelsController;
@@ -66,8 +68,10 @@ import org.infoglue.calendar.controllers.ResourceController;
 import org.infoglue.calendar.entities.Category;
 import org.infoglue.calendar.entities.Event;
 import org.infoglue.calendar.entities.EventCategory;
+import org.infoglue.calendar.entities.EventTiny;
 import org.infoglue.calendar.entities.EventTypeCategoryAttribute;
 import org.infoglue.calendar.entities.EventVersion;
+import org.infoglue.calendar.entities.EventVersionTiny;
 import org.infoglue.calendar.entities.Language;
 import org.infoglue.calendar.entities.Participant;
 import org.infoglue.calendar.util.AttributeType;
@@ -78,6 +82,7 @@ import org.infoglue.common.util.ActionValidatorManager;
 import org.infoglue.common.util.ConstraintExceptionBuffer;
 import org.infoglue.common.util.PropertyHelper;
 import org.infoglue.common.util.ResourceBundleHelper;
+import org.infoglue.common.util.Timer;
 import org.infoglue.common.util.WebServiceHelper;
 
 import com.opensymphony.webwork.ServletActionContext;
@@ -196,7 +201,33 @@ public class CalendarAbstractAction extends ActionSupport
     
     public Integer getSiteNodeId()
     {
-        return (Integer)ServletActionContext.getRequest().getAttribute("siteNodeId");
+    	Object temp = ServletActionContext.getRequest().getAttribute("siteNodeId");
+    	if(temp != null){
+    		if(temp instanceof String){
+    			try{
+    				Integer siteNodeId = new Integer((String)temp);
+    				return siteNodeId;
+    			}
+    			catch(NumberFormatException e){
+    				log.error("Error parsing siteNodeId " + temp);
+    				return null;
+    			}    			
+    		}
+    		else{
+    	        return (Integer)ServletActionContext.getRequest().getAttribute("siteNodeId");
+    		}
+    	}
+    	return null;
+    }
+    
+    public List<Long> getEventIds()
+    {
+        return (List<Long>)ServletActionContext.getRequest().getAttribute("eventIds");
+    }
+
+    public Map<Long, String> getSupplementingImages()
+    {
+        return (Map<Long, String>)ServletActionContext.getRequest().getAttribute("supplementingImages");
     }
 
     public Integer getComponentId()
@@ -215,7 +246,7 @@ public class CalendarAbstractAction extends ActionSupport
     	
         return languageCode;
     }
-
+  
     public Locale getLocale()
     {
     	String languageCode = getLanguageCode();
@@ -247,6 +278,11 @@ public class CalendarAbstractAction extends ActionSupport
     public Integer getNumberOfItemsPerPage()
     {
         return (Integer)ServletActionContext.getRequest().getAttribute("numberOfItems");
+    }
+
+    public String getUseTinyEventsInFilteredList()
+    {
+        return (String)ServletActionContext.getRequest().getAttribute("useTinyEventsInFilteredList");
     }
 
     public String getUploadMaxSize()
@@ -281,7 +317,7 @@ public class CalendarAbstractAction extends ActionSupport
 
     public String getCalendarMonth()
     {
-        return (String)ServletActionContext.getRequest().getAttribute("calendarMonth");
+    	return (String)ServletActionContext.getRequest().getAttribute("calendarMonth");
     }
 
     public String getFreeText()
@@ -338,7 +374,8 @@ public class CalendarAbstractAction extends ActionSupport
     	}
     	catch(Exception e)
     	{
-    		log.error("Could not get infoglue user:", e);
+    		log.error("Could not get infoglue user:" + e.getMessage());
+    		log.warn("Could not get infoglue user:" + e.getMessage(), e);
     		throw e;
     	}
     }
@@ -388,8 +425,8 @@ public class CalendarAbstractAction extends ActionSupport
 		        }
 		        else
 		        {
-		            Set calendars = CalendarController.getController().getCalendarList(this.getInfoGlueRemoteUserRoles(), this.getInfoGlueRemoteUserGroups(), getSession());
-			        log.info("calendars: " + calendars);
+		            Set<org.infoglue.calendar.entities.Calendar> calendars = CalendarController.getController().getCalendarList(this.getInfoGlueRemoteUserRoles(), this.getInfoGlueRemoteUserGroups(), getSession());
+			        log.info("calendars: " + calendars);			        
 			        if(calendars.contains(owningCalendar))
 			            isEventOwner = true;
 		        }
@@ -418,8 +455,8 @@ public class CalendarAbstractAction extends ActionSupport
 	        }
 	        else
 	        {
-	            Set calendars = CalendarController.getController().getCalendarList(this.getInfoGlueRemoteUserRoles(), this.getInfoGlueRemoteUserGroups(), getSession());
-		        
+	            Set<org.infoglue.calendar.entities.Calendar> calendars = CalendarController.getController().getCalendarList(this.getInfoGlueRemoteUserRoles(), this.getInfoGlueRemoteUserGroups(), getSession());
+
 		        if(calendars.contains(calendar))
 		        	isCalendarOwner = true;
 	        }
@@ -457,19 +494,38 @@ public class CalendarAbstractAction extends ActionSupport
     public List getEventCategories(String eventString, EventTypeCategoryAttribute categoryAttribute)
     {        
         Object object = findOnValueStack(eventString);
-        Event event = (Event)object;
-        
-        List categories = new ArrayList();
-        
-        Iterator i = event.getEventCategories().iterator();
-        while(i.hasNext())
+        if(object instanceof EventTiny)
         {
-            EventCategory eventCategory = (EventCategory)i.next();
-            if(eventCategory.getEventTypeCategoryAttribute().getId().equals(categoryAttribute.getId()))
-                categories.add(eventCategory.getCategory());
-        }
+	        EventTiny event = (EventTiny)object;
+	        
+	        List categories = new ArrayList();
+	        
+	        Iterator i = event.getEventCategories().iterator();
+	        while(i.hasNext())
+	        {
+	            EventCategory eventCategory = (EventCategory)i.next();
+	            if(eventCategory.getEventTypeCategoryAttribute().getId().equals(categoryAttribute.getId()))
+	                categories.add(eventCategory.getCategory());
+	        }
 
-        return categories;
+	        return categories;
+        }
+        else
+        {
+        	Event event = (Event)object;
+	        
+	        List categories = new ArrayList();
+	        
+	        Iterator i = event.getEventCategories().iterator();
+	        while(i.hasNext())
+	        {
+	            EventCategory eventCategory = (EventCategory)i.next();
+	            if(eventCategory.getEventTypeCategoryAttribute().getId().equals(categoryAttribute.getId()))
+	                categories.add(eventCategory.getCategory());
+	        }
+
+	        return categories;
+        }
     }
 
     public List getEventCategories(Event event, EventTypeCategoryAttribute categoryAttribute)
@@ -694,6 +750,7 @@ public class CalendarAbstractAction extends ActionSupport
         
         return calendar;
     }
+    
 
     
     public String getVCalendar(Long eventId) throws Exception
@@ -709,6 +766,15 @@ public class CalendarAbstractAction extends ActionSupport
     public String getResourceUrl(Event event, String assetKey) throws Exception
     {
         return ResourceController.getController().getResourceUrl(event, assetKey, getSession());
+    }
+
+    public String getResourceThumbnailUrl(Long resourceId, int width, int height) throws Exception
+    {
+    	return ResourceController.getController().getResourceThumbnailUrl(resourceId, width, height, getSession());
+    }
+    public String getResourceThumbnailUrl(Event event, String assetKey, int width, int height) throws Exception
+    {
+    	return ResourceController.getController().getResourceThumbnailUrl(event, assetKey, width, height, getSession());
     }
 
     public Participant getParticipant(Long participantId) throws Exception
@@ -1035,12 +1101,87 @@ public class CalendarAbstractAction extends ActionSupport
     	
         return masterEventVersion;
     }
-    
-    public EventVersion getEventVersion(String eventString)
-    {
-        Object object = findOnValueStack(eventString);
-        Event event = (Event)object;
         
+    public Object getEventVersion(String eventString)
+    {
+		Timer t = new Timer();
+
+        Object object = findOnValueStack(eventString);
+        
+        if(object instanceof EventTiny)
+        {
+            EventTiny event = (EventTiny)object;
+            
+            if(event == null)
+        		return null;
+
+            EventVersionTiny eventVersion = null;
+
+        	try
+        	{
+        		Long languageId = LanguageController.getController().getLanguageIdForCode(this.getLanguageCode(), getSession());
+
+    	    	Iterator eventVersionsIterator = event.getVersions().iterator();
+    	        while(eventVersionsIterator.hasNext())
+    	        {
+    	        	EventVersionTiny currentEventVersion = (EventVersionTiny)eventVersionsIterator.next();
+    	        	if(currentEventVersion.getLanguageId().equals(languageId))
+    	        	{
+    	        		eventVersion = currentEventVersion;
+    	        		break;
+    	        	}
+    	        }
+    	        
+    	        if(eventVersion == null && event.getVersions().size() > 0)
+    	        	eventVersion = (EventVersionTiny)event.getVersions().toArray()[0];
+        	}
+        	catch(Exception e)
+        	{
+        		log.error("Error when getting event version for event: " + event + ":" + e.getMessage(), e); 
+        	}
+
+            return eventVersion;
+        }
+        else
+        {
+	        Event event = (Event)object;
+	        
+	        if(event == null)
+	    		return null;
+	
+	    	EventVersion eventVersion = null;
+	
+	    	try
+	    	{
+	    		Long languageId = LanguageController.getController().getLanguageIdForCode(this.getLanguageCode(), getSession());
+	
+		    	Iterator eventVersionsIterator = event.getVersions().iterator();
+		        while(eventVersionsIterator.hasNext())
+		        {
+		        	EventVersion currentEventVersion = (EventVersion)eventVersionsIterator.next();
+		        	if(currentEventVersion.getVersionLanguageId().equals(languageId))
+		        	{
+		        		eventVersion = currentEventVersion;
+		        		break;
+		        	}
+		        }
+		        
+		        if(eventVersion == null && event.getVersions().size() > 0)
+		        	eventVersion = (EventVersion)event.getVersions().toArray()[0];
+	    	}
+	    	catch(Exception e)
+	    	{
+	    		log.error("Error when getting event version for event: " + event + ":" + e.getMessage(), e); 
+	    	}
+	    	
+	        return eventVersion;
+        }
+    }
+
+    public EventVersion getEventVersion(Event event)
+    {        
+		Timer t = new Timer();
+		
         if(event == null)
     		return null;
 
@@ -1048,13 +1189,14 @@ public class CalendarAbstractAction extends ActionSupport
 
     	try
     	{
-    		Language language = LanguageController.getController().getLanguageWithCode(this.getLanguageCode(), getSession());
-	    	
+    		Long languageId = LanguageController.getController().getLanguageIdForCode(this.getLanguageCode(), getSession());
+    		//Language language = LanguageController.getController().getLanguageWithCode(this.getLanguageCode(), getSession());
+    		
 	    	Iterator eventVersionsIterator = event.getVersions().iterator();
-	        while(eventVersionsIterator.hasNext())
+            while(eventVersionsIterator.hasNext())
 	        {
 	        	EventVersion currentEventVersion = (EventVersion)eventVersionsIterator.next();
-	        	if(currentEventVersion.getVersionLanguageId().equals(language.getId()))
+	        	if(currentEventVersion.getVersionLanguageId().equals(languageId))
 	        	{
 	        		eventVersion = currentEventVersion;
 	        		break;
@@ -1071,9 +1213,11 @@ public class CalendarAbstractAction extends ActionSupport
     	
         return eventVersion;
     }
-
-    public EventVersion getEventVersion(Event event)
+    
+    public EventVersion getEventVersion(Event event, String languageCode, Session session)
     {        
+		Timer t = new Timer();
+		
         if(event == null)
     		return null;
 
@@ -1081,13 +1225,14 @@ public class CalendarAbstractAction extends ActionSupport
 
     	try
     	{
-    		Language language = LanguageController.getController().getLanguageWithCode(this.getLanguageCode(), getSession());
-	    	
+    		Long languageId = LanguageController.getController().getLanguageIdForCode(languageCode, session);
+    		//Language language = LanguageController.getController().getLanguageWithCode(this.getLanguageCode(), getSession());
+    		
 	    	Iterator eventVersionsIterator = event.getVersions().iterator();
-	        while(eventVersionsIterator.hasNext())
+            while(eventVersionsIterator.hasNext())
 	        {
 	        	EventVersion currentEventVersion = (EventVersion)eventVersionsIterator.next();
-	        	if(currentEventVersion.getVersionLanguageId().equals(language.getId()))
+	        	if(currentEventVersion.getVersionLanguageId().equals(languageId))
 	        	{
 	        		eventVersion = currentEventVersion;
 	        		break;
@@ -1269,16 +1414,20 @@ public class CalendarAbstractAction extends ActionSupport
 	public void disposeSession() throws HibernateException {
 		
 		log.debug("disposing");
-
+		
 		if (getSession()==null) return;
 
 		if (rollBackOnly) {
 			try {
-				log.debug("rolling back");
+				log.debug("Rolling back");
 				if (getTransaction()!=null) getTransaction().rollback();
 			}
+			catch (TransactionException te) {
+			    log.warn("Error getting transaction in rollback", te);
+				throw te;
+			}
 			catch (HibernateException e) {
-			    log.error("error during rollback", e);
+			    log.error("Error during rollback", e);
 				throw e;
 			}
 			finally {
@@ -1341,5 +1490,8 @@ public class CalendarAbstractAction extends ActionSupport
 		return value;
 	}
 
+    public String getAjaxServiceUrl(){
+    	 return (String)ServletActionContext.getRequest().getAttribute("ajaxServiceUrl");
+    }
 }
 

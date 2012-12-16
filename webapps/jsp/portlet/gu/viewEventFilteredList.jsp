@@ -16,7 +16,7 @@
 </ww:else>
 
 <%
-	java.util.Calendar now = java.util.Calendar.getInstance();
+    java.util.Calendar now = java.util.Calendar.getInstance();
 	pageContext.setAttribute("now", now);
 %>
 
@@ -33,10 +33,10 @@
 	</ww:else>
 
 	<ww:iterator value="events" status="rowstatus">
-	
+		
 		<ww:set name="event" value="top"/>
 		<ww:set name="eventVersion" value="this.getEventVersion('#event')"/>
-		<ww:set name="eventVersion" value="this.getEventVersion('#event')" scope="page"/>
+		<ww:set name="eventVersion" value="#eventVersion" scope="page"/>
 		<ww:set name="eventId" value="id" scope="page"/>
 		
 		<portlet:renderURL var="eventDetailUrl">
@@ -52,7 +52,7 @@
 				</ww:iterator>
 			</ww:if>
    		</ww:iterator>
-   		                 
+
 		<!-- Record Start -->
 		<div class="recordLine">
 			<span class="categoryLabelSmall">
@@ -78,6 +78,7 @@
 			<ww:property value="this.getLabel('labels.public.event.klockLabel')"/> <ww:property value="this.formatDate(top.startDateTime.getTime(), #timeFormat)"/>, 
 			</ww:if>
 			<br />
+
 			<span class="calFactLabel"><ww:property value="this.getLabel('labels.public.event.locationLabel')"/>:</span>
 			<ww:if test="#eventVersion.alternativeLocation != null && #eventVersion.alternativeLocation != ''">
 				<ww:property value="#eventVersion.alternativeLocation"/>
@@ -105,6 +106,7 @@
 				</ww:if>
 			</ww:if>
 		</div>
+		
 		<!-- Record End -->
 	</ww:iterator>
 
