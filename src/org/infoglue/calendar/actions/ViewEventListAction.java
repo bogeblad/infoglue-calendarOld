@@ -969,7 +969,6 @@ public class ViewEventListAction extends CalendarAbstractAction
 
 	public void setBaseUrlCalendarCarousel(String baseUrlCalendarCarousel) {
 		this.baseUrlCalendarCarousel = baseUrlCalendarCarousel;
-		System.out.println(baseUrlCalendarCarousel);
 	}
     public List getTopEvents() {
 		return topEvents;

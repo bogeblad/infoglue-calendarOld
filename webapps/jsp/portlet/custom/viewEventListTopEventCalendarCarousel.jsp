@@ -1,4 +1,5 @@
 <!--eri-no-index-->
+<!-- eri-no-follow -->
 <%@ taglib uri="webwork" prefix="ww"%>
 <%@ taglib uri="http://java.sun.com/portlet" prefix="portlet"%>
 <%@ taglib uri="http://java.sun.com/jstl/core" prefix="c"%>
@@ -79,11 +80,10 @@
 				<ww:iterator value="top.event.owningCalendar.eventType.categoryAttributes">
 					<ww:if test="top.name == 'Evenemangstyp' || top.name == 'Eventtyp'">
 						<ww:set name="selectedCategories" value="this.getEventCategories('#topEvent.event', top)"/>
-						<ww:iterator value="#selectedCategories" status="rowstatus"><ww:property value="top.getLocalizedName(#languageCode, 'sv')"/><ww:if test="!#rowstatus.last">,</ww:if></ww:iterator>
+						<ww:iterator value="#selectedCategories" status="rowstatus"><ww:property value="top.getLocalizedName(#languageCode, 'sv')"/><ww:if test="!#rowstatus.last">, </ww:if></ww:iterator>
 					</ww:if>
 		   		</ww:iterator></span>
-		   		<br/>
-				<h2><a href="<ww:property value="#attr.eventDetailUrl"/><c:out value="${delim}"/>eventId=<ww:property value="top.event.id"/>" title="<ww:property value="#topEvent.title"/>"><ww:property value="#topEvent.name" /></a></h2>
+				<a href="<ww:property value="#attr.eventDetailUrl"/><c:out value="${delim}"/>eventId=<ww:property value="top.event.id"/>" title="<ww:property value="#topEvent.title"/>"><ww:property value="#topEvent.name" /></a>
 				<span class="smallfont">
 					<ww:property value="this.formatDate(top.event.startDateTime.getTime(), 'EEEE d MMM ')" /><ww:property value="this.getLabel('labels.public.event.klockLabel')"/>
 					<ww:property value="this.formatDate(top.event.startDateTime.getTime(), 'HH')" />-<ww:property value="this.formatDate(top.event.endDateTime.getTime(), 'HH')" />
@@ -102,4 +102,5 @@
 		%>
 	</ul>
 </div>
+<!-- /eri-no-follow -->
 <!--/eri-no-index-->

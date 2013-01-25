@@ -179,7 +179,7 @@
 				</div>
 				<div class="columnlabelarea">
 					<div class="column_name"><p><ww:property value="this.getLabel('labels.internal.event.name')"/></p></div>
-					<div class="column_date"><p><ww:property value="this.getLabel('labels.internal.event.startDate')"/></p></div>
+					<div class="column_date"><p><ww:property value="this.getLabel('labels.internal.event.externalSearch.startDate')"/></p></div>
 					<div class="clear"></div>
 				</div>
 	

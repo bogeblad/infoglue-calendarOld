@@ -1,4 +1,5 @@
 <!--eri-no-index-->
+<!-- eri-no-follow -->
 <%@page import="org.apache.commons.lang.StringEscapeUtils"%>
 <%@page import="org.infoglue.calendar.entities.Category"%>
 <%@page import="org.infoglue.calendar.actions.CalendarAbstractAction"%>
@@ -14,7 +15,6 @@ org.infoglue.calendar.entities.Language, java.util.List, java.util.Set, java.uti
 <portlet:defineObjects/>
 <ww:set name="eventList" value="events"/>
 <ww:set name="daysEventHash" value="this.getDaysEventHash('#eventList', true)" scope="page"/>
-
 <ww:if test="#attr.eventDetailUrl.indexOf('?') > -1">
 	<c:set var="delim" value="&"/>
 </ww:if>
@@ -138,6 +138,9 @@ Map daysEventHash = (Map)pageContext.getAttribute("daysEventHash");
 	<ww:set name="beginsLabel" value="this.getLabel('labels.public.event.begins')" scope="page"/>
 	<ww:set name="endsLabel" value="this.getLabel('labels.public.event.ends')" scope="page"/>
 	<ww:set name="clockLabel" value="this.getLabel('labels.public.event.klockLabel')" scope="page"/>
+	<ww:set name="cross_close" value="#attr.crossClose" scope="page"/>
+	<ww:set name="cross_close_hover" value="#attr.crossCloseHover" scope="page"/>
+	
 	<%
 	CalendarAbstractAction calendarAbstractAction = (CalendarAbstractAction)pageContext.getAttribute("actionObject");
 	String eventDetailUrl = (String)pageContext.getAttribute("eventDetailUrl");
@@ -146,6 +149,11 @@ Map daysEventHash = (Map)pageContext.getAttribute("daysEventHash");
 	String beginsLabel = (String)pageContext.getAttribute("beginsLabel");
 	String endsLabel = (String)pageContext.getAttribute("endsLabel");
 	String clockLabel = (String)pageContext.getAttribute("clockLabel");
+	String cross_close_Img = (String)pageContext.getAttribute("cross_close");
+	String cross_close_Img_hover = (String)pageContext.getAttribute("cross_close_hover");
+	if(cross_close_Img_hover == null){
+		cross_close_Img_hover = "";
+	}
 	if(weekDaysCalendar != null){
 		out.print("<tr class='GUCalendarCarouselGraphicalTableWeekdays'>");
 		for(int i = 0; i < 7; i++){
@@ -191,6 +199,7 @@ Map daysEventHash = (Map)pageContext.getAttribute("daysEventHash");
 			String todayEvents = "";
 			String shortDescription = "";
 			String headerDate ="";
+			String cross_close = "";
       		for(int j = 0; j < todaysEvents.size(); j++){
       			Event currentEvent = todaysEvents.get(j);
 				pageContext.setAttribute("currentEvent", currentEvent);
@@ -220,14 +229,20 @@ Map daysEventHash = (Map)pageContext.getAttribute("daysEventHash");
                 }
                 endDate = calendarAbstractAction.formatDate(currentEvent.getEndDateTime().getTime(), "HH:mm");
 	           	date = "<span class=\"smallfont\">"+ beginsLabel + " " + clockLabel + " " + startDate + "</span><span class=\"smallfont\">" + endsLabel + " " + clockLabel + " " + endDate + "</span>";
-	    		title = "<h2><a href=\"" + eventDetailUrl + delim + "amp;eventId=" + currentEvent.getId() + "\">"+ StringEscapeUtils.escapeJavaScript(currentEventVersion.getTitle()) +"</a></h2>";
+	    		title = "<a href=\"" + eventDetailUrl + delim + "amp;eventId=" + currentEvent.getId() + "\">"+ StringEscapeUtils.escapeJavaScript(currentEventVersion.getTitle()) +"</a>";
 	    		eventTypes = "<span class=\"smallfont\">" + StringEscapeUtils.escapeJavaScript(eventTypes) + "</span>";
-	    		todayEvents += "<div class=\"eventBox\">" + eventTypes + title + date + "</div>";// + shortDescription;
+	    		todayEvents += "<li class=\"eventBox\">" + eventTypes + title + date + "</li>";// + shortDescription;
 	    		eventTypes = "";
       		}
-      		headerDate =  "<h2 class=\"infoboxHeaderDate\">" + i + " " + vf.formatDate(calendarMonthCalendar.getTime(), locale, "MMMM") + "</h2>";
-      		todayEvents = "textArray[" + i + "] = '"+ headerDate + todayEvents + "';";
-		    rows.append("<a data-id=\"" + i + "\" href=\"" + calendarPageUrl + delim + "amp;startDateTime=" + dateTimeString + delim + "amp;endDateTime=" + dateTimeString +"\" class=\"thelink\"><span class=\"dateNumber\">" + i + "</span></a>");
+      		headerDate =  "<h3 class=\"infoboxHeaderDate\">" + i + " " + vf.formatDate(calendarMonthCalendar.getTime(), locale, "MMMM") + "</h3>";
+      		cross_close = "<div class=\"cross_close\"><img src=\"" + cross_close_Img +"\""+ 
+      				" onmouseout=\"this.src=\\\'" + cross_close_Img + "\\\'\""+
+      				" onmouseup=\"this.src=\\\'" + cross_close_Img + "\\\'\""+
+      				" onmousedown=\"this.src=\\\'" + cross_close_Img_hover + "\\\'\""+
+      				" onmouseover=\"this.src=\\\'" + cross_close_Img_hover + "\\\'\""+
+      			 	" alt=\"\"/></div>";
+      		todayEvents = "textArray[" + i + "] = '"+ cross_close + headerDate + "<ul>" + todayEvents + "</ul>" + "';";
+		    rows.append("<a data-id=\"" + i + "\" href=\"\" class=\"thelink\"><span class=\"dateNumber\">" + i + "</span></a>");
 		    textArrayString += todayEvents ;
 	  	}
 	  	else{
@@ -256,52 +271,48 @@ Map daysEventHash = (Map)pageContext.getAttribute("daysEventHash");
 	%>
 </table>
 <div id="tipbox"></div>
+<div id="tipboxArrow">&diams;</div>
 
 <script type="text/javascript">
 <!--
 	var textArray = new Array();
-	var isOverDatebox = false;
-	var isOverTipbox = false;
 	<% out.print(textArrayString); %>
-	$(".thelink").hoverIntent(function () {
-		/*=====================================================
-		  Make sure the popup doesn't end up below the viewport 
-		  =====================================================*/
+	function closePopup(){
+		$("#tipboxArrow").hide();
+		$("#tipbox").fadeOut(100);
+		$("body").unbind("click");
+	}
+	
+	$(".thelink").click(function(event){
+		event.preventDefault();
+		event.stopPropagation();
 		var position = $(this).position();
-		isOverDatebox = true;
 		$('#tipbox').html(textArray[$(this).attr("data-id")]);
 		var popupHeight = $("#tipbox").height();
 		var windowHeight = $(window).height();
-		if ((position.top - $(window).scrollTop() + popupHeight) + 80 > windowHeight){
-			modY = windowHeight - (position.top - $(window).scrollTop() + popupHeight) - 75;
-			modX = 325;
+		if((position.top - $(window).scrollTop() + popupHeight) + 35 > windowHeight){
+			modY = windowHeight - (position.top - $(window).scrollTop() + popupHeight) - 55;
+			modX = 328;
 		}
 		else{
-			modY = 35;
-			modX = 270;
+			modY = -15;
+			modX = 328;
 		}
 		$("#tipbox").fadeIn(100).css("left", (position.left - modX)).css("top", (position.top + modY));
-	}, function(){
-		isOverDatebox = false;
-		setTimeout("hidePopup()", 400);
+		$("#tipboxArrow").fadeIn(100).css("top", (position.top + 3)).css("left", (position.left - 8));
+		$("body").click(closePopup);
+		$(".cross_close").click(closePopup);
+		$("#tipbox a").click(function(){
+			event.stopPropagation();
+		});
+		$("#tipbox").click(function(){
+			event.stopPropagation();
+		});
+		return false;
 	});
-
-	$('#tipbox').mouseenter(function(){
-		isOverTipbox = true;
-	});
-
-	$('#tipbox').mouseleave(function(){
-		isOverTipbox = false;
-		$('#tipbox').fadeOut(600);
-	});
-	
-	function hidePopup(){
-		if(!isOverTipbox && !isOverDatebox){
-			$('#tipbox').fadeOut(600);
-		}	
-	}
 	-->
 </script>
+<!-- /eri-no-follow -->
 <!--/eri-no-index-->
  
  

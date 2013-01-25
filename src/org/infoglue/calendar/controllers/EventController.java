@@ -1009,6 +1009,33 @@ public class EventController extends BasicController
      */
     
     public List getEventList(String name,
+    		java.util.Calendar startDateTime,
+    		java.util.Calendar endDateTime,
+    		String organizerName,
+    		String lecturer,
+    		String customLocation,
+    		String alternativeLocation,
+    		String contactName,
+    		String contactEmail,
+    		String contactPhone,
+    		String price,
+    		Integer maximumParticipants,
+    		Boolean sortAscending,
+    		Long categoryId,
+    		Long calendarId,
+    		Long locationId,
+    		Session session) throws Exception 
+	{
+    	return getEventList(name, startDateTime, endDateTime, organizerName, lecturer, customLocation, alternativeLocation, contactName, contactEmail,
+    				contactPhone, price, maximumParticipants, sortAscending, categoryId, calendarId, locationId, null, session);
+	}
+    /**
+     * Gets a list of all events matching the arguments given.
+     * @return List of Event
+     * @throws Exception
+     */
+    
+    public List getEventList(String name,
             java.util.Calendar startDateTime,
             java.util.Calendar endDateTime,
         	String organizerName,
@@ -1024,6 +1051,7 @@ public class EventController extends BasicController
             Long categoryId,
             Long calendarId,
             Long locationId,
+            Integer stateId,
             Session session) throws Exception 
     {
         List result = null;
@@ -1074,6 +1102,11 @@ public class EventController extends BasicController
         else
         {
         	criteria.addOrder(Order.desc("startDateTime"));	
+        }
+        
+        if (stateId != null)
+        {
+        	criteria.add(Expression.eq("stateId", stateId));
         }
         
         result = criteria.list();

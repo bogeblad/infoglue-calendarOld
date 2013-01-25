@@ -91,6 +91,7 @@ public class ViewEventSearchAction extends CalendarAbstractAction
     private Boolean sortAscending = new Boolean(true);
     private Integer maximumParticipants = null;
 	private Boolean exportResult = new Boolean(false);
+	private Integer stateId;
     
 	private Calendar startCalendar;
     private Calendar endCalendar;
@@ -150,6 +151,7 @@ public class ViewEventSearchAction extends CalendarAbstractAction
 															        categoryId,
 															        calendarId,
 															        locationId,
+															        stateId,
 															        session);
         
         // should we create result files?
@@ -171,6 +173,7 @@ public class ViewEventSearchAction extends CalendarAbstractAction
     {
     	setExportResult(false);
     	setSortAscending(false);
+    	setStateId(Event.STATE_PUBLISHED);
     	initialize();
     	if (startDateTime != null)
     	{
