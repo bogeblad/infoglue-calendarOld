@@ -85,6 +85,7 @@ public class EntrySearchResultfilesConstructor_TXT {
 	}
 
 	private void printHeadline( StringBuffer sb, String lineSeparator ) {
+		//System.out.println("resultValues:" + resultValues);
 		for( Iterator it = resultValues.iterator(); it.hasNext(); ) {
 			String resultValue = ( String ) it.next();
 			if( resultValue.equalsIgnoreCase("id") ) {

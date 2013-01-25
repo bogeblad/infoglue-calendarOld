@@ -510,6 +510,18 @@
 			<result name="successFilteredGraphicalCalendarGU" type="portletDispatch">
 				<param name="dispatchTo">/jsp/portlet/gu/viewEventFilteredGraphicalCalendar.jsp</param>
 			</result>
+			<result name="successTopEventCalendarCarouselGU" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/gu/viewEventListTopEventCalendarCarousel.jsp</param>
+			</result>
+			<result name="successTopEventCalendarCarouselCustom" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/custom/viewEventListTopEventCalendarCarousel.jsp</param>
+			</result>
+			<result name="successGraphicalCalendarCarouselGU" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/gu/viewEventListGraphicalCalendarCarousel.jsp</param>
+			</result>
+			<result name="successGraphicalCalendarCarouselCustom" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/custom/viewEventListGraphicalCalendarCarousel.jsp</param>
+			</result>
 			<result name="successAggregatedCustom" type="portletDispatch">
 				<param name="dispatchTo">/jsp/portlet/custom/viewEventListAggregated.jsp</param>
 			</result>
@@ -526,7 +538,6 @@
 				<param name="dispatchTo">/jsp/portlet/custom/error.jsp</param>
 			</result>
 		</action>
-		
 		<action name="ViewMyWorkingEventList" class="org.infoglue.calendar.actions.ViewMyWorkingEventListAction">
 			<result name="success" type="portletDispatch">
 				<param name="dispatchTo">/jsp/portlet/viewMyWorkingEventList.jsp</param>
@@ -624,6 +635,12 @@
             <result name="success" type="portletDispatch">
             	<param name="dispatchTo">/jsp/portlet/viewEventSearch.jsp</param>
             </result>
+			<result name="inputExternalBinding" type="portletDispatch">
+            	<param name="dispatchTo">/jsp/portlet/viewExternalBindingEventSearchForm.jsp</param>
+            </result>
+            <result name="successExternalBinding" type="portletDispatch">
+            	<param name="dispatchTo">/jsp/portlet/viewExternalBindingEventSearch.jsp</param>
+            </result>
 			<result name="error" type="portletDispatch">
 				<param name="dispatchTo">/jsp/portlet/error.jsp</param>
 			</result>
@@ -668,19 +685,19 @@
             	<param name="dispatchTo">/jsp/portlet/custom/createEntry.jsp</param>
             </result>
             <result name="success" type="eventProcessed">
-				<param name="viewAction">CreateEntry!receipt.action?eventId=${eventId}&amp;entryId=${newEntry.id}</param>
+				<param name="viewAction">CreateEntry!receipt.action?eventId=${eventId}&amp;entryId=${newEntryId}</param>
 				<param name="parse">true</param>
 			</result>
             <result name="successPublic" type="eventProcessed">
-				<param name="viewAction">CreateEntry!receiptPublic.action?eventId=${eventId}&amp;entryId=${newEntry.id}</param>
+				<param name="viewAction">CreateEntry!receiptPublic.action?eventId=${eventId}&amp;entryId=${newEntryId}</param>
 				<param name="parse">true</param>
 			</result>
             <result name="successPublicGU" type="eventProcessed">
-				<param name="viewAction">CreateEntry!receiptPublicGU.action?eventId=${eventId}&amp;entryId=${newEntry.id}</param>
+				<param name="viewAction">CreateEntry!receiptPublicGU.action?eventId=${eventId}&amp;entryId=${newEntryId}</param>
 				<param name="parse">true</param>
 			</result>
 			<result name="successPublicCustom" type="eventProcessed">
-				<param name="viewAction">CreateEntry!receiptPublicCustom.action?eventId=${eventId}&amp;entryId=${newEntry.id}</param>
+				<param name="viewAction">CreateEntry!receiptPublicCustom.action?eventId=${eventId}&amp;entryId=${newEntryId}</param>
 				<param name="parse">true</param>
 			</result>
             <result name="maximumReached" type="portletDispatch">
@@ -703,6 +720,13 @@
 			</result>		
 			<result name="errorPublicCustom" type="eventProcessed">
 				<param name="viewAction">CreateEntry!inputPublicCustom.action</param>
+			</result>	
+            <result name="errorRegistrationFailed" type="eventProcessed">
+				<param name="viewAction">CreateEntry!receiptFailedRegistration.action?eventId=${eventId}</param>
+				<param name="parse">true</param>
+			</result>
+			<result name="receiptFailedRegistration" type="portletDispatch">
+				<param name="dispatchTo">/jsp/portlet/errorRegistrationFailed.jsp</param>
 			</result>	
             <result name="receipt" type="portletDispatch">
             	<param name="dispatchTo">/jsp/portlet/entryReceipt.jsp</param>

@@ -35,6 +35,9 @@ import org.apache.axis.client.Service;
 import org.apache.axis.encoding.XMLType;
 import org.apache.axis.encoding.ser.ArrayDeserializerFactory;
 import org.apache.axis.encoding.ser.ArraySerializerFactory;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.infoglue.calendar.actions.CalendarAbstractAction;
 import org.infoglue.common.exceptions.SystemException;
 import org.infoglue.common.security.beans.InfoGlueGroupBean;
 import org.infoglue.common.security.beans.InfoGluePrincipalBean;
@@ -47,6 +50,8 @@ import org.infoglue.common.security.beans.InfoGlueRoleBean;
 
 public class WebServiceHelper
 {
+	private static Log logger = LogFactory.getLog(WebServiceHelper.class);
+	
 	private String serviceUrl = "";
 	
 	private boolean isSuccessfull;
@@ -145,7 +150,8 @@ public class WebServiceHelper
 		}
 		catch (Exception e)
 		{
-			e.printStackTrace();
+			logger.error("Error calling webservice: " + e.getMessage());
+			logger.warn("Error calling webservice: " + e.getMessage(), e);
 		}
 		return response;
 	}
@@ -196,7 +202,8 @@ public class WebServiceHelper
 		}
 		catch (Exception e)
 		{
-			e.printStackTrace();
+			logger.error("Error calling webservice: " + e.getMessage());
+			logger.warn("Error calling webservice: " + e.getMessage(), e);
 		}
 		return response;
 	}
@@ -251,7 +258,8 @@ public class WebServiceHelper
 		}
 		catch (Exception e)
 		{
-			e.printStackTrace();
+			logger.error("Error calling webservice: " + e.getMessage());
+			logger.warn("Error calling webservice: " + e.getMessage(), e);
 		}
 		return response;
 	}
@@ -302,7 +310,8 @@ public class WebServiceHelper
 		}
 		catch (Exception e)
 		{
-			e.printStackTrace();
+			logger.error("Error calling webservice: " + e.getMessage());
+			logger.warn("Error calling webservice: " + e.getMessage(), e);			
 		}
 		return response;
 	}
@@ -357,7 +366,8 @@ public class WebServiceHelper
 		}
 		catch (Exception e)
 		{
-			e.printStackTrace();
+			logger.error("Error calling webservice: " + e.getMessage());
+			logger.warn("Error calling webservice: " + e.getMessage(), e);
 		}
 		return response;
 	}
@@ -391,7 +401,8 @@ public class WebServiceHelper
 		{
 			response.put("errorStatus", new Integer(1));
 			response.put("errorMessage", e.getMessage());
-			e.printStackTrace();
+			logger.error("Error calling webservice: " + e.getMessage());
+			logger.warn("Error calling webservice: " + e.getMessage(), e);
 		}
 		return response;
 	}
@@ -425,7 +436,8 @@ public class WebServiceHelper
 		}
 		catch (Exception e)
 		{
-			e.printStackTrace();
+			logger.error("Error calling webservice: " + e.getMessage());
+			logger.warn("Error calling webservice: " + e.getMessage(), e);
 		}
 		
 		return response;
@@ -463,7 +475,8 @@ public class WebServiceHelper
 		{
 			response.put("errorStatus", new Integer(1));
 			response.put("errorMessage", e.getMessage());
-			e.printStackTrace();
+			logger.error("Error calling webservice: " + e.getMessage());
+			logger.warn("Error calling webservice: " + e.getMessage(), e);
 		}
 		
 		return response;

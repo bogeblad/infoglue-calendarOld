@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<!-- org.infoglue.calendar.entities.EventVersion root -->
+	<class
+        name="org.infoglue.calendar.entities.EventVersionTiny"
+        table="Event_Version"
+        dynamic-update="false"
+        dynamic-insert="false"
+        select-before-update="false"
+        optimistic-lock="version"
+    >
+		<id name="id" column="id" type="long" unsaved-value="null">
+            <generator class="native"></generator>
+        </id>
+
+		<property name="name" column="name" type="string"/>
+		<property name="title" column="title" type="string"/>
+		<property name="description" column="description" type="string"/>
+		<property name="customLocation" column="customLocation" type="string"/>
+		<property name="alternativeLocation" column="alternativeLocation" type="string"/>
+		<property name="eventUrl" column="eventUrl" type="string"/>
+
+		<property name="languageId" column="language_id" type="long"/>
+
+        <many-to-one name="event" class="org.infoglue.calendar.entities.Event" cascade="none" outer-join="auto" update="true" insert="true" access="property" column="event_id"/>
+
+	</class>
+</hibernate-mapping>

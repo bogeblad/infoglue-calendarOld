@@ -310,17 +310,18 @@
 		String languageName = ((org.infoglue.calendar.entities.EventVersion)event.getVersions().toArray()[0]).getLanguage().getName();
 		pageContext.setAttribute("languageName", languageName);
 		%>
-
+		
 		<ww:if test="this.getIsEventCreator(event) || this.getIsEventOwner(event) || calendarAdministrator == true">
 
 	  		<input onclick="document.location.href='<c:out value="${uploadFormURL}"/>';" type="button" value="<ww:property value="this.getLabel('labels.internal.event.attachFile')"/>" class="button">
 			<input onclick="document.location.href='<c:out value="${editEventRenderURL}"/>';" type="button" value="<ww:property value="this.getLabel('labels.internal.event.editButton')"/>" class="button">
 			
-			<ww:if test="event.versions.size() > 1">
-				<input onclick="document.deleteVersionLinkForm.submit();" type="button" value="<ww:property value="this.getParameterizedLabel('labels.internal.event.deleteVersionButton', eventVersion.language.name)"/>" class="button"></a>
+			<ww:if test="this.getInfoGluePrincipal().name != 'eventPublisher'">
+				<ww:if test="event.versions.size() > 1">
+					<input onclick="document.deleteVersionLinkForm.submit();" type="button" value="<ww:property value="this.getParameterizedLabel('labels.internal.event.deleteVersionButton', eventVersion.language.name)"/>" class="button"></a>
+				</ww:if>
+				<input onclick="document.deleteLinkForm.submit();" type="button" value="<ww:property value="this.getLabel('labels.internal.event.deleteButton')"/>" class="button"></a>
 			</ww:if>
-			<input onclick="document.deleteLinkForm.submit();" type="button" value="<ww:property value="this.getLabel('labels.internal.event.deleteButton')"/>" class="button"></a>
-		
 			<%
 			Object requestObject = request.getAttribute("javax.portlet.request");
 			javax.portlet.PortletRequest renderRequestIG = (javax.portlet.PortletRequest)requestObject;

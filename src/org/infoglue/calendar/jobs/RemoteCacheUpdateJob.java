@@ -92,7 +92,8 @@ public class RemoteCacheUpdateJob implements Job
 	                if(calendar.getTimeInMillis() <= event.getEndDateTime().getTimeInMillis())
 	                {
 	                    log.info("It was not only recent - it was not expired before...");
-	                    new RemoteCacheUpdater().updateRemoteCaches(event.getOwningCalendar().getId());
+	            		new RemoteCacheUpdater().updateRemoteCaches(event.getCalendars());
+	                    //new RemoteCacheUpdater().updateRemoteCaches(event.getOwningCalendar().getId());
 	                }
 	            }
 	            

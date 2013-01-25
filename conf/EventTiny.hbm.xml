@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<!-- org.infoglue.calendar.entities.EventTiny root -->
+	<class
+        name="org.infoglue.calendar.entities.EventTiny"
+        table="Event"
+        dynamic-update="false"
+        dynamic-insert="false"
+        select-before-update="false"
+        optimistic-lock="version"
+    >
+		<id name="id" column="id" type="long" unsaved-value="null">
+            <generator class="native"></generator>
+        </id>
+
+		<property name="isOrganizedByGU" column="isOrganizedByGU" type="boolean"/>
+		<property name="lastRegistrationDateTime" column="lastRegistrationDateTime" type="calendar"/>
+		<property name="endDateTime" column="endDateTime" type="calendar"/>
+		<property name="isInternal" column="isInternal" type="boolean"/>
+		<property name="startDateTime" column="startDateTime" type="calendar"/>
+		<property name="maximumParticipants" column="maximumParticipants" type="integer"/>
+		<property name="stateId" column="stateId" type="integer"/>
+		<property name="creator" column="creator" type="string"/>
+		<property name="entryFormId" column="entryFormId" type="long"/>
+        <property name="contactEmail" column="contactEmail" type="string"/>
+		<property name="contactName" column="contactName" type="string"/>
+		<property name="contactPhone" column="contactPhone" type="string"/>
+		<property name="price" column="price" type="string"/>
+		
+		<property name="name" column="name" type="string"/>
+		<property name="lecturer" column="lecturer" type="string"/>
+		<property name="organizerName" column="organizerName" type="string"/>
+		<property name="customLocation" column="customLocation" type="string"/>
+		<property name="alternativeLocation" column="alternativeLocation" type="string"/>
+		<property name="eventUrl" column="eventUrl" type="string"/>		
+		
+        <set name="versions" table="Event_Version" lazy="true" inverse="false" cascade="none" order-by="language_id" sort="unsorted" batch-size="40">
+	    	<key column="event_id"></key>
+			<one-to-many class="org.infoglue.calendar.entities.EventVersionTiny"/>
+        </set>
+
+        <set name="calendars" table="Event_Calendar" lazy="true" inverse="false" cascade="none" sort="unsorted" batch-size="40">
+	    	<key column="event_id"></key>
+        	<many-to-many class="org.infoglue.calendar.entities.Calendar" column="calendar_id" outer-join="auto" />
+        </set>
+
+        <set name="locations" table="Event_Location" lazy="true" inverse="false" cascade="none" sort="unsorted" batch-size="40">
+	    	<key column="event_id"></key>
+        	<many-to-many class="org.infoglue.calendar.entities.Location" column="location_id" outer-join="auto" />
+        </set>
+
+        <set name="participants" lazy="true" inverse="false" cascade="none" sort="unsorted" batch-size="40">
+            <key column="event_id"></key>
+            <one-to-many class="org.infoglue.calendar.entities.Participant"/>
+        </set>
+
+        <set name="resources" lazy="true" inverse="false" cascade="none" sort="unsorted" batch-size="40">
+        	<key column="event_id"></key>
+            <one-to-many class="org.infoglue.calendar.entities.Resource"/>
+        </set>
+
+        <set name="eventCategories" table="Event_Category" lazy="true" inverse="false" cascade="none" sort="unsorted" batch-size="40">
+        	<key column="event_id"></key>
+            <one-to-many class="org.infoglue.calendar.entities.EventCategory"/>
+        </set>
+
+        <set name="entries" lazy="true" inverse="false" cascade="none" sort="unsorted" batch-size="40">
+        	<key column="event_id"></key>
+            <one-to-many class="org.infoglue.calendar.entities.Entry"/>
+        </set>
+
+        <many-to-one name="owningCalendar" class="org.infoglue.calendar.entities.Calendar" lazy="proxy" cascade="none" outer-join="auto" update="true" insert="true" access="property" column="calendar_id"/>
+	</class>
+</hibernate-mapping>

@@ -153,8 +153,15 @@ public class ViewEventAction extends CalendarAbstractAction
 	            this.categories = CategoryController.getController().getRootCategoryList(session);
 	            //this.infogluePrincipals = UserControllerProxy.getController().getAllUsers();
 	            this.entryFormEventTypes = EventTypeController.getController().getEventTypeList(EventType.ENTRY_DEFINITION, session);
-	            this.entryFormEventType = EventTypeController.getController().getEventType(event.getEntryFormId(), session);
-	            
+	            if(event.getEntryFormId() != null)
+	            	this.entryFormEventType = EventTypeController.getController().getEventType(event.getEntryFormId(), session);
+	            else
+	            {
+	            	List eventTypeList = EventTypeController.getController().getEventTypeList(session);
+	            	if(eventTypeList.size() > 0)
+	            		this.entryFormEventType = (EventType)eventTypeList.get(0);
+	            }
+	            	
 	            EventType eventType = this.event.getOwningCalendar().getEventType();
 	    		if(eventType != null)
 	    			this.attributes = ContentTypeDefinitionController.getController().getContentTypeAttributes(eventType.getSchemaValue());

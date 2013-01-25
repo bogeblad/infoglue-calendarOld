@@ -232,7 +232,7 @@ public class UpdateEventAction extends CalendarUploadAbstractAction
             
             log.info("SystemUserName:" + this.participantUserName);
             log.info("name:" + this.name);
-            
+            System.out.println("Title: " + title);
             EventController.getController().updateEvent(
                     eventId, 
                     versionLanguageId,

@@ -109,6 +109,5 @@
 	<classpathentry kind="lib" path="lib/xerces-2.6.2.jar"/>
 	<classpathentry kind="lib" path="lib/xml-apis.jar"/>
 	<classpathentry kind="lib" path="lib/xwork.jar"/>
-	<classpathentry kind="lib" path="/infoglue/lib/build/Filters.jar"/>
 	<classpathentry kind="output" path="build"/>
 </classpath>

@@ -29,7 +29,6 @@ urlBase=/infoglueCalendar/
 calendarsPath=c:/Program Files/Apache Software Foundation/Tomcat 5.5/webapps/infoglueCalendar/calendars/
 digitalAssetPath=c:/Program Files/Apache Software Foundation/Tomcat 5.5/webapps/infoglueCalendar/digitalAssets/
 decodeCharSet=UTF-8
-AssetUploadMaxFileSize=5000
 useEventPublishing=true
 useEntryLimitation=true
 useGlobalEventNotification=true
