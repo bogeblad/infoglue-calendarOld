@@ -468,6 +468,16 @@ public class ViewEventSearchAction extends CalendarAbstractAction
 	{
 		return searchResultFiles;
 	}
+    
+    public void setStateId(Integer stateId)
+    {
+    	this.stateId = stateId;
+    }
+    
+    public Integer getStateId()
+    {
+    	return this.stateId;
+    }
 
 }
 

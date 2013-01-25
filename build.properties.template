@@ -22,7 +22,7 @@ hibernate.dbcp.validationQuery=select 1 from calendar
 ################################
 #Properties for the calendar
 ################################
-notificationUrl.0=http://localhost:8080/infoglueDeliverWorking/ViewApplicationState!clearCache.action?cacheName=pageCache
+notificationUrl.0=http://localhost:8080/infoglueCMS
 
 #WEB-SPECIFIC SETTINGS (USED TO WRITE CALENDARS ETC)
 urlBase=/infoglueCalendar/

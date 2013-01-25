@@ -139,6 +139,7 @@ Map daysEventHash = (Map)pageContext.getAttribute("daysEventHash");
 	<ww:set name="endsLabel" value="this.getLabel('labels.public.event.ends')" scope="page"/>
 	<ww:set name="clockLabel" value="this.getLabel('labels.public.event.klockLabel')" scope="page"/>
 	<ww:set name="cross_close" value="#attr.crossClose" scope="page"/>
+	<ww:set name="cross_close_hover" value="#attr.crossCloseHover" scope="page"/>
 	
 	<%
 	CalendarAbstractAction calendarAbstractAction = (CalendarAbstractAction)pageContext.getAttribute("actionObject");
@@ -149,6 +150,10 @@ Map daysEventHash = (Map)pageContext.getAttribute("daysEventHash");
 	String endsLabel = (String)pageContext.getAttribute("endsLabel");
 	String clockLabel = (String)pageContext.getAttribute("clockLabel");
 	String cross_close_Img = (String)pageContext.getAttribute("cross_close");
+	String cross_close_Img_hover = (String)pageContext.getAttribute("cross_close_hover");
+	if(cross_close_Img_hover == null){
+		cross_close_Img_hover = "";
+	}
 	if(weekDaysCalendar != null){
 		out.print("<tr class='GUCalendarCarouselGraphicalTableWeekdays'>");
 		for(int i = 0; i < 7; i++){
@@ -229,8 +234,13 @@ Map daysEventHash = (Map)pageContext.getAttribute("daysEventHash");
 	    		todayEvents += "<li class=\"eventBox\">" + eventTypes + title + date + "</li>";// + shortDescription;
 	    		eventTypes = "";
       		}
-      		headerDate =  "<h2 class=\"infoboxHeaderDate\">" + i + " " + vf.formatDate(calendarMonthCalendar.getTime(), locale, "MMMM") + "</h2>";
-      		cross_close = "<div class =\"cross_close\"><img src=\"" + cross_close_Img + " \" alt=\"\"></div>";
+      		headerDate =  "<h3 class=\"infoboxHeaderDate\">" + i + " " + vf.formatDate(calendarMonthCalendar.getTime(), locale, "MMMM") + "</h3>";
+      		cross_close = "<div class=\"cross_close\"><img src=\"" + cross_close_Img +"\""+ 
+      				" onmouseout=\"this.src=\\\'" + cross_close_Img + "\\\'\""+
+      				" onmouseup=\"this.src=\\\'" + cross_close_Img + "\\\'\""+
+      				" onmousedown=\"this.src=\\\'" + cross_close_Img_hover + "\\\'\""+
+      				" onmouseover=\"this.src=\\\'" + cross_close_Img_hover + "\\\'\""+
+      			 	" alt=\"\"/></div>";
       		todayEvents = "textArray[" + i + "] = '"+ cross_close + headerDate + "<ul>" + todayEvents + "</ul>" + "';";
 		    rows.append("<a data-id=\"" + i + "\" href=\"\" class=\"thelink\"><span class=\"dateNumber\">" + i + "</span></a>");
 		    textArrayString += todayEvents ;
@@ -260,37 +270,36 @@ Map daysEventHash = (Map)pageContext.getAttribute("daysEventHash");
   		out.print(rows.toString().replaceAll("<tr></tr>", ""));
 	%>
 </table>
-<div id="tipbox">
-
-
-</div>
+<div id="tipbox"></div>
+<div id="tipboxArrow">&diams;</div>
 
 <script type="text/javascript">
 <!--
 	var textArray = new Array();
 	<% out.print(textArrayString); %>
 	function closePopup(){
+		$("#tipboxArrow").hide();
 		$("#tipbox").fadeOut(100);
 		$("body").unbind("click");
-		console.log("klickelick");
 	}
 	
-	$(".thelink").click(function(){
+	$(".thelink").click(function(event){
 		event.preventDefault();
 		event.stopPropagation();
 		var position = $(this).position();
 		$('#tipbox').html(textArray[$(this).attr("data-id")]);
 		var popupHeight = $("#tipbox").height();
 		var windowHeight = $(window).height();
-		if ((position.top - $(window).scrollTop() + popupHeight) + 80 > windowHeight){
-			modY = windowHeight - (position.top - $(window).scrollTop() + popupHeight) - 75;
-			modX = 325;
+		if((position.top - $(window).scrollTop() + popupHeight) + 35 > windowHeight){
+			modY = windowHeight - (position.top - $(window).scrollTop() + popupHeight) - 55;
+			modX = 328;
 		}
 		else{
-			modY = 35;
-			modX = 270;
+			modY = -15;
+			modX = 328;
 		}
 		$("#tipbox").fadeIn(100).css("left", (position.left - modX)).css("top", (position.top + modY));
+		$("#tipboxArrow").fadeIn(100).css("top", (position.top + 3)).css("left", (position.left - 8));
 		$("body").click(closePopup);
 		$(".cross_close").click(closePopup);
 		$("#tipbox a").click(function(){
@@ -301,46 +310,6 @@ Map daysEventHash = (Map)pageContext.getAttribute("daysEventHash");
 		});
 		return false;
 	});
-	
-	
-/*	$(".thelink").hoverIntent(function () {*/
-		/*=====================================================
-		  Make sure the popup doesn't end up below the viewport 
-		  =====================================================*/
-/*		var position = $(this).position();
-		isOverDatebox = true;
-		$('#tipbox').html(textArray[$(this).attr("data-id")]);
-		var popupHeight = $("#tipbox").height();
-		var windowHeight = $(window).height();
-		if ((position.top - $(window).scrollTop() + popupHeight) + 80 > windowHeight){
-			modY = windowHeight - (position.top - $(window).scrollTop() + popupHeight) - 75;
-			modX = 325;
-		}
-		else{
-			modY = 35;
-			modX = 270;
-		}
-		$("#tipbox").fadeIn(100).css("left", (position.left - modX)).css("top", (position.top + modY));
-	}, function(){
-		isOverDatebox = false;
-		setTimeout("hidePopup()", 400);
-	});
-
-	$('#tipbox').mouseenter(function(){
-		isOverTipbox = true;
-	});
-
-	$('#tipbox').mouseleave(function(){
-		isOverTipbox = false;
-		$('#tipbox').fadeOut(600);
-	});
-	
-	function hidePopup(){
-		if(!isOverTipbox && !isOverDatebox){
-			$('#tipbox').fadeOut(600);
-		}	
-	}
-*/
 	-->
 </script>
 <!-- /eri-no-follow -->
