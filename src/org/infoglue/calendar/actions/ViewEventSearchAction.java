@@ -23,14 +23,18 @@
 
 package org.infoglue.calendar.actions;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -58,6 +62,7 @@ import org.infoglue.common.util.PropertyHelper;
 
 import com.opensymphony.webwork.ServletActionContext;
 import com.opensymphony.xwork.Action;
+import com.opensymphony.xwork.ActionContext;
 
 /**
  * This action represents a Location Administration screen.
@@ -86,6 +91,7 @@ public class ViewEventSearchAction extends CalendarAbstractAction
     private Boolean sortAscending = new Boolean(true);
     private Integer maximumParticipants = null;
 	private Boolean exportResult = new Boolean(false);
+	private Integer stateId;
     
 	private Calendar startCalendar;
     private Calendar endCalendar;
@@ -99,7 +105,7 @@ public class ViewEventSearchAction extends CalendarAbstractAction
     private Set categoriesList;
     private Set calendarList;
     private List locationList;
-	private List resultValues = new LinkedList(); 
+	private List resultValues = new LinkedList();
 	private Map searchResultFiles;
 	
 	private void initialize() throws Exception
@@ -145,6 +151,7 @@ public class ViewEventSearchAction extends CalendarAbstractAction
 															        categoryId,
 															        calendarId,
 															        locationId,
+															        stateId,
 															        session);
         
         // should we create result files?
@@ -160,7 +167,48 @@ public class ViewEventSearchAction extends CalendarAbstractAction
         }
         
         return Action.SUCCESS;
-    } 
+    }
+    
+    public String doExternalBindingSearch() throws Exception
+    {
+    	setExportResult(false);
+    	setSortAscending(false);
+    	setStateId(Event.STATE_PUBLISHED);
+    	initialize();
+    	if (startDateTime != null)
+    	{
+    		execute();
+    		if (this.events != null)
+    		{
+    			log.info("Filtering event results. We only want one post even if there are more versions...");
+	    		// Remove duplicates
+	    		HashSet<Long> currentIds = new HashSet<Long>();
+	    		Iterator<Event> eventIterator = this.events.iterator();
+	        	while (eventIterator.hasNext())
+				{
+					Event event = (Event) eventIterator.next();
+					if (!currentIds.add(event.getId())) // if the id already exists
+					{
+						log.debug("Found duplicate event: " + event.getId());
+						eventIterator.remove();
+					}
+				}
+    		}
+    	}
+    	else
+    	{
+    		SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+    		Calendar calendar = Calendar.getInstance();
+    		startDateTime = dateFormatter.format(calendar.getTime());
+    		calendar.roll(Calendar.WEEK_OF_YEAR, 1);
+    		endDateTime = dateFormatter.format(calendar.getTime());
+
+    		startTime = "00:00";
+    		endTime = "23:59";
+    	}
+
+    	return "successExternalBinding";
+    }
 
     /**
      * This is the entry point for the search form.
@@ -171,14 +219,13 @@ public class ViewEventSearchAction extends CalendarAbstractAction
         initialize();
 
         return Action.INPUT;
-    } 
+    }
 
-    
     public List getEvents()
     {
         return events;
     }
-    
+
     public String getContactEmail()
     {
         return contactEmail;
@@ -421,6 +468,16 @@ public class ViewEventSearchAction extends CalendarAbstractAction
 	{
 		return searchResultFiles;
 	}
+    
+    public void setStateId(Integer stateId)
+    {
+    	this.stateId = stateId;
+    }
+    
+    public Integer getStateId()
+    {
+    	return this.stateId;
+    }
 
 }
 

@@ -22,14 +22,13 @@ hibernate.dbcp.validationQuery=select 1 from calendar
 ################################
 #Properties for the calendar
 ################################
-notificationUrl.0=http://localhost:8080/infoglueDeliverWorking/ViewApplicationState!clearCache.action?cacheName=pageCache
+notificationUrl.0=http://localhost:8080/infoglueCMS
 
 #WEB-SPECIFIC SETTINGS (USED TO WRITE CALENDARS ETC)
 urlBase=/infoglueCalendar/
 calendarsPath=c:/Program Files/Apache Software Foundation/Tomcat 5.5/webapps/infoglueCalendar/calendars/
 digitalAssetPath=c:/Program Files/Apache Software Foundation/Tomcat 5.5/webapps/infoglueCalendar/digitalAssets/
 decodeCharSet=UTF-8
-AssetUploadMaxFileSize=5000
 useEventPublishing=true
 useEntryLimitation=true
 useGlobalEventNotification=true

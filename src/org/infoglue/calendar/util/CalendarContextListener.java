@@ -28,6 +28,7 @@ import javax.servlet.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.infoglue.calendar.actions.ViewApplicationStateAction;
+import org.infoglue.common.util.InfoglueInstanceMonitor;
 import org.infoglue.common.util.PropertyHelper;
 
 import java.io.File;
@@ -58,6 +59,7 @@ public final class CalendarContextListener implements ServletContextListener
 							
 			PropertyHelper.setProperty("contextRootPath", contextRootPath); 			
 
+			InfoglueInstanceMonitor.getInstance();
 			//CmsPropertyHandler.setApplicationName("application");
 
 			//InfoGlueAuthenticationFilter.initializeProperties();

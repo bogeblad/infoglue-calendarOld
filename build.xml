@@ -7,6 +7,7 @@
     <!-- Give user a chance to override without editing this file 
          (and without typing -D each time they invoke a target) -->    
 
+	<property file="${local.buildfile}" />
     <property file="${user.home}/build.properties" />
     <property file="${user.home}/.build.properties" />
     <property file="build.properties" />
@@ -60,6 +61,7 @@
 	* The master filterset, created from build.properties
 	-->
 	<filterset id="project.filters">
+		<filtersfile file="${local.buildfile}"/>
 		<filtersfile file="build.properties"/>
 	</filterset>
 

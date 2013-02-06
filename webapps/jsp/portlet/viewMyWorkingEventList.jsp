@@ -64,7 +64,7 @@
 	<ww:set name="eventVersion" value="this.getMasterEventVersion('#event')" scope="page"/>
 	<ww:set name="eventId" value="id" scope="page"/>
 	<ww:set name="name" value="name" scope="page"/>
-
+	
 	<portlet:renderURL var="eventUrl">
 		<portlet:param name="action" value="ViewEvent"/>
 		<portlet:param name="eventId" value='<%= pageContext.getAttribute("eventId").toString() %>'/>
@@ -104,8 +104,10 @@
 	   		<p style="white-space: nowrap;"><ww:property value="this.formatDate(startDateTime.time, 'yyyy-MM-dd')"/></p>
 	   	</div>
 	   	<div class="columnEnd">
+	   		<ww:if test="this.getInfoGluePrincipal().name != 'eventPublisher'">
 	   		<a href="javascript:submitDelete('<c:out value="${deleteUrl}"/>', 'Är du säker på att du vill radera &quot;<ww:property value="#eventVersion.name"/>&quot;');" title="Radera '<ww:property value="#eventVersion.name"/>'" class="delete"></a>
 	   	   	<a href="<c:out value="${eventUrl}"/>" title="Redigera '<ww:property value="#eventVersion.name"/>'" class="edit"></a>
+	   	   	</ww:if>
 	   	</div>
 	   	<div class="clear"></div>
 	</div>

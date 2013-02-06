@@ -1,6 +1,6 @@
 /* ===============================================================================
 *
-* Part of the InfoGlue Content Management Platform (www.infoglue.org)
+	* Part of the InfoGlue Content Management Platform (www.infoglue.org)
 *
 * ===============================================================================
 *
@@ -41,10 +41,14 @@ import org.infoglue.calendar.controllers.EventTypeController;
 import org.infoglue.calendar.entities.Entry;
 import org.infoglue.calendar.entities.Event;
 import org.infoglue.calendar.entities.EventType;
+import org.infoglue.common.exceptions.SystemException;
 import org.infoglue.common.security.beans.InfoGluePrincipalBean;
 import org.infoglue.common.util.ConstraintExceptionBuffer;
+import org.infoglue.common.util.HttpUtilities;
+import org.infoglue.common.util.PropertyHelper;
 import org.infoglue.common.util.VelocityTemplateProcessor;
 import org.infoglue.common.util.dom.DOMBuilder;
+import org.infoglue.common.util.mail.MailServiceFactory;
 
 import com.opensymphony.webwork.ServletActionContext;
 import com.opensymphony.xwork.Action;
@@ -72,6 +76,7 @@ public class CreateEntryAction extends CalendarAbstractAction
     private String phone;
     private String fax;
     private String message;
+    private String attributesString;
     
     private String captcha;
     private String captchaTextVariableName;
@@ -82,12 +87,13 @@ public class CreateEntryAction extends CalendarAbstractAction
     
     private Event event;
     private Entry newEntry;
+    private Long newEntryId;
     private Entry entry;
     
     private List attributes;
     
     private boolean isReserve = false;
-
+    private String newEntryDataAsQueryString = null;
     
     /**
      * This is the entry point for the main listing.
@@ -185,46 +191,123 @@ public class CreateEntryAction extends CalendarAbstractAction
             
             validateInput(this, ceb, isCaptchaOk);
 
-	        newEntry = EntryController.getController().createEntry(firstName, 
-	                									lastName, 
-	                									email, 
-	                									organisation,
-	                									address,
-	                									zipcode,
-	                									city,
-	                									phone,
-	                									fax,
-	                									message,
-	                									xml,
-	                									eventId,
-	                									getSession());
-	        
-	        EntryController.getController().mailVerification(newEntry, this.getLocale(), isReserve, getSession());
-	        
-	        InfoGluePrincipalBean principalBean = null;
-	        try
-	        {
-	        	principalBean = this.getInfoGluePrincipal();
-	        }
-	        catch(Exception e)
-	        {
-	        	System.out.println("Problem getting current principal - falling back:" + e.getMessage());
+            Map<String,String> arguments = new HashMap<String,String>();
+            arguments.put("firstName", "" + firstName);
+            arguments.put("lastName", "" + lastName);
+            arguments.put("email", "" + email);
+            arguments.put("organisation", "" + organisation);
+            arguments.put("address", "" + address);
+            arguments.put("zipcode", "" + zipcode);
+            arguments.put("city", "" + city);
+            arguments.put("phone", "" + phone);
+            arguments.put("fax", "" + fax);
+            arguments.put("message", "" + message);
+            arguments.put("xml", "" + xml);
+            arguments.put("eventId", "" + eventId);
+            arguments.put("languageCode", "" + this.getLocale());
+            
+            String eventEntryRESTService = PropertyHelper.getProperty("notificationUrl.eventEntryRESTService");
+            System.out.println("eventEntryRESTService:" + eventEntryRESTService);
+            
+            if(eventEntryRESTService != null && eventEntryRESTService.equalsIgnoreCase("") && eventEntryRESTService.indexOf("@notificationUrl.eventEntryRESTService@") == -1)
+            {
+	            String response = null;
+	            try
+	            {
+	            	response = HttpUtilities.postToUrl(eventEntryRESTService, arguments, 3000);
+	            }
+	            catch (Exception e) 
+	            {
+	            	
+	    			try
+	    			{
+	    		        String contentType = PropertyHelper.getProperty("mail.contentType");
+	    		        if(contentType == null || contentType.length() == 0)
+	    		            contentType = "text/html";
+	
+	    				String systemEmailSender = PropertyHelper.getProperty("systemEmailSender");
+	    				if(systemEmailSender == null || systemEmailSender.equalsIgnoreCase(""))
+	    					systemEmailSender = "infoglueCalendar@" + PropertyHelper.getProperty("mail.smtp.host");
+	
+	    				String warningEmailReceiver = PropertyHelper.getProperty("warningEmailReceiver");
+	    				if(warningEmailReceiver != null && !warningEmailReceiver.equalsIgnoreCase(""))
+	    				{
+	    					MailServiceFactory.getService().send(systemEmailSender, warningEmailReceiver, null, "Could not reach event registration service", "<div>Error reported trying to reach:<br/>" + eventEntryRESTService + ": " + e.getMessage() + "</div>", contentType, "UTF-8", null);
+	    				}
+	    			}
+	    			catch(Exception e2)
+	    			{
+	    				log.error("The warning was not sent. Reason:" + e2.getMessage());
+	    			}
+	
+	            	log.error("Problem reaching [" + eventEntryRESTService + "]: " + e.getMessage());
+				}
+	            
+	            //System.out.println("response:" + response);
+	            if(response == null || (response.indexOf("OK") == -1 || response.indexOf("entryId") == -1))
+	            { 
+	            	log.error("Failed to create entry in server:" + response.trim());
+	            	throw new SystemException("Failed to create entry in server");
+	            }
+	            
+	            System.out.println("response:" + response);
+	            String entryIdString = response.substring(response.indexOf("entryId=") + 8);
+	            entryIdString = entryIdString.substring(0,response.indexOf(" "));
+	            System.out.println("entryIdString:" + entryIdString);
+	            
+	            this.newEntryId = Long.parseLong(entryIdString);
+	            arguments.put("id", "" + this.newEntryId);
+	            
+	            ServletActionContext.getRequest().getSession().setAttribute(""+this.newEntryId, arguments);
+            }
+            else
+            {
+		        newEntry = EntryController.getController().createEntry(firstName, 
+		                									lastName, 
+		                									email, 
+		                									organisation,
+		                									address,
+		                									zipcode,
+		                									city,
+		                									phone,
+		                									fax,
+		                									message,
+		                									xml,
+		                									eventId,
+		                									getSession());
+		      
+	            this.newEntryId = newEntry.getId();
+	            arguments.put("id", "" + newEntry.getId());
+	            
+	            ServletActionContext.getRequest().getSession().setAttribute(""+this.newEntryId, arguments);
+
+		        EntryController.getController().mailVerification(newEntry, this.getLocale(), isReserve, getSession());
+		        
+		        InfoGluePrincipalBean principalBean = null;
 		        try
 		        {
-		        	principalBean = new InfoGluePrincipalBean();
-		        	principalBean.setDisplayName("Anonymous");
-		        	principalBean.setEmail(email);
-		        	principalBean.setName("anonymous");
-		        	principalBean.setFirstName("Anomymous");
-		        	principalBean.setLastName("User");
+		        	principalBean = this.getInfoGluePrincipal();
 		        }
-		        catch (Exception e2) 
+		        catch(Exception e)
 		        {
-		        	System.out.println("Problem getting fallback principal - falling back:" + e2.getMessage());
-				}
-	        }
-	        EntryController.getController().notifyEventOwner(newEntry, this.getLocale(), principalBean, getSession());
-
+		        	System.out.println("Problem getting current principal - falling back:" + e.getMessage());
+			        try
+			        {
+			        	principalBean = new InfoGluePrincipalBean();
+			        	principalBean.setDisplayName("Anonymous");
+			        	principalBean.setEmail(email);
+			        	principalBean.setName("anonymous");
+			        	principalBean.setFirstName("Anomymous");
+			        	principalBean.setLastName("User");
+			        }
+			        catch (Exception e2) 
+			        {
+			        	System.out.println("Problem getting fallback principal - falling back:" + e2.getMessage());
+					}
+		        }
+		        EntryController.getController().notifyEventOwner(newEntry, this.getLocale(), principalBean, getSession());
+			}
+                        
 	        String presentationTemplate = getPresentationTemplate();
 	        log.info("presentationTemplate:" + presentationTemplate);
 	        if(presentationTemplate != null && !presentationTemplate.equals(""))
@@ -243,10 +326,17 @@ public class CreateEntryAction extends CalendarAbstractAction
         }
         catch(ValidationException e)
         {
+        	//e.printStackTrace();
             return Action.ERROR;            
+        }
+        catch(SystemException se)
+        {
+        	//se.printStackTrace();
+            throw se;
         }
         catch(Exception e)
         {
+        	//e.printStackTrace();
             throw e;
         }
 
@@ -275,6 +365,10 @@ public class CreateEntryAction extends CalendarAbstractAction
             validateInput(this);
 
             this.execute();
+        }
+        catch(SystemException se)
+        {
+        	return "errorRegistrationFailed";
         }
         catch(ValidationException e)
         {
@@ -306,6 +400,10 @@ public class CreateEntryAction extends CalendarAbstractAction
 
             this.execute();
         }
+        catch(SystemException se)
+        {
+        	return "errorRegistrationFailed";
+        }
         catch(ValidationException e)
         {
             return Action.ERROR + "PublicGU";            
@@ -335,6 +433,10 @@ public class CreateEntryAction extends CalendarAbstractAction
             validateInput(this);
 
             this.execute();
+        }
+        catch(SystemException se)
+        {
+        	return "errorRegistrationFailed";
         }
         catch(ValidationException e)
         {
@@ -496,12 +598,33 @@ public class CreateEntryAction extends CalendarAbstractAction
 
     public String receipt() throws Exception 
     {
-        String requestEntryId = ServletActionContext.getRequest().getParameter("entryId");
+    	System.out.println("receipt");
+
+    	String requestEntryId = ServletActionContext.getRequest().getParameter("entryId");
         if(this.entryId == null && requestEntryId != null && !requestEntryId.equalsIgnoreCase(""))
             entryId = new Long(requestEntryId);
         
         event = EventController.getController().getEvent(eventId, getSession());
-        entry = EntryController.getController().getEntry(entryId, this.getSession());
+        //entry = EntryController.getController().getEntry(entryId, this.getSession());
+
+        Map attributes = (Map)ServletActionContext.getRequest().getSession().getAttribute(""+entryId);
+        System.out.println("attributes:" + attributes);
+
+        entry = new Entry();
+        entry.setId(entryId);
+        entry.setAddress(""+attributes.get("address"));
+        entry.setCity(""+attributes.get("city"));
+        entry.setEmail(""+attributes.get("email"));
+        entry.setEvent(event);
+        entry.setFax(""+attributes.get("fax"));
+        entry.setFirstName(""+attributes.get("firstName"));
+        entry.setLastName(""+attributes.get("lastName"));
+        entry.setMessage(""+attributes.get("message"));
+        entry.setOrganisation(""+attributes.get("organisation"));
+        entry.setPhone(""+attributes.get("phone"));
+        entry.setZipcode(""+attributes.get("zipcode"));
+        entry.setAttributes(""+attributes.get("attributesString"));
+
         
         int numberOfExistingEntries = event.getEntries().size();
         //if(numberOfExistingEntries > event.getMaximumParticipants())
@@ -513,12 +636,32 @@ public class CreateEntryAction extends CalendarAbstractAction
 
     public String receiptPublic() throws Exception 
     {
+    	System.out.println("receiptPublic");
+
         String requestEntryId = ServletActionContext.getRequest().getParameter("entryId");
         if(this.entryId == null && requestEntryId != null && !requestEntryId.equalsIgnoreCase(""))
             entryId = new Long(requestEntryId);
         
         event = EventController.getController().getEvent(eventId, getSession());
-        entry = EntryController.getController().getEntry(entryId, this.getSession());
+        //entry = EntryController.getController().getEntry(entryId, this.getSession());
+
+        Map attributes = (Map)ServletActionContext.getRequest().getSession().getAttribute(""+entryId);
+        System.out.println("attributes:" + attributes);
+
+        entry = new Entry();
+        entry.setId(entryId);
+        entry.setAddress(""+attributes.get("address"));
+        entry.setCity(""+attributes.get("city"));
+        entry.setEmail(""+attributes.get("email"));
+        entry.setEvent(event);
+        entry.setFax(""+attributes.get("fax"));
+        entry.setFirstName(""+attributes.get("firstName"));
+        entry.setLastName(""+attributes.get("lastName"));
+        entry.setMessage(""+attributes.get("message"));
+        entry.setOrganisation(""+attributes.get("organisation"));
+        entry.setPhone(""+attributes.get("phone"));
+        entry.setZipcode(""+attributes.get("zipcode"));
+        entry.setAttributes(""+attributes.get("attributesString"));
 
         int numberOfExistingEntries = event.getEntries().size();
         //if(numberOfExistingEntries > event.getMaximumParticipants())
@@ -548,6 +691,8 @@ public class CreateEntryAction extends CalendarAbstractAction
 
     public String receiptPublicGU() throws Exception 
     {
+    	System.out.println("receiptPublicGU");
+
     	log.info("Receipt public GU start");
         String requestEntryId = ServletActionContext.getRequest().getParameter("entryId");
         log.info("requestEntryId:" + requestEntryId);
@@ -555,7 +700,25 @@ public class CreateEntryAction extends CalendarAbstractAction
             entryId = new Long(requestEntryId);
 
         event = EventController.getController().getEvent(eventId, getSession());
-        entry = EntryController.getController().getEntry(entryId, this.getSession());
+        //entry = EntryController.getController().getEntry(entryId, this.getSession());
+
+        Map attributes = (Map)ServletActionContext.getRequest().getSession().getAttribute(""+entryId);
+        System.out.println("attributes:" + attributes);
+
+        entry = new Entry();
+        entry.setId(entryId);
+        entry.setAddress(""+attributes.get("address"));
+        entry.setCity(""+attributes.get("city"));
+        entry.setEmail(""+attributes.get("email"));
+        entry.setEvent(event);
+        entry.setFax(""+attributes.get("fax"));
+        entry.setFirstName(""+attributes.get("firstName"));
+        entry.setLastName(""+attributes.get("lastName"));
+        entry.setMessage(""+attributes.get("message"));
+        entry.setOrganisation(""+attributes.get("organisation"));
+        entry.setPhone(""+attributes.get("phone"));
+        entry.setZipcode(""+attributes.get("zipcode"));
+        entry.setAttributes(""+attributes.get("attributesString"));
 
         int numberOfExistingEntries = event.getEntries().size();
         //if(numberOfExistingEntries > event.getMaximumParticipants())
@@ -583,6 +746,17 @@ public class CreateEntryAction extends CalendarAbstractAction
         return "receiptPublicGU";
     } 
     
+    public String receiptFailedRegistration() throws Exception 
+    {
+    	log.info("receiptFailedRegistration start");
+        String requestEntryId = ServletActionContext.getRequest().getParameter("entryId");
+        log.info("requestEntryId:" + requestEntryId);
+        if(this.entryId == null && requestEntryId != null && !requestEntryId.equalsIgnoreCase(""))
+            entryId = new Long(requestEntryId);
+
+        return "receiptFailedRegistration";
+    } 
+    
     public String receiptPublicCustom() throws Exception 
     {
     	log.info("Receipt public GU start");
@@ -592,7 +766,25 @@ public class CreateEntryAction extends CalendarAbstractAction
             entryId = new Long(requestEntryId);
 
         event = EventController.getController().getEvent(eventId, getSession());
-        entry = EntryController.getController().getEntry(entryId, this.getSession());
+        //entry = EntryController.getController().getEntry(entryId, this.getSession());
+
+        Map attributes = (Map)ServletActionContext.getRequest().getSession().getAttribute(""+entryId);
+        System.out.println("attributes:" + attributes);
+
+        entry = new Entry();
+        entry.setId(entryId);
+        entry.setAddress(""+attributes.get("address"));
+        entry.setCity(""+attributes.get("city"));
+        entry.setEmail(""+attributes.get("email"));
+        entry.setEvent(event);
+        entry.setFax(""+attributes.get("fax"));
+        entry.setFirstName(""+attributes.get("firstName"));
+        entry.setLastName(""+attributes.get("lastName"));
+        entry.setMessage(""+attributes.get("message"));
+        entry.setOrganisation(""+attributes.get("organisation"));
+        entry.setPhone(""+attributes.get("phone"));
+        entry.setZipcode(""+attributes.get("zipcode"));
+        entry.setAttributes(""+attributes.get("attributesString"));
 
         int numberOfExistingEntries = event.getEntries().size();
         //if(numberOfExistingEntries > event.getMaximumParticipants())
@@ -652,7 +844,17 @@ public class CreateEntryAction extends CalendarAbstractAction
     {
         this.lastName = lastName;
     }
+
+    public String getAttributesString()
+    {
+        return this.attributesString;
+    }
     
+    public void setAttributesString(String attributesString)
+    {
+        this.attributesString = attributesString;
+    }
+
     public Long getEventId()
     {
         return eventId;
@@ -735,6 +937,10 @@ public class CreateEntryAction extends CalendarAbstractAction
     {
         return newEntry;
     }
+    public Long getNewEntryId()
+    {
+        return newEntryId;
+    }
     public Long getEntryId()
     {
         return entryId;
@@ -757,7 +963,12 @@ public class CreateEntryAction extends CalendarAbstractAction
 	{
 		return isReserve;
 	}
-	
+
+	public String getNewEntryDataAsQueryString()
+	{
+		return newEntryDataAsQueryString;
+	}
+
 	public void setCaptcha(String captcha)
 	{
 		this.captcha = captcha;

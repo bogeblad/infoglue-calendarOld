@@ -24,7 +24,9 @@
         <mapping resource="Calendar.hbm.xml"/>
         <mapping resource="Category.hbm.xml"/>
         <mapping resource="Event.hbm.xml"/>
+        <mapping resource="EventTiny.hbm.xml"/>
         <mapping resource="EventVersion.hbm.xml"/>
+        <mapping resource="EventVersionTiny.hbm.xml"/>
         <mapping resource="EventType.hbm.xml"/>
         <mapping resource="EventTypeCategoryAttribute.hbm.xml"/>
         <mapping resource="EventCategory.hbm.xml"/>

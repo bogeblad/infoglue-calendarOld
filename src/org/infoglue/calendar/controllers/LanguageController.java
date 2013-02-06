@@ -30,8 +30,10 @@ import org.apache.commons.logging.LogFactory;
 import org.infoglue.calendar.entities.Calendar;
 import org.infoglue.calendar.entities.Language;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
@@ -176,13 +178,32 @@ public class LanguageController extends BasicController
      * @throws Exception
      */
     
+    final static Map<String,Long> languageCodes = new HashMap<String,Long>();
+    
     public Language getLanguageWithCode(String isoCode, Session session) throws Exception 
     {
         Language language = null;
-        
+
         language = (Language)session.createQuery("from Language as language where language.isoCode = ?").setString(0, isoCode).uniqueResult();
-        
+
         return language;
+    }
+
+    public Long getLanguageIdForCode(String isoCode, Session session) throws Exception 
+    {
+    	Long languageId = null;
+        if(languageCodes.get(isoCode) != null)
+        {
+        	languageId = languageCodes.get(isoCode);
+        }
+        else
+        {
+        	Language language = getLanguageWithCode(isoCode, session);
+        	languageCodes.put(isoCode, language.getId());
+        	languageId = language.getId();
+        }
+        
+        return languageId;
     }
 
     /**

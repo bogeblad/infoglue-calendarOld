@@ -62,6 +62,21 @@ public class DigitalAssetValidatorFilter implements Filter
     {
     }
 
+    private boolean isNumeric(String s) 
+    {
+    	try 
+    	{
+    		Long.parseLong(s);
+    	}
+    	catch (NumberFormatException nfe) 
+    	{
+    		return false;
+    	}
+    	
+    	return true;
+    }
+
+    
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException 
     {
         HttpServletRequest httpRequest = (HttpServletRequest) servletRequest;
@@ -70,83 +85,88 @@ public class DigitalAssetValidatorFilter implements Filter
         //System.out.println("httpRequest:" + httpRequest.getRequestURI());
         String assetFileName = httpRequest.getRequestURI().substring(httpRequest.getRequestURI().lastIndexOf("/") + 1);
         //System.out.println("assetFileName:" + assetFileName);
-        
-        String digitalAssetPath = PropertyHelper.getProperty("digitalAssetPath");
-		//String fileName = resource.getId() + "_" + resource.getAssetKey() + "_" + resource.getFileName();
-        File assetFile = new File(digitalAssetPath + File.separator + assetFileName);
-        //System.out.println("assetFile:" + assetFile.exists());
-        if(!assetFile.exists())
+        if(assetFileName.indexOf("_") == -1)
         {
-        	//System.out.println("Now we must write the file to disk again....");
-        	String assetId = assetFileName.substring(0,assetFileName.indexOf("_"));
-        	//System.out.println("assetId:" + assetId);
-        	
-        	Session session = HibernateUtil.currentSession();
-        	Transaction tx = null;
-        	try 
-        	{
-        		tx = session.beginTransaction();
-
-        		//Resource resource = ResourceController.getController().getResource(new Long(assetId), session);
-        		String url = ResourceController.getController().getResourceUrl(new Long(assetId), session);
-        		Thread.sleep(5000);
-        		//System.out.println("assetFile:" + assetFile.exists() + " for url:" + url);
-        		//FileDataSource fds = new FileDataSource(assetFile);
-        		//System.out.println("assetFile content type:" + fds.getContentType());
-        		String contentType = "application/octet-stream";
-        		if(url.endsWith(".png")) contentType = "image/png";
-        		else if(url.endsWith(".jpg")) contentType = "image/jpeg";
-        		else if(url.endsWith(".gif")) contentType = "image/gif";
-        		
-        		else if(url.endsWith(".pdf")) contentType = "application/pdf";
-        		else if(url.endsWith(".doc")) contentType = "application/msword";
-        		else if(url.endsWith(".docx")) contentType = "application/msword";
-        		else if(url.endsWith(".dot")) contentType = "application/msword";
-
-        		else if(url.endsWith(".eps")) contentType = "application/postscript";
-        		else if(url.endsWith(".xls")) contentType = "application/vnd.ms-excel";
-        		else if(url.endsWith(".ppt")) contentType = "application/vnd.ms-powerpoint";
-        		else if(url.endsWith(".dot")) contentType = "application/msword";
-
-        		else if(url.endsWith(".txt")) contentType = "text/plain";
-        		else if(url.endsWith(".html")) contentType = "text/html";
-        		else if(url.endsWith(".htm")) contentType = "text/html";
-        		
-        		httpResponse.setContentType(contentType);
-
-    	        // print some html
-    	        ServletOutputStream out = httpResponse.getOutputStream();
-    	        
-    	        // print the file
-    	        InputStream in = null;
-    	        try 
-    	        {
-    	            in = new BufferedInputStream(new FileInputStream(assetFile));
-    	            int ch;
-    	            while ((ch = in.read()) !=-1) 
-    	            {
-    	                out.print((char)ch);
-    	            }
-    	        }
-    	        finally 
-    	        {
-    	            if (in != null) in.close();  // very important
-    	        }
-
-        		//System.out.println("url:" + url);
-        		//httpResponse.sendRedirect(url + "?rand=" + System.currentTimeMillis());
-        		tx.commit();
-        	}
-        	catch (Exception e) 
-        	{
-        		e.printStackTrace();
-        		if (tx!=null) tx.rollback();
-        	}
-        	finally 
-        	{
-        		HibernateUtil.closeSession();
-        	}
-    		return;
+	        String digitalAssetPath = PropertyHelper.getProperty("digitalAssetPath");
+			//String fileName = resource.getId() + "_" + resource.getAssetKey() + "_" + resource.getFileName();
+	        File assetFile = new File(digitalAssetPath + File.separator + assetFileName);
+	        //System.out.println("assetFile:" + assetFile.getPath() + " : " + assetFile.exists());
+	        if(!assetFile.exists())
+	        {
+	        	//System.out.println("Now we must write the file to disk again....");
+	        	String assetId = assetFileName.substring(0,assetFileName.indexOf("_"));
+	        	//System.out.println("assetId:" + assetId);
+	        	if(isNumeric(assetId))
+	        	{
+		        	Session session = HibernateUtil.currentSession();
+		        	Transaction tx = null;
+		        	try 
+		        	{
+		        		tx = session.beginTransaction();
+		
+		        		//Resource resource = ResourceController.getController().getResource(new Long(assetId), session);
+		        		String url = ResourceController.getController().getResourceUrl(new Long(assetId), session);
+		        		Thread.sleep(5000);
+		        		//System.out.println("assetFile:" + assetFile.exists() + " for url:" + url);
+		        		//FileDataSource fds = new FileDataSource(assetFile);
+		        		//System.out.println("assetFile content type:" + fds.getContentType());
+		        		String contentType = "application/octet-stream";
+		        		if(url.endsWith(".png")) contentType = "image/png";
+		        		else if(url.endsWith(".jpg")) contentType = "image/jpeg";
+		        		else if(url.endsWith(".gif")) contentType = "image/gif";
+		        		
+		        		else if(url.endsWith(".pdf")) contentType = "application/pdf";
+		        		else if(url.endsWith(".doc")) contentType = "application/msword";
+		        		else if(url.endsWith(".docx")) contentType = "application/msword";
+		        		else if(url.endsWith(".dot")) contentType = "application/msword";
+		
+		        		else if(url.endsWith(".eps")) contentType = "application/postscript";
+		        		else if(url.endsWith(".xls")) contentType = "application/vnd.ms-excel";
+		        		else if(url.endsWith(".ppt")) contentType = "application/vnd.ms-powerpoint";
+		        		else if(url.endsWith(".dot")) contentType = "application/msword";
+		
+		        		else if(url.endsWith(".txt")) contentType = "text/plain";
+		        		else if(url.endsWith(".html")) contentType = "text/html";
+		        		else if(url.endsWith(".htm")) contentType = "text/html";
+		        		
+		        		httpResponse.setContentType(contentType);
+		
+		    	        // print some html
+		    	        ServletOutputStream out = httpResponse.getOutputStream();
+		    	        
+		    	        // print the file
+		    	        InputStream in = null;
+		    	        try 
+		    	        {
+		    	            in = new BufferedInputStream(new FileInputStream(assetFile));
+		    	            int ch;
+		    	            while ((ch = in.read()) !=-1) 
+		    	            {
+		    	                out.print((char)ch);
+		    	            }
+		    	        }
+		    	        finally 
+		    	        {
+		    	            if (in != null) in.close();  // very important
+		    	        }
+		
+		        		//System.out.println("url:" + url);
+		        		//httpResponse.sendRedirect(url + "?rand=" + System.currentTimeMillis());
+		        		tx.commit();
+		        	}
+		        	catch (Exception e) 
+		        	{
+		        		e.printStackTrace();
+		        		if (tx!=null) tx.rollback();
+		        	}
+		        	finally 
+		        	{
+		        		HibernateUtil.closeSession();
+		        	}
+	        	}
+	        	
+	    		return;
+	        }
         }
         
         filterChain.doFilter(httpRequest, httpResponse);

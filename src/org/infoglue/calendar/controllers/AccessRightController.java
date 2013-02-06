@@ -337,13 +337,17 @@ public class AccessRightController extends BasicController
 		    WebServiceHelper wsh = new WebServiceHelper();
 	        wsh.setServiceUrl(getServiceURL());
 	        
-	        list = new ArrayList(Arrays.asList((Object[])wsh.getArray("getPrincipalsWithRole", roleName)));
+	        Object[] objects = (Object[])wsh.getArray("getPrincipalsWithRole", roleName);
+	        if(objects != null)
+	        	list = new ArrayList(Arrays.asList(objects));
+	        
 	        if(list != null)
 	        	CacheController.cacheObject("principalsCache", "role_principals_" + roleName, list);
 		}
 		catch (Exception e) 
 		{
-			e.printStackTrace();
+			log.error("Error getting principal with role:" + e.getMessage());
+			log.info("Error getting principal with role:" + e.getMessage(), e);
 			list = (List)CacheController.getCachedObject("principalsCache", "role_principals_" + roleName);
 		}
 		

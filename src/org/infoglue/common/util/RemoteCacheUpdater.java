@@ -36,7 +36,7 @@ import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.infoglue.calendar.controllers.EventController;
+import org.infoglue.calendar.controllers.CalendarSettingsController;
 import org.infoglue.calendar.entities.Calendar;
 
 
@@ -102,12 +102,117 @@ public class RemoteCacheUpdater implements Runnable
 	 */
 	public void updateRemoteCaches(Set calendars) throws Exception
 	{
-	    Iterator calendarsIterator = calendars.iterator();
-	    while(calendarsIterator.hasNext())
-	    {
-	        Calendar calendar = (Calendar)calendarsIterator.next();
-	        updateRemoteCaches(calendar.getId());
-	    }
+		if(PropertyHelper.getInfoglueCacheInstanceBaseUrls().size() > 0)
+		{
+			log.info("Using the new publication method....");
+			for(String instanceBaseUrl : PropertyHelper.getInfoglueCacheInstanceBaseUrls())
+			{
+				log.info("instanceBaseUrl:" + instanceBaseUrl);
+				String address = instanceBaseUrl + "/UpdateCache!passThroughPublication.action";
+
+				StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
+				String caller = stackTraceElements[2].getClassName().substring(stackTraceElements[2].getClassName().lastIndexOf(".") + 1) + "." + stackTraceElements[2].getMethodName();
+				
+				String objectName = "Infoglue Calendar update";
+				String objectDescription = "No detailed information was given. Origin: " + caller;
+				
+				log.info("caller: " + caller);
+				if(caller.indexOf("EntryController.createEntry") > -1)
+				{
+					objectName = "New event entry";
+					objectDescription = "An entry was added to an event";
+				}
+				else if(caller.indexOf("EntryController.deleteEntry") > -1)
+				{
+					objectName = "Entry deleted";
+					objectDescription = "An entry was deleted from an event";
+				}
+				else if(caller.indexOf("EventController.deleteEvent") > -1)
+				{
+					objectName = "Event deleted";
+					objectDescription = "An event was deleted from it's calendar";
+				}
+				else if(caller.indexOf("EventController.deleteEventVersion") > -1)
+				{
+					objectName = "Event version deleted";
+					objectDescription = "An event version was deleted from it's event";
+				}
+				else if(caller.indexOf("EventController.deleteLikedEvent") > -1)
+				{
+					objectName = "Liked event deleted";
+					objectDescription = "A linked event was deleted from it's calendar";
+				}
+				else if(caller.indexOf("ResourceController.deleteResource") > -1)
+				{
+					objectName = "Event resource deleted";
+					objectDescription = "An event resource was deleted";
+				}
+				else if(caller.indexOf("EventController.linkEvent") > -1)
+				{
+					objectName = "Event linked";
+					objectDescription = "An event was liked to a calendar";
+				}
+				else if(caller.indexOf("EventController.publishEvent") > -1)
+				{
+					objectName = "Event published";
+					objectDescription = "An event was published";
+				}
+				else if(caller.indexOf("EventController.updateEvent") > -1)
+				{
+					objectName = "Event updated";
+					objectDescription = "An existing event was updated";
+				}
+				else if(caller.indexOf("ResourceController.createResource") > -1)
+				{
+					objectName = "New resource";
+					objectDescription = "A new resource was added to an event";
+				}
+				
+				String repositoryID = PropertyHelper.getProperty("infoglue.repositoryId");
+				if(repositoryID == null || repositoryID.equals("") || repositoryID.indexOf("infoglue.repositoryId") > -1)
+				{
+					repositoryID = "InfoglueCalendar";
+				}
+				
+				Hashtable<String,String> publicMessage = new Hashtable<String,String>();
+				publicMessage.put("publisherName", "calendarTester");
+				publicMessage.put("publicationName", "Infoglue Calendar publication");
+				publicMessage.put("publicationDescription", "A publication was made from the calendar system");
+				//publicMessage.put("repositoryId", "2");
+				publicMessage.put("repositoryId", repositoryID);
+				publicMessage.put("objectDescription", objectDescription);
+				publicMessage.put("className", "pageCache:portlet_infoglueCalendar.WebworkDispatcherPortlet");
+				publicMessage.put("objectId", "1");
+				publicMessage.put("objectName", objectName);
+
+				try
+				{
+					String response = postToUrl(address, publicMessage);
+					log.info("response:" + response);
+					if(response == null || response.indexOf("ok") == -1 || response.indexOf("error") > 0)
+						throw new Exception("Not ok response from infoglue.");
+				}
+				catch(Exception e)
+				{
+					log.error("Error updating cache at " + address + ":" + e.getMessage() + ". Adding it to the queue-thread");
+					PublicationQueueBean pqb = new PublicationQueueBean();
+					pqb.setUrlAddress(address);
+					pqb.setRequestParameters(publicMessage);
+					pqb.setSerializedParameters(toEncodedString(publicMessage));
+					PublicationQueue.getPublicationQueue().addPublicationQueueBean(instanceBaseUrl, pqb);
+				}
+
+			}
+		}
+		else
+		{
+		    Iterator calendarsIterator = calendars.iterator();
+		    while(calendarsIterator.hasNext())
+		    {
+		        Calendar calendar = (Calendar)calendarsIterator.next();
+		        updateRemoteCaches(calendar.getId());
+		    }
+		}
 	}
 
 
@@ -146,12 +251,10 @@ public class RemoteCacheUpdater implements Runnable
 			    {
 			    	if(address.indexOf("infoglueDeliverWorking") > -1 || address.indexOf("infoglueDeliverPreview") > -1)
 			    	{
-			    		System.out.println("1");
 				    	String response = postToUrl(address, hashedMessage);
 			    	}
 			    	else
 			    	{
-			    		System.out.println("2");
 			    		Thread thread = new Thread(new RemoteCacheUpdater(address, hashedMessage));
 						thread.start();
 			    	}
